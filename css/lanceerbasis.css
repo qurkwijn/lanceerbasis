@@ -141,6 +141,9 @@ a.station:active .station-art { transform: scale(0.96); }
   100% { transform: rotate(-22deg); }
 }
 
+/* De maanlander komt uit de hangar en vliegt weg */
+.station.launching .lander-craft { animation: liftoff 1.1s ease-in forwards; }
+
 @keyframes liftoff {
   0% { transform: translate(0, 0); }
   10% { transform: translate(-1.5px, 0); }

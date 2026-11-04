@@ -27,6 +27,7 @@ export const STATIONS = [
     subject: 'Lezen',
     world: 'de manen',
     groups: [3, 4],
+    ready: true,
     art: lander,
   },
 ];

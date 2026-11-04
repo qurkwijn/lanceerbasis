@@ -186,7 +186,7 @@
 .choice.reveal { border-color: var(--accent); background: rgba(255, 204, 51, 0.3); }
 
 /* Drie keuzes naast elkaar */
-.choices:has(> :nth-child(3):last-child) { grid-template-columns: repeat(3, 1fr); }
+.choices:not(.choices-list):has(> :nth-child(3):last-child) { grid-template-columns: repeat(3, 1fr); }
 
 /* Compacter, zodat alles ook op kleinere telefoons past */
 .game { padding: 8px 0; gap: 8px; }
@@ -196,3 +196,49 @@
 
 /* De voortgang neemt de ruimte tussen het kruisje en de tijd in */
 .progress { flex: 1; display: flex; align-items: center; min-width: 0; }
+
+/* Keuzes die even moeten wachten, en lange keuzes onder elkaar */
+.choices.waiting { visibility: hidden; }
+.choices.choices-list { grid-template-columns: 1fr; }
+.choices-list .choice { min-height: 56px; font-size: 1.25rem; }
+
+/* Losse woorden in de goede volgorde zetten */
+.tiles { display: flex; flex-direction: column; gap: 14px; }
+.tiles[hidden] { display: none; }
+
+.tiles-built,
+.tiles-pool {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.tiles-built {
+  min-height: 64px;
+  padding: 8px;
+  border-radius: 16px;
+  border: 2px dashed rgba(255, 255, 255, 0.3);
+  align-content: center;
+}
+.tiles-built.correct { border: 2px solid var(--good); }
+.tiles-built.reveal { border: 2px solid var(--accent); }
+.tiles-built.shake { animation: shake 0.4s ease; }
+
+.tile {
+  min-height: 48px;
+  padding: 4px 14px;
+  border: none;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.14);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 1.4rem;
+  font-weight: 700;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+.tile:active { transform: translateY(3px); box-shadow: 0 1px 0 rgba(0, 0, 0, 0.3); }
+.tile.used { visibility: hidden; }
+.tiles-built .tile { background: rgba(255, 204, 51, 0.22); }
+.tiles-built.correct .tile { background: var(--good); color: #0b3b20; }

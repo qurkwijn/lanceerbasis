@@ -1,0 +1,109 @@
+/* Leeslander: alles wat alleen bij lezen hoort. De basis staat in shared/css/base.css
+   en het spelscherm in shared/css/game.css. */
+
+/* Kop: zo past het aantal sterren er nog naast */
+.map-header .logo { margin-right: auto; font-size: clamp(1.7rem, 7.6vw, 2.4rem); }
+
+/* Manen */
+.moon-art { display: block; flex: none; }
+.moon-shadow { fill: #14173d; opacity: 0.82; }
+
+/* Het pad langs de manen, om en om links en rechts */
+.moon-path {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.moon-path li { display: flex; }
+.moon-path li:nth-child(even) { justify-content: flex-end; }
+
+.moon-link {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 12px;
+  border-radius: var(--radius);
+  max-width: 100%;
+}
+
+.moon-path li:nth-child(even) .moon-link { flex-direction: row-reverse; text-align: right; }
+a.moon-link:active .moon-art { transform: scale(0.94); }
+
+.moon-label { display: flex; flex-direction: column; }
+.moon-name { font-size: 1.5rem; font-weight: 800; line-height: 1.1; }
+.moon-sub { font-size: 1.1rem; color: var(--muted); }
+
+.moon-link.locked .moon-art { opacity: 0.5; }
+.moon-link.locked .moon-name { color: var(--muted); }
+
+/* Een maan van dichtbij */
+.moon-hero { display: flex; justify-content: center; padding: 16px 0 0; }
+.moon-hero-sub {
+  margin: 0;
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--accent);
+}
+
+/* Voortgang tijdens het oefenen */
+.moon-progress { display: flex; }
+.moon-progress-name { margin-left: 10px; font-size: 1.3rem; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* Flitswoord en plaatjes */
+.flash-card { display: flex; align-items: center; justify-content: center; min-height: 5rem; }
+.flash-word {
+  font-size: clamp(2.8rem, 14vw, 4rem);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+.flash-word.gone { visibility: hidden; }
+.flash-word.solved { color: var(--accent); animation: pop 0.35s ease; }
+.flash-ready { font-size: 1.3rem; color: var(--muted); }
+
+/* Een zin of verhaaltje om te lezen */
+.read-card {
+  max-width: 34rem;
+  padding: 14px 18px;
+  border-radius: var(--radius);
+  background: var(--card);
+  border: 2px solid var(--card-border);
+  font-size: clamp(1.45rem, 6.2vw, 1.8rem);
+  font-weight: 700;
+  line-height: 1.35;
+  text-align: center;
+}
+.read-card.story { font-size: clamp(1.25rem, 5.2vw, 1.55rem); text-align: left; }
+.read-question {
+  margin: 12px 0 0;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--accent);
+  text-align: center;
+}
+
+/* Uitslag: de lander staat op een volle maan */
+.moon-result { position: relative; margin: 40px 0 4px; }
+.moon-result .moon-art { animation: pop 0.5s ease both; }
+.moon-lander {
+  position: absolute;
+  top: -44px;
+  left: 50%;
+  width: 70px;
+  transform: translateX(-50%);
+  animation: touchdown 1.2s ease-out both;
+}
+.lander-art { display: block; width: 100%; }
+
+@keyframes touchdown {
+  from { top: -160px; opacity: 0; }
+  to { top: -44px; opacity: 1; }
+}
+
+@media (max-height: 700px) {
+  .moon-hero .moon-art { width: 120px; height: 120px; }
+}

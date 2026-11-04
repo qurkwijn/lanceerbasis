@@ -4,7 +4,7 @@ Een vrolijke oefenplek voor kinderen in groep 3 en 4, met een ruimtethema. Op de
 
 - **Rekenraket** (`rekenraket/`): rekenen, van tellen tot tafels, klok en geld.
 - **Taaltelescoop** (`taaltelescoop/`): spelling, met een sterrenbeeld per onderdeel.
-- **Leeslander** (komt later): lezen.
+- **Leeslander** (`leeslander/`): lezen, met een maan per onderdeel die voller wordt als je oefent.
 
 Speel op https://lanceerbasis.app
 
@@ -23,6 +23,7 @@ shared/js/game.js       het spelscherm dat alle voertuigen delen
 shared/css/game.css     stijl van het spelscherm
 rekenraket/             de reken-app
 taaltelescoop/          de spelling-app
+leeslander/             de lees-app
 ```
 
 Alles wordt alleen in `localStorage` op het apparaat bewaard, onder `lanceerbasis:v1`. Naam, groep en sterren uit de losse Rekenraket (`rekenraket:v1`) worden bij het eerste bezoek overgenomen.

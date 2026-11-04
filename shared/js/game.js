@@ -31,7 +31,17 @@ const rocketTrack = (goalHtml) => ({
 //
 // options:
 //   level         { id, timed?, starsAt? }
-//   makeQuestion  () => { key, prompt, html, answer, choices?, maxDigits?, onSolved?, solvedDelay? }
+//   makeQuestion  () => een vraag:
+//     key, prompt, html, answer   altijd
+//     maxDigits                   bij typen op het toetsenbord (standaard)
+//     choices                     keuzeknoppen: teksten of { value, label }
+//     choiceStyle                 'big' voor grote plaatjes, 'list' voor lange zinnen
+//     choicesDelay                ms voordat de keuzes verschijnen
+//     tiles                       losse woorden om in de goede volgorde te tikken
+//     onShow(el)                  na het tonen; mag een opruimfunctie teruggeven
+//     onRetry(el)                 na de eerste fout
+//     onSolved(el), solvedDelay   na het goede antwoord
+//     revealText                  tekst als we het antwoord voorzeggen
 //   quitHref      waar het kruisje naartoe gaat
 //   goalHtml      plaatje aan het eind van het raketspoor, of
 //   progress      { html, update(el, done) } voor een eigen voortgang
@@ -51,6 +61,9 @@ export function playRound(root, options) {
   let busy = false;
   let question;
   let slot;
+  let placed = [];
+  let unshow;
+  let waitTimer;
   let timer;
   let clock;
   let startedAt;
@@ -74,6 +87,10 @@ export function playRound(root, options) {
         <button type="button" data-key="ok" class="key-ok">OK</button>
       </div>
       <div class="choices" hidden></div>
+      <div class="tiles" hidden>
+        <div class="tiles-built"></div>
+        <div class="tiles-pool"></div>
+      </div>
     </div>`;
 
   const promptEl = root.querySelector('.prompt');
@@ -83,6 +100,9 @@ export function playRound(root, options) {
   const keypadEl = root.querySelector('.keypad');
   const choicesEl = root.querySelector('.choices');
   const timeEl = root.querySelector('.time-left');
+  const tilesEl = root.querySelector('.tiles');
+  const builtEl = root.querySelector('.tiles-built');
+  const poolEl = root.querySelector('.tiles-pool');
 
   function updateProgress() {
     const done = timed ? Math.min(1, (Date.now() - startedAt) / 1000 / timed) : index / ROUND;
@@ -101,7 +121,23 @@ export function playRound(root, options) {
     feedbackEl.className = `feedback ${kind}`;
   }
 
+  // Losse woorden: wat je hebt gekozen staat bovenaan in de zin, de rest
+  // blijft op zijn plek staan zodat de knoppen niet verspringen.
+  function renderTiles(words = placed.map((i) => question.tiles[i])) {
+    builtEl.innerHTML = words.map((w, n) =>
+      `<button type="button" class="tile" data-placed="${n}">${escapeHtml(w)}</button>`).join('');
+    poolEl.innerHTML = (question.tiles || []).map((w, i) =>
+      `<button type="button" class="tile${placed.includes(i) ? ' used' : ''}" data-tile="${i}">${escapeHtml(w)}</button>`).join('');
+  }
+
+  function clearQuestion() {
+    clearTimeout(waitTimer);
+    if (unshow) unshow();
+    unshow = null;
+  }
+
   function next() {
+    clearQuestion();
     if (!timed && index === ROUND) return finish();
     for (let attempt = 0; attempt < 30; attempt++) {
       question = makeQuestion();
@@ -111,20 +147,36 @@ export function playRound(root, options) {
     input = '';
     tries = 0;
     busy = false;
+    builtEl.className = 'tiles-built';
     stopSpeaking();
     promptEl.textContent = question.prompt;
     questionEl.innerHTML = question.html;
     slot = questionEl.querySelector('.slot');
-    // Een vraag heeft óf een vakje om in te typen, óf keuzeknoppen.
-    keypadEl.hidden = Boolean(question.choices);
+    // Een vraag heeft een vakje om in te typen, keuzeknoppen of losse woorden.
+    keypadEl.hidden = Boolean(question.choices || question.tiles);
     choicesEl.hidden = !question.choices;
-    choicesEl.innerHTML = (question.choices || []).map((c) =>
+    tilesEl.hidden = !question.tiles;
+    choicesEl.className = `choices${question.choiceStyle === 'list' ? ' choices-list' : ''}`;
+    choicesEl.innerHTML = (question.choices || []).map((c) => {
+      const { value, label } = typeof c === 'string' ? { value: c, label: c } : c;
       // Korte keuzes zoals "<" of "🔴" krijgen een grotere letter.
-      `<button type="button" class="choice${[...c].length <= 2 ? ' choice-big' : ''}" data-choice="${escapeHtml(c)}">${escapeHtml(c)}</button>`).join('');
+      const big = question.choiceStyle === 'big' || [...label].length <= 2;
+      return `<button type="button" class="choice${big ? ' choice-big' : ''}" data-choice="${escapeHtml(value)}">${escapeHtml(label)}</button>`;
+    }).join('');
+    placed = [];
+    if (question.tiles) renderTiles();
+    // Eerst goed kijken (bijvoorbeeld naar een flitswoord), dan pas kiezen.
+    if (question.choicesDelay) {
+      choicesEl.classList.add('waiting');
+      waitTimer = setTimeout(() => choicesEl.classList.remove('waiting'), question.choicesDelay);
+    }
     setFeedback('');
     updateSlot();
     updateProgress();
+    if (question.onShow) unshow = question.onShow(questionEl) || null;
   }
+
+  const revealText = () => question.revealText || `Het goede antwoord is ${question.answer}.`;
 
   // Na een goed (of voorgezegd) antwoord mag de vraag nog iets laten zien,
   // zoals de klok die doordraait of het woord dat compleet wordt.
@@ -156,10 +208,52 @@ export function playRound(root, options) {
     btn.classList.add('wrong');
     if (tries < 2) {
       setFeedback('Bijna! Probeer het nog eens.', 'try');
+      if (question.onRetry) question.onRetry(questionEl);
       return;
     }
     [...choicesEl.children].find((b) => b.dataset.choice === String(question.answer)).classList.add('reveal');
-    setFeedback(`Het goede antwoord is ${question.answer}.`, 'reveal');
+    setFeedback(revealText(), 'reveal');
+    advance(revealDelay);
+  }
+
+  function tap(btn) {
+    if (busy) return;
+    if (btn.dataset.tile !== undefined) {
+      const i = Number(btn.dataset.tile);
+      if (placed.includes(i)) return;
+      placed.push(i);
+    } else {
+      placed.splice(Number(btn.dataset.placed), 1);
+    }
+    renderTiles();
+    if (placed.length === question.tiles.length) checkTiles();
+  }
+
+  function checkTiles() {
+    const sentence = placed.map((i) => question.tiles[i]).join(' ');
+    if (sentence === question.answer) {
+      if (tries === 0) good++;
+      builtEl.classList.add('correct');
+      setFeedback(pick(PRAISE), 'good');
+      advance(correctDelay);
+      return;
+    }
+    tries++;
+    if (tries < 2) {
+      busy = true;
+      builtEl.classList.add('shake');
+      setFeedback('Bijna! Probeer het nog eens.', 'try');
+      waitTimer = setTimeout(() => {
+        builtEl.classList.remove('shake');
+        placed = [];
+        renderTiles();
+        busy = false;
+      }, 700);
+      return;
+    }
+    renderTiles(question.answer.split(' '));
+    builtEl.classList.add('reveal');
+    setFeedback(question.revealText || 'Zo is de zin goed.', 'reveal');
     advance(revealDelay);
   }
 
@@ -183,7 +277,7 @@ export function playRound(root, options) {
     }
     input = String(question.answer);
     slot.classList.add('reveal');
-    setFeedback(`Het goede antwoord is ${question.answer}.`, 'reveal');
+    setFeedback(revealText(), 'reveal');
     advance(revealDelay);
   }
 
@@ -233,6 +327,8 @@ export function playRound(root, options) {
     if (key) press(key.dataset.key);
     const choice = e.target.closest('[data-choice]');
     if (choice) choose(choice);
+    const tile = e.target.closest('[data-tile], [data-placed]');
+    if (tile) tap(tile);
     const speakBtn = e.target.closest('[data-speak]');
     if (speakBtn) speak(speakBtn.dataset.speak);
   };
@@ -242,6 +338,7 @@ export function playRound(root, options) {
     else if (e.key === 'Enter') press('ok');
   };
   function stop() {
+    clearQuestion();
     clearTimeout(timer);
     clearInterval(clock);
     root.removeEventListener('click', onClick);
