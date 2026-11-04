@@ -1,47 +1,170 @@
-/* Landingspagina: de kaarten naar de apps. De basis staat in shared/css/base.css. */
+/* Landingspagina: de basis met de voertuigen. De basis staat in shared/css/base.css. */
 
-.app-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: 14px;
-}
-
-.app-card {
-  position: relative;
+/* Bovenkant: groep en logboek */
+.base-header {
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 14px 16px;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.base-header .player-chip { margin-top: 0; padding-left: 8px; }
+
+.log-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.base-title {
+  margin-top: 28px;
+  font-size: clamp(1.9rem, 8vw, 2.4rem);
+  font-weight: 800;
+  text-align: center;
+}
+
+.base-name { color: var(--accent); }
+
+.base-intro {
+  margin: 8px 0 0;
+  font-size: 1.2rem;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* Aan de hemel: een planeet en de maan */
+.base-sky {
+  position: relative;
+  flex: 1;
+  min-height: 90px;
+}
+.base-sky .planet { position: absolute; left: 12%; top: 30%; }
+.base-sky .planet.ringed::after { border-width: 3px; }
+.moon {
+  position: absolute;
+  right: 14%;
+  top: 8%;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  box-shadow: inset -12px -4px 0 0 #fff3c4;
+  transform: rotate(-20deg);
+}
+
+/* De grond van de basis, van rand tot rand */
+.base-ground {
+  margin: 0 calc(-1 * max(16px, env(safe-area-inset-right))) calc(-1 * max(16px, env(safe-area-inset-bottom)))
+    calc(-1 * max(16px, env(safe-area-inset-left)));
+  padding: 0 0 max(16px, env(safe-area-inset-bottom));
+  /* De horizon ligt net boven de voet van de stations */
+  --horizon: calc(min(40vw, 190px) * 1.28);
+  background:
+    radial-gradient(140% 48px at 50% 48px, #2c3170 99%, transparent) 0 calc(var(--horizon) - 48px) / 100% 96px no-repeat,
+    linear-gradient(#2c3170, #1d2152) 0 var(--horizon) / 100% 100% no-repeat;
+}
+
+/* De stations staan naast elkaar. Komen er meer bij dan er passen, dan
+   schuif je de basis opzij. */
+.stations {
+  list-style: none;
+  margin: 0;
+  padding: 0 12px 8px;
+  display: flex;
+  justify-content: safe center;
+  gap: 8px;
+  scroll-padding: 0 30vw;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.stations::-webkit-scrollbar { display: none; }
+
+.stations li { flex: 0 0 min(40vw, 190px); scroll-snap-align: center; }
+
+.station {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+}
+
+.station-art { width: 100%; height: auto; display: block; overflow: visible; }
+
+.station-sign {
+  display: flex;
+  flex-direction: column;
+  padding: 4px 6px;
+  border-radius: 12px;
+  background: rgba(10, 12, 40, 0.45);
+  border: 1px solid var(--card-border);
+  width: 100%;
+}
+
+.station-name { font-size: 1.25rem; font-weight: 800; line-height: 1.15; }
+.station-sub { font-size: 1rem; color: var(--muted); line-height: 1.2; }
+
+a.station:active .station-art { transform: scale(0.96); }
+
+.station.building .station-art { filter: saturate(0.4) brightness(0.75); }
+.station.building .station-name { color: var(--muted); }
+
+/* Kleine details die leven */
+.beacon { animation: blink 1.6s steps(2, jump-none) infinite; }
+.window { animation: glow 3s ease-in-out infinite alternate; }
+
+@keyframes blink { 50% { opacity: 0.2; } }
+@keyframes glow { to { opacity: 0.6; } }
+
+/* Lancering: even trillen en dan omhoog */
+.station .flame { opacity: 0; transform-origin: 56px 146px; }
+.station.launching .flame { opacity: 1; animation: flicker 0.12s linear infinite alternate; }
+.station.launching .rocket { animation: liftoff 1.1s ease-in forwards; }
+.station.launching .station-sign { opacity: 0.4; transition: opacity 0.3s; }
+
+@keyframes flicker { to { transform: scaleY(1.3); } }
+
+@keyframes liftoff {
+  0% { transform: translate(0, 0); }
+  10% { transform: translate(-1.5px, 0); }
+  20% { transform: translate(1.5px, 0); }
+  30% { transform: translate(-1.5px, -2px); }
+  100% { transform: translate(0, -900px); }
+}
+
+/* Missielogboek */
+.log-total {
+  margin: 20px 0 16px;
+  font-size: 1.5rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+.log-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+
+.log-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 16px;
   border-radius: var(--radius);
   background: var(--card);
   border: 2px solid var(--card-border);
 }
 
-a.app-card:active { transform: scale(0.98); border-color: var(--accent); }
-a.app-card .app-planet { animation: float 3s ease-in-out infinite alternate; }
-.app-list li:nth-child(even) a.app-card .app-planet { animation-delay: -1.5s; }
+.log-art { width: 56px; flex: none; }
+.log-label { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+.log-name { font-size: 1.4rem; font-weight: 800; line-height: 1.1; }
+.log-sub { font-size: 1rem; color: var(--muted); }
+.log-stars { font-size: 1.4rem; font-weight: 800; white-space: nowrap; }
 
-/* Het icoontje landt op de planeet */
-.app-planet {
-  position: relative;
-  display: grid;
-  place-items: center;
-  flex: none;
-}
-.app-planet .planet.ringed { margin: 0 14px; }
-.app-icon {
-  position: absolute;
-  font-size: 2.4rem;
-  pointer-events: none;
-}
-
-.app-label { display: flex; flex-direction: column; min-width: 0; }
-.app-name { font-size: 1.6rem; font-weight: 800; line-height: 1.1; }
-.app-sub { font-size: 1.1rem; color: var(--muted); }
-
-.app-card.soon { border-style: dashed; }
-.app-card.soon .planet { filter: grayscale(0.7) brightness(0.65); box-shadow: inset -8px -10px 0 rgba(0, 0, 0, 0.2); }
-.app-card.soon .app-icon { opacity: 0.6; }
-.app-card.soon .app-name { color: var(--muted); }
+.log-item.building { border-style: dashed; }
+.log-item.building .station-art { filter: saturate(0.4) brightness(0.75); }
+.log-item.building .log-name { color: var(--muted); }

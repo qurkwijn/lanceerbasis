@@ -1,6 +1,9 @@
 import { load, save } from './store.js';
 
+// Voor deze groepen is er al iets te oefenen. De rest van de basisschool
+// laten we alvast zien, maar die staat nog in aanbouw.
 export const GROUPS = [3, 4];
+export const ALL_GROUPS = [3, 4, 5, 6, 7, 8];
 
 // De landingspagina, gerekend vanaf deze map. Zo werkt het lokaal en op
 // GitHub Pages, vanuit elke app.
