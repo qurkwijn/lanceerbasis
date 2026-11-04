@@ -18,6 +18,9 @@ function showInfo(appName) {
   dialog.innerHTML = `
     <h2 id="info-title">Over ${appName}</h2>
     <p>De Lanceerbasis is een gratis oefenplek voor de basisschool, gemaakt door een ouder. Nu kun je in groep 3 en 4 rekenen met de Rekenraket, spelling oefenen met de Taaltelescoop en lezen met de Leeslander. De hogere groepen zijn nog in aanbouw.</p>
+    <h3>Gemaakt met AI</h3>
+    <p>De oefeningen, woordenlijsten en verhaaltjes zijn gemaakt met hulp van AI (Claude). Ik controleer zo veel mogelijk, maar ik kan niet alles nakijken. Er kan dus een foutje in zitten, zoals een woord dat net anders gespeld wordt, een plaatje dat niet goed past of een vraag met een verkeerd antwoord.</p>
+    <p>De Lanceerbasis is een extraatje om thuis te oefenen. Het vervangt de lessen en de methode van school niet. Twijfel je over een antwoord, ga dan uit van wat de juf of meester zegt.</p>
     <h3>Privacy</h3>
     <ul>
       <li>Je hoeft geen account te maken. We vragen geen e-mailadres of wachtwoord.</li>
@@ -28,7 +31,7 @@ function showInfo(appName) {
     <p class="info-small">De website staat op GitHub Pages en het lettertype komt van Google Fonts. Zoals bij elke website zien zij je IP-adres. Het adres lanceerbasis.app wordt beheerd bij Cloudflare, maar je bezoek gaat rechtstreeks naar GitHub. Voorlezen gebruikt de stem van je telefoon of browser.</p>
     <button type="button" class="btn info-clear" data-clear>Wis naam en sterren</button>
     <h3>Feedback</h3>
-    <p>Een idee, een foutje of een vraag die niet klopt? Laat het weten!</p>
+    <p>Een idee, of een foutje gevonden? Laat het weten, dan verbeter ik het!</p>
     <a class="btn primary" href="mailto:${FEEDBACK_MAIL}?subject=${subject}">✉️ Stuur een mailtje</a>
     <button type="button" class="btn info-close" data-close>Sluiten</button>`;
   document.body.append(dialog);
