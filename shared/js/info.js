@@ -17,7 +17,7 @@ function showInfo(appName) {
   dialog.setAttribute('aria-labelledby', 'info-title');
   dialog.innerHTML = `
     <h2 id="info-title">Over ${appName}</h2>
-    <p>De Lanceerbasis is een gratis plek om rekenen, taal en lezen te oefenen in groep 3 en 4, gemaakt door een ouder.</p>
+    <p>De Lanceerbasis is een gratis oefenplek voor de basisschool, gemaakt door een ouder. Nu kun je met de Rekenraket rekenen oefenen in groep 3 en 4. Taal, lezen en de hogere groepen zijn nog in aanbouw.</p>
     <h3>Privacy</h3>
     <ul>
       <li>Je hoeft geen account te maken. We vragen geen e-mailadres of wachtwoord.</li>
@@ -25,7 +25,7 @@ function showInfo(appName) {
       <li>Geen reclame, geen cookies en we houden niet bij wie de app gebruikt.</li>
       <li>Een voornaam of bijnaam is genoeg.</li>
     </ul>
-    <p class="info-small">De website staat op GitHub Pages en het lettertype komt van Google Fonts. Zoals bij elke website zien zij je IP-adres. Voorlezen gebruikt de stem van je telefoon of browser.</p>
+    <p class="info-small">De website staat op GitHub Pages en het lettertype komt van Google Fonts. Zoals bij elke website zien zij je IP-adres. Het adres lanceerbasis.app wordt beheerd bij Cloudflare, maar je bezoek gaat rechtstreeks naar GitHub. Voorlezen gebruikt de stem van je telefoon of browser.</p>
     <button type="button" class="btn info-clear" data-clear>Wis naam en sterren</button>
     <h3>Feedback</h3>
     <p>Een idee, een foutje of een vraag die niet klopt? Laat het weten!</p>
