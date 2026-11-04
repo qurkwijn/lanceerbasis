@@ -9,12 +9,18 @@ import muis from './sterrenbeelden/muis.js';
 import nachtuil from './sterrenbeelden/nachtuil.js';
 import slang from './sterrenbeelden/slang.js';
 import zwaan from './sterrenbeelden/zwaan.js';
+import citroen from './sterrenbeelden/citroen.js';
+import kiwi from './sterrenbeelden/kiwi.js';
+import papegaai from './sterrenbeelden/papegaai.js';
+import paraplu from './sterrenbeelden/paraplu.js';
+import zwaluw from './sterrenbeelden/zwaluw.js';
+import { herhaal } from '../../shared/js/herhaal.js';
 
 // Elk sterrenbeeld is een spellingonderdeel en heet naar een woord dat erbij hoort.
 // Een sterrenbeeld heeft precies 10 sterren, één per vraag in een ronde.
 // `stars` zijn punten in een vlak van 100 bij 100, `lines` verbinden twee
 // sterren (op volgorde in de lijst, vanaf 0). De volgorde volgt ongeveer de
-// spellingcategorieën van groep 3 en 4.
+// spellingcategorieën van Staal, groep voor groep.
 export const STERRENBEELDEN = [
   {
     id: 'kat', name: 'De Kat', sub: 'Hakken en plakken', module: kat,
@@ -70,6 +76,38 @@ export const STERRENBEELDEN = [
     id: 'muis', name: 'Het Muisje', sub: 'Verkleinwoorden', module: muis,
     stars: [[6, 28], [18, 50], [34, 68], [48, 56], [66, 48], [76, 30], [92, 52], [78, 70], [62, 86], [42, 86]],
     lines: [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 7], [7, 8], [8, 9], [9, 2]],
+  },
+  {
+    id: 'kiwi', name: 'De Kiwi', sub: 'Kilowoorden', module: kiwi,
+    stars: [[6, 52], [20, 44], [34, 28], [56, 22], [76, 30], [88, 50], [78, 70], [56, 76], [44, 94], [64, 94]],
+    lines: [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 7], [7, 1], [7, 8], [6, 9]],
+  },
+  {
+    id: 'paraplu', name: 'De Paraplu', sub: "Komma-s: 's morgens, oma's", module: paraplu,
+    stars: [[8, 46], [20, 26], [40, 12], [60, 12], [80, 26], [92, 46], [50, 46], [50, 68], [50, 88], [38, 92]],
+    lines: [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 0], [6, 7], [7, 8], [8, 9]],
+  },
+  {
+    id: 'citroen', name: 'De Citroen', sub: 'c: cent of cola', module: citroen,
+    stars: [[6, 50], [20, 32], [40, 20], [62, 20], [82, 32], [94, 50], [82, 68], [62, 80], [40, 80], [20, 68]],
+    lines: [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 7], [7, 8], [8, 9], [9, 0]],
+  },
+  {
+    id: 'papegaai', name: 'De Papegaai', sub: 'Politie en tropisch', module: papegaai,
+    stars: [[30, 12], [46, 6], [56, 18], [46, 32], [34, 24], [42, 52], [48, 72], [54, 96], [66, 90], [28, 62]],
+    lines: [[0, 1], [1, 2], [2, 3], [3, 4], [4, 0], [3, 5], [5, 6], [6, 7], [6, 8], [5, 9]],
+  },
+  {
+    id: 'zwaluw', name: 'De Zwaluw', sub: 'uw en gids', module: zwaluw,
+    stars: [[6, 30], [28, 40], [50, 46], [72, 40], [94, 30], [50, 28], [50, 64], [38, 92], [62, 92], [50, 76]],
+    lines: [[0, 1], [1, 2], [2, 3], [3, 4], [5, 2], [2, 6], [6, 9], [9, 7], [9, 8]],
+  },
+  {
+    id: 'grote-beer', name: 'De Grote Beer', sub: 'Herhalen', module: herhaal(() => STERRENBEELDEN, {
+      from: [4], intro: 'Alle spellingcategorieën uit de vorige groep door elkaar. Op school herhalen ze die ook elke dag!',
+    }),
+    stars: [[6, 30], [22, 26], [36, 32], [48, 42], [48, 62], [74, 66], [78, 44], [42, 88], [80, 90], [94, 30]],
+    lines: [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 3], [4, 7], [5, 8], [6, 9]],
   },
 ];
 

@@ -2,6 +2,10 @@ import alfabet from './signalen/alfabet.js';
 import hoofdletters from './signalen/hoofdletters.js';
 import meervoud from './signalen/meervoud.js';
 import woordenschat from './signalen/woordenschat.js';
+import dehet from './signalen/dehet.js';
+import verleden from './signalen/verleden.js';
+import woordsoorten from './signalen/woordsoorten.js';
+import { herhaal } from '../../shared/js/herhaal.js';
 
 // De signalen die de Zinnenzender opvangt. Elk signaal is een stukje
 // taalkennis: woorden, zinnen en later ook woordsoorten en ontleden.
@@ -11,6 +15,13 @@ export const SIGNALEN = [
   { id: 'hoofdletters', name: 'Hoofdletter en punt', sub: 'Zo schrijf je een zin', color: '#ff8fa3', module: hoofdletters },
   { id: 'woordenschat', name: 'Woordenschat', sub: 'Tegenstellingen en meer', color: '#8af0b0', module: woordenschat },
   { id: 'meervoud', name: 'Meervoud', sub: 'Eén kat, twee katten', color: '#9fd3ff', module: meervoud },
+  { id: 'woordsoorten', name: 'Woordsoorten', sub: 'Naamwoord, werkwoord en meer', color: '#c4b0ff', module: woordsoorten },
+  { id: 'dehet', name: 'De of het', sub: 'De tafel, het huis', color: '#ffb36b', module: dehet },
+  { id: 'verleden', name: 'Verleden tijd', sub: 'Loop wordt liep', color: '#8af5e8', module: verleden },
+  {
+    id: 'herhaal', name: 'Herhalen', sub: 'Alles uit de vorige groep', color: '#e0e4ff',
+    module: herhaal(() => SIGNALEN, { from: [4], intro: 'Alles uit de vorige groep door elkaar. Zo blijf je het goed weten!' }),
+  },
 ];
 
 const WAVES = 4;

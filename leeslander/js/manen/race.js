@@ -24,7 +24,7 @@ export default {
   intro: 'Je hebt <b>1 minuut</b>. Lees het woord en tik zo snel als je kunt op het goede plaatje. Hoeveel haal jij?',
   levels: [
     { id: 'kort', name: 'Korte woorden', hint: 'Race tegen de klok', groups: [3, 4], timed: 60, starsAt: [8, 14] },
-    { id: 'lang', name: 'Lange woorden', hint: 'Race tegen de klok', groups: [4], timed: 60, starsAt: [8, 14] },
+    { id: 'lang', name: 'Lange woorden', hint: 'Race tegen de klok', groups: [4, 5], timed: 60, starsAt: [8, 14] },
   ],
   makeQuestion: question,
 };

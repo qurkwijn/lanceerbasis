@@ -1,11 +1,12 @@
 # 🚀 Lanceerbasis
 
-Een vrolijke oefenplek voor kinderen in groep 3 en 4, met een ruimtethema. Op de Lanceerbasis kies je je naam en groep en vertrek je met een van de voertuigen:
+Een vrolijke oefenplek voor kinderen in groep 3 tot en met 5, met een ruimtethema. Op de Lanceerbasis kies je je naam en groep en vertrek je met een van de voertuigen:
 
 - **Rekenraket** (`rekenraket/`): rekenen, van tellen en splitsen tot tafels en sommen tot 100.
 - **Meetrover** (`meetrover/`): klokkijken, kalender, geld, meten, grafieken en vormen, met een plek op Mars per onderdeel.
 - **Taaltelescoop** (`taaltelescoop/`): spelling, met een sterrenbeeld per onderdeel (de spellingcategorieën van groep 3 en 4).
 - **Zinnenzender** (`zinnenzender/`): taal, zoals het alfabet, hoofdletters, woordenschat en meervoud, met een signaal per onderdeel.
+- **Wereldsatelliet** (`wereldsatelliet/`): topografie vanaf groep 5, met een blokjeskaart van Nederland.
 - **Leeslander** (`leeslander/`): lezen, met een maan per onderdeel die voller wordt als je oefent.
 
 Speel op https://lanceerbasis.app
@@ -27,10 +28,12 @@ shared/js/util.js       kleine hulpjes en voorlezen
 shared/js/game.js       het spelscherm dat alle voertuigen delen
 shared/css/game.css     stijl van het spelscherm
 shared/css/sommen.css   sommen en invulvakjes (Rekenraket en Meetrover)
+shared/js/herhaal.js    herhaalonderdeel: alles uit de vorige groep door elkaar
 rekenraket/             de reken-app
 meetrover/              meten, tijd en geld
 taaltelescoop/          de spelling-app
 zinnenzender/           de taal-app
+wereldsatelliet/        topografie
 leeslander/             de lees-app
 ```
 

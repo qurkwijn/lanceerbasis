@@ -40,7 +40,7 @@ const levelsFor = (planet) => planet.module.levels.filter((l) => l.groups.includ
 function planetState(planet) {
   if (levelsFor(planet).length) return { state: 'open' };
   const from = Math.min(...planet.module.levels.flatMap((l) => l.groups));
-  return from > getProfile().groep ? { state: 'locked', from } : { state: 'hidden' };
+  return from > getProfile().groep && !planet.module.review ? { state: 'locked', from } : { state: 'hidden' };
 }
 
 function planetBall(planet, size) {

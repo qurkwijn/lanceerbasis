@@ -21,6 +21,15 @@ const UITLEG = {
     zinnenzender: 'woordenboekvolgorde, namen, meervoud, woorden die hetzelfde betekenen',
     leeslander: 'sneller lezen (AVI E4) en begrijpend lezen, ook weetjesteksten',
   },
+  5: {
+    intro: 'Tot 1000, alle tafels, de eerste breuken en voor het eerst topografie.',
+    rekenraket: 'tot 1000, tafels 1 t/m 10, delen met rest, breuken',
+    meetrover: 'klok op de minuut en digitaal, omrekenen, omtrek, kommabedragen',
+    taaltelescoop: 'spellingcategorie 13 t/m 19 (zoals in Staal) en herhalen',
+    zinnenzender: 'woordsoorten, de of het, verleden tijd, woordenboek',
+    wereldsatelliet: 'provincies, hoofdsteden, water en windrichtingen',
+    leeslander: 'langere teksten, hoofdgedachte en signaalwoorden',
+  },
 };
 
 // Het blokje onder de voertuigen; alleen voor groepen met uitleg.

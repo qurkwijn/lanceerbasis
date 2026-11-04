@@ -68,7 +68,7 @@ export default {
   intro: 'Een woord flitst even in beeld en is dan weg. Lees het snel en kies het goede plaatje!',
   levels: [
     { id: 'kort', name: 'Korte woorden', hint: 'Kat, vis, maan en huis', groups: [3, 4] },
-    { id: 'lang', name: 'Lange woorden', hint: 'Fiets, kikker en vlinder, en sneller!', groups: [4] },
+    { id: 'lang', name: 'Lange woorden', hint: 'Fiets, kikker en vlinder, en sneller!', groups: [4, 5] },
   ],
   makeQuestion: question,
 };

@@ -119,6 +119,24 @@ function map() {
   };
 }
 
+// Symmetrie: kun je een spiegel midden op de letter zetten, zodat beide kanten
+// hetzelfde zijn? (Een spiegel die rechtop staat.)
+const SYMMETRISCH = ['A', 'H', 'I', 'M', 'O', 'T', 'U', 'V', 'W', 'X', 'Y'];
+const NIET = ['F', 'G', 'J', 'L', 'N', 'P', 'R', 'S', 'Z'];
+
+function symmetry() {
+  const answer = pick(SYMMETRISCH);
+  return {
+    key: `sym-${answer}`,
+    prompt: 'Welke letter is symmetrisch?',
+    answer,
+    choices: shuffle([answer, ...shuffle(NIET).slice(0, 2)]),
+    choiceStyle: 'big',
+    revealText: `Zet een spiegel midden op de ${answer}: links en rechts zijn hetzelfde.`,
+    html: '<p class="unit-question">Zet in gedachten een spiegel rechtop in het midden van de letter.</p>',
+  };
+}
+
 const LEVELS = {
   patroon: pattern,
   vormen: () => shapeName(['cirkel', 'driehoek', 'vierkant', 'rechthoek']),
@@ -126,6 +144,7 @@ const LEVELS = {
   hoeken: corners,
   spiegelen: mirror,
   plattegrond: map,
+  symmetrie: symmetry,
 };
 
 export default {
@@ -137,6 +156,7 @@ export default {
     { id: 'hoeken', name: 'Hoeken tellen', hint: 'Hoeveel hoeken heeft het?', groups: [4] },
     { id: 'spiegelen', name: 'Spiegelen', hint: 'Wat zie je in de spiegel?', groups: [3, 4] },
     { id: 'plattegrond', name: 'Plattegrond', hint: 'Links, rechts, boven of onder?', groups: [3, 4] },
+    { id: 'symmetrie', name: 'Symmetrie', hint: 'Welke letter is aan twee kanten hetzelfde?', groups: [5] },
   ],
 
   makeQuestion(level) {

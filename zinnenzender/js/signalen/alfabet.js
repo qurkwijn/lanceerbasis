@@ -40,13 +40,32 @@ function first() {
   };
 }
 
+// Groep 5: beginnen de woorden met dezelfde letter? Kijk dan naar de tweede.
+const ZELFDE = [['bal', 'beer', 'boom', 'bus', 'brood', 'bijl'], ['kat', 'kip', 'koe', 'kers', 'kus', 'klok'],
+  ['sok', 'slak', 'sap', 'ster', 'sneeuw', 'sik'], ['maan', 'muis', 'mes', 'mier', 'mond'],
+  ['pen', 'pop', 'pak', 'pizza', 'pluim'], ['tak', 'tent', 'tol', 'trein', 'tuin']];
+
+function second() {
+  const words = shuffle(pick(ZELFDE)).slice(0, 3);
+  const answer = [...words].sort()[0];
+  return {
+    key: `tweede-${[...words].sort().join('-')}`,
+    prompt: 'Welk woord komt het eerst in het woordenboek?',
+    answer,
+    choices: words,
+    revealText: `Ze beginnen allemaal met een ${answer[0]}. Dan kijk je naar de tweede letter: ${answer[1]} komt het eerst.`,
+    html: '<div class="abc-row abc-hint">a b c d e f g h i j k l m n o p q r s t u v w x y z</div>',
+  };
+}
+
 export default {
   intro: 'Het alfabet is de rij van alle letters: <b>a b c d e…</b> tot de <b>z</b>. In het woordenboek staan de woorden in die volgorde.',
   levels: [
     { id: 'erna', name: 'Welke letter komt erna?', hint: 'a, b, c, ?', groups: [3, 4] },
     { id: 'woorden', name: 'Welk woord eerst?', hint: 'Zoals in het woordenboek', groups: [4] },
+    { id: 'tweede', name: 'Op de tweede letter', hint: 'Bal, beer of boom?', groups: [5] },
   ],
   makeQuestion(level) {
-    return level === 'erna' ? next() : first();
+    return { erna: next, woorden: first, tweede: second }[level]();
   },
 };

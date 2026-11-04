@@ -40,7 +40,7 @@ const plekStars = (plek) => levelsFor(plek).reduce((sum, l) => sum + getStars(le
 function plekState(plek) {
   if (levelsFor(plek).length) return { state: 'open' };
   const from = Math.min(...plek.module.levels.flatMap((l) => l.groups));
-  return from > getProfile().groep ? { state: 'locked', from } : { state: 'hidden' };
+  return from > getProfile().groep && !plek.module.review ? { state: 'locked', from } : { state: 'hidden' };
 }
 
 const phaseFor = (plek) => {

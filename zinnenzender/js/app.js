@@ -41,7 +41,7 @@ const signalStars = (sig) => levelsFor(sig).reduce((sum, l) => sum + getStars(le
 function signalState(sig) {
   if (levelsFor(sig).length) return { state: 'open' };
   const from = Math.min(...sig.module.levels.flatMap((l) => l.groups));
-  return from > getProfile().groep ? { state: 'locked', from } : { state: 'hidden' };
+  return from > getProfile().groep && !sig.module.review ? { state: 'locked', from } : { state: 'hidden' };
 }
 
 const phaseFor = (sig) => {

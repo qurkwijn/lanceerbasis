@@ -13,7 +13,7 @@ function story(text, answer, emoji, unit) {
     key: text,
     prompt: 'Lees goed en reken uit.',
     answer,
-    maxDigits: 3,
+    maxDigits: 4,
     html: `
       <div class="story">
         <span class="story-emoji" aria-hidden="true">${emoji}</span>
@@ -59,10 +59,26 @@ function money(name) {
   return story(`Een ijsje kost €${price}. ${name} koopt er ${count}. Hoeveel euro moet ${name} betalen?`, price * count, '🍦', 'euro');
 }
 
+// Verdelen: hoeveel krijgt ieder?
+function divide() {
+  const kids = rand(2, 6);
+  const each = rand(3, 12);
+  const [thing, emoji] = pick([['snoepjes', '🍬'], ['stickers', '⭐'], ['knikkers', '🔵'], ['kaarten', '🃏']]);
+  return story(`Er zijn ${kids * each} ${thing}. Ze worden eerlijk verdeeld over ${kids} kinderen. Hoeveel ${thing} krijgt ieder kind?`, each, emoji, thing);
+}
+
+function bigMoney(name) {
+  const price = 5 * rand(3, 40);
+  const count = rand(2, 5);
+  const [item, emoji] = pick([['kaartje voor de dierentuin', '🦁'], ['boek', '📕'], ['spelletje', '🎲']]);
+  return story(`Een ${item} kost €${price}. ${name} koopt er ${count}. Hoeveel euro is dat samen?`, price * count, emoji, 'euro');
+}
+
 const LEVELS = {
   tot10: (name) => (Math.random() < 0.5 ? plus(10, name) : minus(10)),
   tot20: (name) => pick([() => plus(20, name), () => minus(20), () => difference(20, name)])(),
   tot100: (name) => pick([() => plus(100, name), () => minus(100), () => difference(100, name), groups, () => money(name)])(),
+  tot1000: (name) => pick([() => plus(1000, name), () => difference(1000, name), divide, () => bigMoney(name)])(),
 };
 
 export default {
@@ -71,6 +87,7 @@ export default {
     { id: 'tot10', name: 'Verhaaltjes tot 10', hint: 'Erbij of eraf?', groups: [3] },
     { id: 'tot20', name: 'Verhaaltjes tot 20', hint: 'Ook: hoeveel meer?', groups: [3, 4] },
     { id: 'tot100', name: 'Verhaaltjes tot 100', hint: 'Met zakjes en geld', groups: [4] },
+    { id: 'tot1000', name: 'Verhaaltjes tot 1000', hint: 'Plus, min, keer en delen', groups: [5] },
   ],
 
   makeQuestion(level, profile) {

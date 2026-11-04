@@ -183,9 +183,15 @@ a.station:active .station-art { transform: scale(0.96); }
   cursor: pointer;
 }
 .groep-info-btn:hover, .groep-info-btn:focus-visible { color: var(--text); border-color: var(--accent); }
-.info-dialog .groep-list { list-style: none; padding: 0; }
-.info-dialog .groep-list li { margin: 8px 0; }
+.info-dialog .groep-list { list-style: none; padding: 0; line-height: 1.3; }
+.info-dialog .groep-list li { margin: 6px 0; }
 .groep-list b { display: block; color: var(--accent); }
+
+/* De satelliet draait een rondje in zijn baan */
+.station .sat-craft { transform-origin: 60px 150px; }
+.station.launching .sat-craft { animation: orbit 1.1s ease-in-out forwards; }
+
+@keyframes orbit { to { transform: rotate(-70deg); } }
 
 /* Missielogboek */
 .log-total {

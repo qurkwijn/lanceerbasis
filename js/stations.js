@@ -8,7 +8,7 @@ export const STATIONS = [
     name: 'Taaltelescoop',
     subject: 'Spelling',
     world: 'de sterrenbeelden',
-    groups: [3, 4],
+    groups: [3, 4, 5],
     ready: true,
     art: telescope,
   },
@@ -17,7 +17,7 @@ export const STATIONS = [
     name: 'Zinnenzender',
     subject: 'Taal',
     world: 'de signalen',
-    groups: [3, 4],
+    groups: [3, 4, 5],
     ready: true,
     art: dish,
   },
@@ -26,7 +26,7 @@ export const STATIONS = [
     name: 'Rekenraket',
     subject: 'Rekenen',
     world: 'de planeten',
-    groups: [3, 4],
+    groups: [3, 4, 5],
     ready: true,
     art: rocket,
   },
@@ -35,16 +35,25 @@ export const STATIONS = [
     name: 'Meetrover',
     subject: 'Meten en tijd',
     world: 'Mars',
-    groups: [3, 4],
+    groups: [3, 4, 5],
     ready: true,
     art: rover,
+  },
+  {
+    id: 'wereldsatelliet',
+    name: 'Wereldsatelliet',
+    subject: 'Topografie',
+    world: 'de aarde',
+    groups: [5],
+    ready: true,
+    art: satellite,
   },
   {
     id: 'leeslander',
     name: 'Leeslander',
     subject: 'Lezen',
     world: 'de manen',
-    groups: [3, 4],
+    groups: [3, 4, 5],
     ready: true,
     art: lander,
   },
@@ -145,6 +154,22 @@ function rover() {
       <circle cx="34" cy="142" r="8" fill="#3b4080" stroke="#c9cde8" stroke-width="3"/>
       <circle cx="56" cy="142" r="8" fill="#3b4080" stroke="#c9cde8" stroke-width="3"/>
       <circle cx="78" cy="142" r="8" fill="#3b4080" stroke="#c9cde8" stroke-width="3"/>
+    </g>
+  </svg>`;
+}
+
+// Satelliet in een baan om de aarde, op een schotel op de grond.
+function satellite() {
+  return `<svg class="station-art" viewBox="0 0 120 170" aria-hidden="true">
+    <circle cx="60" cy="150" r="46" fill="#3a6fd8"/>
+    <path d="M30 136 q12 -10 22 0 q8 8 18 -2 M44 160 q10 -6 20 2" stroke="#8af0b0" stroke-width="6" fill="none" stroke-linecap="round"/>
+    <path d="M14 76 A50 50 0 0 1 106 76" stroke="rgba(255,255,255,0.25)" stroke-width="2" stroke-dasharray="4 5" fill="none"/>
+    <g class="sat-craft">
+      <rect x="22" y="58" width="24" height="16" rx="3" fill="#3a6fd8" stroke="#c0d4ff" stroke-width="2"/>
+      <rect x="74" y="58" width="24" height="16" rx="3" fill="#3a6fd8" stroke="#c0d4ff" stroke-width="2"/>
+      <path d="M46 66 H74" stroke="#c9cde8" stroke-width="3"/>
+      <rect x="50" y="52" width="20" height="28" rx="5" fill="#f4f1ff"/>
+      <circle cx="60" cy="86" r="5" fill="#ffcc33" class="beacon"/>
     </g>
   </svg>`;
 }

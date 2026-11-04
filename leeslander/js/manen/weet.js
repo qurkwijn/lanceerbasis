@@ -90,13 +90,69 @@ const TEKSTEN = [
   },
 ];
 
+// Groep 5: langere teksten. De eerste vraag is altijd de hoofdgedachte: waar
+// gaat de hele tekst over, niet één zinnetje.
+const LANG = [
+  {
+    pic: '🐋',
+    text: 'Een walvis lijkt op een vis, maar het is een zoogdier. Hij ademt lucht en moet daarom naar boven om adem te halen. Dat doet hij door een gat boven op zijn kop. Een walvisjong drinkt melk bij zijn moeder, net als een kalf bij een koe.',
+    vragen: [['Waar gaat deze tekst vooral over?', 'Een walvis is een zoogdier en geen vis.', 'Walvissen zwemmen heel snel.', 'Koeien geven melk.'],
+      ['Waarom moet een walvis naar boven?', 'om lucht te ademen', 'om te eten', 'om te slapen']],
+  },
+  {
+    pic: '🌋',
+    text: 'Een vulkaan is een berg met een opening naar binnen in de aarde. Diep onder de grond is het zo heet dat steen smelt. Die hete, vloeibare steen heet lava. Als een vulkaan uitbarst, komen er lava, as en rook naar buiten. In Nederland zijn geen werkende vulkanen.',
+    vragen: [['Waar gaat deze tekst vooral over?', 'Wat een vulkaan is en wat er gebeurt bij een uitbarsting.', 'Hoe je een berg beklimt.', 'Waarom Nederland vlak is.'],
+      ['Hoe heet gesmolten steen?', 'lava', 'as', 'zand']],
+  },
+  {
+    pic: '🦷',
+    text: 'Je tanden hebben elke dag zorg nodig. Na het eten blijven er kleine stukjes achter. Daar komen bacteriën op af, en die maken gaatjes in je tanden. Daarom poets je twee keer per dag, twee minuten lang. Ook is het goed om niet te vaak snoep te eten.',
+    vragen: [['Waar gaat deze tekst vooral over?', 'Hoe je je tanden gezond houdt.', 'Welk snoep het lekkerst is.', 'Hoe een tandarts werkt.'],
+      ['Hoe vaak moet je per dag poetsen?', 'twee keer', 'één keer', 'vijf keer']],
+  },
+  {
+    pic: '🐿️',
+    text: 'In de herfst heeft de eekhoorn het druk. Hij verzamelt nootjes en zaden en verstopt die op allerlei plekken. In de winter is er weinig eten te vinden. Dan zoekt de eekhoorn zijn voorraad weer op. Niet alle nootjes vindt hij terug. Daaruit groeien soms nieuwe bomen.',
+    vragen: [['Waar gaat deze tekst vooral over?', 'Hoe een eekhoorn eten verzamelt voor de winter.', 'Hoe bomen groeien.', 'Wat eekhoorns in de zomer doen.'],
+      ['Wat gebeurt er met nootjes die de eekhoorn niet terugvindt?', 'Er groeien soms nieuwe bomen uit.', 'Ze worden snoep.', 'Ze smelten.']],
+  },
+  {
+    pic: '🪐',
+    text: 'Ons zonnestelsel heeft acht planeten. Ze draaien allemaal om de zon. Mercurius staat het dichtst bij de zon en is daarom heel heet. Jupiter is de grootste planeet. Saturnus herken je aan zijn mooie ringen. De aarde is de enige planeet waarvan we weten dat er leven is.',
+    vragen: [['Waar gaat deze tekst vooral over?', 'De planeten van ons zonnestelsel.', 'Hoe je een raket bouwt.', 'Waarom de zon heet is.'],
+      ['Welke planeet is de grootste?', 'Jupiter', 'Mercurius', 'de aarde']],
+  },
+  {
+    pic: '🌷',
+    text: 'Nederland staat bekend om zijn tulpen. In het voorjaar zijn er grote velden vol rode, gele en roze bloemen. Tulpen groeien uit een bol die je in de herfst in de grond stopt. Veel tulpen worden naar andere landen verkocht. Toeristen komen van ver om de velden te zien.',
+    vragen: [['Waar gaat deze tekst vooral over?', 'Tulpen in Nederland.', 'Hoe je een bos plant.', 'Waarom toeristen fietsen.'],
+      ['Wanneer stop je een tulpenbol in de grond?', 'in de herfst', 'in de zomer', 'in het voorjaar']],
+  },
+  {
+    pic: '♻️',
+    text: 'Afval kun je vaak opnieuw gebruiken. Dat heet recyclen. Van oud papier maken ze nieuw papier. Van plastic flessen kunnen ze bijvoorbeeld fleecetruien maken. Daarom is het belangrijk om afval goed te scheiden. Zo hoeft er minder te worden weggegooid.',
+    vragen: [['Waar gaat deze tekst vooral over?', 'Waarom we afval scheiden en recyclen.', 'Hoe je een trui breit.', 'Wat er in een vuilnisbak zit.'],
+      ['Wat kunnen ze maken van plastic flessen?', 'fleecetruien', 'papier', 'brood']],
+  },
+  {
+    pic: '🦉',
+    text: 'Uilen jagen vooral in de nacht. Ze hebben grote ogen en zien goed in het donker. Ook horen ze heel goed: een uil hoort een muis lopen onder de bladeren. Uilen vliegen bijna zonder geluid, omdat hun veren heel zacht zijn. Zo merkt de muis niets.',
+    vragen: [['Waar gaat deze tekst vooral over?', 'Hoe een uil in de nacht jaagt.', 'Wat muizen eten.', 'Waarom vogels zingen.'],
+      ['Waarom maakt een uil bijna geen geluid bij het vliegen?', 'omdat zijn veren heel zacht zijn', 'omdat hij heel klein is', 'omdat hij niet vliegt']],
+  },
+];
+
+const LIST = { kort: TEKSTEN, lang: LANG };
+
 export default {
-  intro: 'In een <b>weetjestekst</b> leer je iets over echte dingen, zoals dieren of de ruimte. Lees goed en zoek het antwoord in de tekst!',
+  intro: 'In een <b>weetjestekst</b> leer je iets over echte dingen, zoals dieren of de ruimte. Lees goed en zoek het antwoord in de tekst! Bij lange teksten vraag je je af: waar gaat het <b>vooral</b> over?',
   levels: [
     { id: 'kort', name: 'Weetjes', hint: 'Over dieren, planten en de ruimte', groups: [4] },
+    { id: 'lang', name: 'Langere weetjes', hint: 'Waar gaat de tekst over?', groups: [5] },
   ],
-  makeQuestion() {
-    const tekst = pick(TEKSTEN);
+  makeQuestion(level) {
+    const tekst = pick(LIST[level]);
     const [vraag, answer, ...wrong] = pick(tekst.vragen);
     return {
       // Per ronde komt elke tekst maar één keer.

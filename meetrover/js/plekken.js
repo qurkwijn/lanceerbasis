@@ -4,6 +4,7 @@ import kalender from './plekken/kalender.js';
 import klok from './plekken/klok.js';
 import meten from './plekken/meten.js';
 import patronen from './plekken/patronen.js';
+import { herhaal } from '../../shared/js/herhaal.js';
 
 // De plekken op Mars waar de rover naartoe rijdt. Elke plek is een stukje
 // meten, tijd, geld of meetkunde. Hoe meer sterren, hoe hoger de vlag.
@@ -14,6 +15,10 @@ export const PLEKKEN = [
   { id: 'meten', name: 'Meten en wegen', sub: 'Lang, kort, zwaar en licht', icon: '📏', module: meten },
   { id: 'grafieken', name: 'Tabellen en grafieken', sub: 'Turven en aflezen', icon: '📊', module: grafieken },
   { id: 'vormen', name: 'Vormen en ruimte', sub: 'Patronen, spiegelen en plattegronden', icon: '🔷', module: patronen },
+  {
+    id: 'herhaal', name: 'Herhalen', sub: 'Alles uit de vorige groep', icon: '🔁',
+    module: herhaal(() => PLEKKEN, { from: [4], intro: 'Hier komt alles uit de vorige groep door elkaar voorbij. Zo blijf je het goed weten!' }),
+  },
 ];
 
 // Een plek: een kraterheuvel met het onderwerp erop en een vlaggenmast. Bij

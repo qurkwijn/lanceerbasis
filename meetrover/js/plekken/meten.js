@@ -111,12 +111,53 @@ function unitQuestion() {
   };
 }
 
+// Omrekenen: 1 m = 10 dm = 100 cm, 1 cm = 10 mm.
+const STAPPEN = [['m', 'cm', 100], ['m', 'dm', 10], ['dm', 'cm', 10], ['cm', 'mm', 10], ['km', 'm', 1000]];
+
+function convert() {
+  const [big, small, factor] = pick(STAPPEN);
+  const n = rand(2, factor === 1000 ? 5 : 9);
+  const back = Math.random() < 0.4;
+  return {
+    key: `om-${big}-${n}-${back}`,
+    prompt: 'Reken om',
+    answer: back ? n : n * factor,
+    maxDigits: 4,
+    revealText: `${n} ${big} = ${n * factor} ${small}, want 1 ${big} = ${factor} ${small}.`,
+    html: back
+      ? `<div class="sum"><span>${n * factor}</span><span class="unit">${small}</span><span class="op">=</span>${slot()}<span class="unit">${big}</span></div>`
+      : `<div class="sum"><span>${n}</span><span class="unit">${big}</span><span class="op">=</span>${slot()}<span class="unit">${small}</span></div>`,
+  };
+}
+
+// Omtrek: helemaal om de rechthoek heen lopen en alle kanten optellen.
+function perimeter() {
+  const w = rand(2, 9);
+  const h = rand(2, 6);
+  const scale = 26;
+  return {
+    key: `omtrek-${w}-${h}`,
+    prompt: 'Wat is de omtrek?',
+    answer: 2 * (w + h),
+    revealText: `${w} + ${h} + ${w} + ${h} = ${2 * (w + h)} cm`,
+    html: `
+      <svg class="perimeter" viewBox="-30 -24 ${w * scale + 60} ${h * scale + 48}" aria-hidden="true">
+        <rect x="0" y="0" width="${w * scale}" height="${h * scale}" rx="2" />
+        <text x="${(w * scale) / 2}" y="-8">${w} cm</text>
+        <text x="${w * scale + 8}" y="${(h * scale) / 2 + 5}" class="side">${h} cm</text>
+      </svg>
+      <div class="euro-answer">${slot()}<span class="unit">cm</span></div>`,
+  };
+}
+
 const LEVELS = {
   langst: longest,
   blokjes: () => measure('blokjes'),
   liniaal: () => measure('cm'),
   wegen: weigh,
   maten: unitQuestion,
+  omrekenen: convert,
+  omtrek: perimeter,
 };
 
 export default {
@@ -127,6 +168,8 @@ export default {
     { id: 'liniaal', name: 'Meten met de liniaal', hint: 'In centimeters', groups: [4] },
     { id: 'wegen', name: 'Wegen', hint: 'De weegschaal in evenwicht', groups: [4] },
     { id: 'maten', name: 'Welke maat?', hint: 'Centimeter, meter, kilo of liter', groups: [4] },
+    { id: 'omrekenen', name: 'Omrekenen', hint: '1 m = 100 cm, 1 cm = 10 mm', groups: [5] },
+    { id: 'omtrek', name: 'Omtrek', hint: 'Alle kanten bij elkaar', groups: [5] },
   ],
 
   makeQuestion(level) {

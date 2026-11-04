@@ -40,7 +40,7 @@ const sbStars = (sb) => levelsFor(sb).reduce((sum, l) => sum + getStars(levelKey
 function skyState(sb) {
   if (levelsFor(sb).length) return { state: 'open' };
   const from = Math.min(...sb.module.levels.flatMap((l) => l.groups));
-  return from > getProfile().groep ? { state: 'locked', from } : { state: 'hidden' };
+  return from > getProfile().groep && !sb.module.review ? { state: 'locked', from } : { state: 'hidden' };
 }
 
 // Op de hemel zie je meteen hoe ver je bent: elke verdiende ster laat een

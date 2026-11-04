@@ -56,6 +56,35 @@ function numberPattern() {
   };
 }
 
+// Deeltafels: 56 : 8 is de omgekeerde som van 7 × 8.
+function divide(tables) {
+  const table = pick(tables);
+  const times = rand(1, 10);
+  return {
+    key: `d-${times * table}-${table}`,
+    prompt: 'Deel uit je hoofd',
+    answer: times,
+    maxDigits: 2,
+    revealText: `${times * table} : ${table} = ${times}, want ${times} × ${table} = ${times * table}.`,
+    html: `<div class="sum"><span>${times * table}</span><span class="op">:</span><span>${table}</span><span class="op">=</span>${slot()}</div>`,
+  };
+}
+
+// Tafels met tientallen: 6 × 40 is 6 × 4 en dan × 10.
+function tens() {
+  const a = rand(2, 9);
+  const b = 10 * rand(2, 9);
+  return {
+    key: `t-${a}-${b}`,
+    prompt: `${a} keer ${b}`,
+    answer: a * b,
+    maxDigits: 3,
+    html: `<div class="sum"><span>${a}</span><span class="op">×</span><span>${b}</span><span class="op">=</span>${slot()}</div>`,
+  };
+}
+
+const ALL = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
 const LEVELS = {
   sprong2: () => sequence(2, 20),
   sprong510: () => (Math.random() < 0.5 ? sequence(5, 50) : sequence(10, 100)),
@@ -64,6 +93,10 @@ const LEVELS = {
   t34: () => multiply([3, 4]),
   mix: () => multiply([1, 2, 3, 4, 5, 10]),
   rijen: numberPattern,
+  t6789: () => multiply([6, 7, 8, 9]),
+  alle: () => multiply(ALL),
+  deel: () => divide(ALL),
+  tientallen: tens,
 };
 
 export default {
@@ -75,7 +108,11 @@ export default {
     { id: 't5', name: 'Tafel van 5', hint: '5, 10, 15, 20…', groups: [4] },
     { id: 't34', name: 'Tafel van 3 en 4', hint: '3, 6, 9… en 4, 8, 12…', groups: [4] },
     { id: 'mix', name: 'Alles door elkaar', hint: 'Tafels 1 t/m 5 en 10', groups: [4] },
-    { id: 'rijen', name: 'Getallenrijen', hint: 'Zoals 3, 6, 9, ?', groups: [4] },
+    { id: 'rijen', name: 'Getallenrijen', hint: 'Zoals 3, 6, 9, ?', groups: [4, 5] },
+    { id: 't6789', name: 'Tafel van 6, 7, 8 en 9', hint: 'De moeilijkste tafels', groups: [5] },
+    { id: 'alle', name: 'Alle tafels', hint: 'Tafels 1 t/m 10 door elkaar', groups: [5] },
+    { id: 'deel', name: 'Deeltafels', hint: 'Zoals 56 : 8', groups: [5] },
+    { id: 'tientallen', name: 'Keer met tientallen', hint: 'Zoals 6 × 40', groups: [5] },
   ],
 
   makeQuestion(level) {

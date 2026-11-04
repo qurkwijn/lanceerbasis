@@ -3,6 +3,7 @@ import flits from './manen/flits.js';
 import gek from './manen/gek.js';
 import klank from './manen/klank.js';
 import race from './manen/race.js';
+import signaal from './manen/signaal.js';
 import verhaal from './manen/verhaal.js';
 import weet from './manen/weet.js';
 import zinnen from './manen/zinnen.js';
@@ -41,6 +42,10 @@ export const MANEN = [
   {
     id: 'weet', name: 'Weetmaan', sub: 'Weetjesteksten', color: '#c4b0ff', module: weet,
     craters: [[40, 30, 9], [66, 52, 7], [34, 62, 10], [62, 78, 4]],
+  },
+  {
+    id: 'signaal', name: 'Signaalmaan', sub: 'Want, maar, dus', color: '#ffd76e', module: signaal,
+    craters: [[34, 34, 8], [64, 44, 10], [44, 70, 7], [70, 72, 4]],
   },
 ];
 

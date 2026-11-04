@@ -62,3 +62,8 @@ a.signal-link:active .signal-art { transform: scale(0.94); }
   text-align: center;
 }
 .abc-row.abc-hint { gap: 0 8px; max-width: 340px; font-size: 1.3rem; font-weight: 700; color: var(--muted); letter-spacing: 0.04em; }
+
+/* Een zin met een gekleurd woord */
+.signal-sentence { margin: 4px 0; font-size: clamp(1.5rem, 7vw, 2rem); font-weight: 800; text-align: center; line-height: 1.3; }
+.signal-sentence mark { padding: 0 6px; border-radius: 8px; background: rgba(255, 204, 51, 0.3); color: var(--accent); }
+.signal-word .gap, .signal-sentence .gap { display: inline-block; min-width: 1.6em; border-bottom: 5px dashed var(--accent); color: rgba(255, 255, 255, 0.4); }

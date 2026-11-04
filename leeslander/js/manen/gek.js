@@ -37,7 +37,7 @@ export default {
   intro: 'Lees de zin. Kan dat echt? Dan klopt hij. Kan het niet? Dan is het een gekke zin!',
   levels: [
     { id: 'kort', name: 'Korte zinnen', hint: 'Een koe zegt boe. Klopt dat?', groups: [3, 4] },
-    { id: 'lang', name: 'Lange zinnen', hint: 'Na maandag komt zondag. Klopt dat?', groups: [4] },
+    { id: 'lang', name: 'Lange zinnen', hint: 'Na maandag komt zondag. Klopt dat?', groups: [4, 5] },
   ],
   makeQuestion(level) {
     const [klopt, gek] = LIST[level];

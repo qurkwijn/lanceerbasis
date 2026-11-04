@@ -1,4 +1,4 @@
-import { pick, rand, slot } from '../util.js';
+import { pick, rand, shuffle, slot } from '../util.js';
 
 // Eenvoudige tekeningen van euromunten en briefjes (geen echte ontwerpen).
 const BILL_COLORS = { 5: '#9aa3ad', 10: '#e2675d', 20: '#5b8fd6', 50: '#f0a145' };
@@ -110,6 +110,27 @@ function changeQuestion() {
   };
 }
 
+// Bedragen met een komma: €1,50 + €2,25. Een euro is 100 cent.
+const euroText = (cents) => `€${Math.floor(cents / 100)},${String(cents % 100).padStart(2, '0')}`;
+
+function commaQuestion() {
+  const a = 5 * rand(20, 300);
+  const b = 5 * rand(10, 200);
+  const total = a + b;
+  const wrong = [total + 100, total - 100, total + 10, total - 10, total + 50].filter((w) => w > 0 && w !== total);
+  return {
+    key: `komma-${a}-${b}`,
+    prompt: 'Hoeveel kost het samen?',
+    answer: euroText(total),
+    choices: shuffle([euroText(total), ...shuffle(wrong).slice(0, 2).map(euroText)]),
+    revealText: `${euroText(a)} + ${euroText(b)} = ${euroText(total)}`,
+    html: `<div class="shop">${priceTagText(pick(ITEMS), euroText(a))}<span class="op">+</span>${priceTagText(pick(ITEMS), euroText(b))}</div>`,
+  };
+}
+
+const priceTagText = (item, text) =>
+  `<div class="shop-item"><span class="shop-emoji" aria-hidden="true">${item}</span><span class="price-tag">${text}</span></div>`;
+
 const LEVELS = {
   munten10: () => countQuestion([1, 2], 10, 2, 5),
   tot20: () => countQuestion([1, 2, 5, 10], 20, 2, 5),
@@ -118,6 +139,7 @@ const LEVELS = {
   winkel100: () => shopQuestion(100, 50),
   terug: () => changeQuestion(),
   centen: () => centQuestion(),
+  komma: () => commaQuestion(),
 };
 
 export default {
@@ -130,6 +152,7 @@ export default {
     { id: 'winkel100', name: 'Winkeltje tot €100', hint: 'Hoeveel kost het samen?', groups: [4] },
     { id: 'terug', name: 'Wisselgeld', hint: 'Hoeveel krijg je terug?', groups: [4] },
     { id: 'centen', name: 'Centen', hint: '100 cent is 1 euro', groups: [4] },
+    { id: 'komma', name: 'Bedragen met een komma', hint: '€1,50 + €2,25', groups: [5] },
   ],
 
   makeQuestion(level) {

@@ -278,3 +278,11 @@ a.planet-link:active .planet { transform: scale(0.94); }
 @media (max-height: 700px) {
   .pairs { margin-top: 6px; }
 }
+
+/* Breuken: pizza's */
+.pie { width: min(190px, 50vw); height: auto; }
+.pie .crust { fill: #c98a4a; }
+.pie .slice { fill: #ffe9b0; stroke: #c98a4a; stroke-width: 1.5; }
+.pie .slice.on { fill: #e8476a; }
+.pies { display: flex; gap: 24px; }
+.pies .pie { width: min(130px, 36vw); }

@@ -147,7 +147,7 @@ Elk vak heeft een eigen voertuig met een eigen wereld. Per groep wil ik zo'n 6 t
 | Taaltelescoop | Spelling, later ook werkwoordspelling | sterrenbeelden | 3-8 |
 | Zinnenzender | Taal: alfabet, zinnen, woordenschat, later woordsoorten en ontleden | signalen met golven | 3-8 |
 | Leeslander | Technisch en begrijpend lezen | manen | 3-8 |
-| *nog te maken* | Topografie en wereldoriëntatie (bijvoorbeeld een satelliet die naar de aarde kijkt) | | 5-8 |
+| Wereldsatelliet | Topografie: Nederland, later Europa en de wereld | kaarten met een ring die dichtgaat | 5-8 |
 | *nog te maken* | Engels | | 7-8 |
 
 Keuzes van november 2026:
@@ -155,8 +155,10 @@ Keuzes van november 2026:
 - De Rekenraket had in groep 4 18 planeten. Meten, tijd, geld, grafieken en vormen zijn naar de Meetrover gegaan (op school is dat ook een apart domein). Daarnaast zijn planeten samengevoegd: verliefde harten zit bij Splitsen, de getallenlijn bij Getallen, en Snelrekenen is een race-niveau (🏁) geworden bij Plus en min en bij Tafels. Getallenrijen staan nu bij Tafels.
 - De Taaltelescoop is alleen nog spelling. Het alfabet is naar de Zinnenzender verhuisd.
 - Sterren van onderdelen die verhuisd zijn, zijn bewust niet meegenomen.
+- Vanaf groep 5 heeft elk voertuig (behalve de Leeslander en de Wereldsatelliet) een herhaalonderdeel met alle stof uit de vorige groep door elkaar (`shared/js/herhaal.js`). Zo blijft de oude stof in beeld zonder dat de lijst lang wordt. Een lagere groep ziet het herhaalonderdeel niet op slot staan.
+- Topografie gebruikt een blokjeskaart: elke provincie is een blok op ongeveer de goede plek. Er is geen kaartbestand van buiten nodig.
 
-## Wat de Lanceerbasis nu heeft voor groep 3 en 4
+## Wat de Lanceerbasis nu heeft voor groep 3 tot en met 5
 
 | Voertuig | Groep 3 | Groep 4 |
 |---|---|---|
@@ -165,6 +167,17 @@ Keuzes van november 2026:
 | **Taaltelescoop** | Hakken en plakken, Kort of lang, ng of nk | Staal-categorie 1 t/m 12, onthoudwoorden ei/ij en au/ou |
 | **Zinnenzender** | Alfabet, Hoofdletter en punt, Tegenstellingen, Hoort er niet bij | ook: Woordenboekvolgorde, Namen met hoofdletter, Hetzelfde, Meervoud |
 | **Leeslander** | Klanken horen, Woorden flitsen, Snel lezen (race), Zin bij plaatje, Klopt het of is het gek, Zinnen bouwen, Korte verhaaltjes | ook: lange woorden en zinnen, Lange verhaaltjes, Weetjesteksten |
+
+### Groep 5
+
+| Voertuig | Onderdelen |
+|---|---|
+| **Rekenraket** | Getallen tot 1000 (opbouw, buren, vergelijken, afronden), Plus en min tot 1000, Tafels 6 t/m 9, alle tafels, deeltafels en keer met tientallen (met race), Delen met rest, Breuken (welk deel, deel van een getal, welke is groter), Verhaaltjes tot 1000, Herhaalplaneet |
+| **Meetrover** | Klok per 5 minuten, digitaal en op de minuut, Bedragen met een komma, Omrekenen (km, m, dm, cm, mm), Omtrek, Staafgrafiek tot 50, Symmetrie, Herhalen |
+| **Taaltelescoop** | Staal-categorie 13 t/m 19: Kilowoord (De Kiwi), Komma-s-woord en komma-s-meervoud (De Paraplu), Centwoord en colawoord (De Citroen), Politiewoord en tropisch-woord (De Papegaai), uw- en gids-rijtje (De Zwaluw), Herhalen (De Grote Beer) |
+| **Zinnenzender** | Alfabet op de tweede letter, Woordsoorten, De of het, Verleden tijd van sterke werkwoorden, Herhalen |
+| **Wereldsatelliet** | Provincies en buren, Hoofdsteden en grote steden, Water en Waddeneilanden (TV TAS), Windrichtingen |
+| **Leeslander** | Lange woorden flitsen en racen, Lange gekke zinnen, Lange verhaaltjes, Langere weetjes met hoofdgedachte, Signaalwoorden |
 
 Niet in de Lanceerbasis, omdat het in een app niet goed te oefenen is: schrijven met de hand, wereldoriëntatie in groep 3-4, spreken en luisteren.
 
@@ -180,13 +193,8 @@ Alles wat goed in een app past, zit erin. Mogelijke verbeteringen: meer woorden 
 ### Groep 4 ✓
 Compleet voor groep 4, op tafels 6 t/m 9 na (extra streefdoel, komt in groep 5). In de Taaltelescoop zijn ei/ij en au/ou samengevoegd in De IJsbeer (beide onthoudwoorden), zodat groep 4 elf sterrenbeelden heeft.
 
-### Groep 5 ○
-- Rekenraket: getallen tot 1000, alle tafels, kolomsgewijs optellen en aftrekken, delen met rest, eenvoudige breuken.
-- Meetrover: klok in minuten en digitaal, omtrek, meter en centimeter omrekenen, geld met komma.
-- Taaltelescoop: Staal-categorie 13 t/m 21.
-- Zinnenzender: woordsoorten (zelfstandig naamwoord, werkwoord, bijvoeglijk naamwoord).
-- Leeslander: begrijpend lezen met strategieën (voorspellen, hoofdgedachte).
-- Nieuw voertuig: topografie van Nederland.
+### Groep 5 ✓
+Gebouwd in november 2026, zie de tabel hierboven. De Staal-categorieën komen van de regelkaart van groep 5 (13 t/m 19 plus het uw- en gids-rijtje). Mogelijke verbeteringen: kolomsgewijs rekenen als aparte weergave, en rivieren op de kaart tekenen.
 
 ### Groep 6 ○
 - Rekenraket: getallen tot 10.000, cijferend rekenen, breuken en kommagetallen.

@@ -9,13 +9,22 @@ function fromMinutes(total) {
   return { h: Math.floor(t / 60) || 12, m: t % 60 };
 }
 
-// Zoals op school: "3 uur", "half 4", "kwart over 3", "kwart voor 4".
+// Zoals op school: "3 uur", "half 4", "kwart over 3", "kwart voor 4", en in
+// groep 5 ook "10 over 3", "5 voor half 4" en "10 over half 4".
 function timeText({ h, m }) {
+  const next = nextHour(h);
   if (m === 0) return `${h} uur`;
   if (m === 15) return `kwart over ${h}`;
-  if (m === 30) return `half ${nextHour(h)}`;
-  return `kwart voor ${nextHour(h)}`;
+  if (m === 30) return `half ${next}`;
+  if (m === 45) return `kwart voor ${next}`;
+  if (m < 15) return `${m} over ${h}`;
+  if (m < 30) return `${30 - m} voor half ${next}`;
+  if (m < 45) return `${m - 30} over half ${next}`;
+  return `${60 - m} voor ${next}`;
 }
+
+// Een digitale klok, zoals op een wekker: 3:25.
+const digital = ({ h, m }) => `<div class="digital-clock">${h}:${String(m).padStart(2, '0')}</div>`;
 
 function clockSvg({ h, m }) {
   const ticks = Array.from({ length: 60 }, (_, i) => {
@@ -73,6 +82,24 @@ function readQuestion(level) {
   };
 }
 
+// Per 5 minuten op de wijzerklok, of op een digitale klok.
+function fiveQuestion(level) {
+  const time = { h: rand(1, 12), m: 5 * rand(0, 11) };
+  if (level === 'minuut') time.m = rand(1, 59);
+  const t = toMinutes(time.h, time.m);
+  const answer = timeText(time);
+  // Typische fouten: "over" en "voor" omdraaien, een uur ernaast, half verwarren.
+  const mistakes = [t + 60, t - 60, t + 30, t - 30, toMinutes(time.h, 60 - time.m), t + 10, t - 10];
+  return {
+    key: `${level}-${t}`,
+    prompt: 'Hoe laat is het?',
+    answer,
+    choices: makeChoices(answer, mistakes),
+    choiceStyle: 'list',
+    html: level === 'digitaal' ? digital(time) : clockSvg(time) + LEGEND,
+  };
+}
+
 function shiftQuestion() {
   const start = { h: rand(1, 12), m: pick([0, 0, 30]) };
   const shift = pick([60, 60, 120, 120, 180, 30]) * (Math.random() < 0.5 ? 1 : -1);
@@ -99,15 +126,20 @@ function shiftQuestion() {
 
 export default {
   intro: `De <b class="hour-text">korte wijzer</b> wijst het uur aan, de <b class="minute-text">lange wijzer</b> de minuten.
-    Staat de lange wijzer op de 6? Dan is het <b>half</b>: half 4 is een half uur vóór 4 uur.`,
+    Staat de lange wijzer op de 6? Dan is het <b>half</b>: half 4 is een half uur vóór 4 uur. Elk cijfer op de klok is <b>5 minuten</b> voor de lange wijzer.`,
   levels: [
     { id: 'uren', name: 'Hele uren', hint: 'De lange wijzer staat op de 12', groups: [3, 4] },
     { id: 'halve', name: 'Halve uren', hint: 'Hele uren en half', groups: [3, 4] },
     { id: 'kwartier', name: 'Kwartieren', hint: 'Kwart over en kwart voor', groups: [4] },
     { id: 'later', name: 'Later en vroeger', hint: 'Hoe laat is het 2 uur later?', groups: [4] },
+    { id: 'vijf', name: 'Per 5 minuten', hint: '10 over 3, 5 voor half 4', groups: [5] },
+    { id: 'digitaal', name: 'Digitale klok', hint: '3:25 is 5 voor half 4', groups: [5] },
+    { id: 'minuut', name: 'Op de minuut', hint: '7 over 3, 2 voor half 4', groups: [5] },
   ],
 
   makeQuestion(level) {
-    return level === 'later' ? shiftQuestion() : readQuestion(level);
+    if (level === 'later') return shiftQuestion();
+    if (['vijf', 'digitaal', 'minuut'].includes(level)) return fiveQuestion(level);
+    return readQuestion(level);
   },
 };

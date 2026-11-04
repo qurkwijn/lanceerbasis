@@ -9,6 +9,10 @@ import tientallen from './planets/tientallen.js';
 import tafels from './planets/tafels.js';
 import delen from './planets/delen.js';
 import verhaaltjes from './planets/verhaaltjes.js';
+import getallen1000 from './planets/getallen1000.js';
+import plusmin1000 from './planets/plusmin1000.js';
+import breuken from './planets/breuken.js';
+import { herhaal } from '../../shared/js/herhaal.js';
 import snelrekenen from './planets/snelrekenen.js';
 
 // Eén planeet uit de niveaus van meerdere onderdelen, zodat de kaart kort
@@ -52,10 +56,17 @@ export const PLANETS = [
     module: combine(`${getallenlijn.intro} ${tientallen.intro}`, [
       { module: getallenlijn, prefix: 'lijn-' }, { module: tientallen }]),
   },
+  { id: 'getallen1000', name: 'Getallen tot 1000', colors: ['#a8c8ff', '#3a4fb0'], module: getallen1000 },
+  { id: 'plusmin1000', name: 'Plus en min tot 1000', colors: ['#7fe0a8', '#1f7d55'], module: plusmin1000 },
   {
     id: 'tafels', name: 'Tafels', colors: ['#d2b0ff', '#7a4fd6'], ring: true,
-    module: combine(tafels.intro, [{ module: tafels }, race(['tafels'])]),
+    module: combine(tafels.intro, [{ module: tafels }, race(['tafels', 'alletafels'])]),
   },
   { id: 'delen', name: 'Eerlijk delen', colors: ['#ffc4e1', '#c2549a'], module: delen },
+  { id: 'breuken', name: 'Breuken', colors: ['#ffd9a0', '#d9663a'], ring: true, module: breuken },
   { id: 'verhaaltjes', name: 'Verhaaltjessommen', colors: ['#f0c8ff', '#9b4fd6'], module: verhaaltjes },
+  {
+    id: 'herhaal', name: 'Herhaalplaneet', colors: ['#e0e4ff', '#8a8fd0'],
+    module: herhaal(() => PLANETS, { from: [4], intro: 'Hier komt alles uit de vorige groep door elkaar voorbij. Zo blijf je het goed weten!' }),
+  },
 ];

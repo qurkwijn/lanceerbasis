@@ -1,0 +1,80 @@
+/* Wereldsatelliet: alles wat alleen bij topografie hoort. De basis staat in
+   shared/css/base.css en het spelscherm in shared/css/game.css. */
+
+.map-header .logo { margin-right: auto; font-size: clamp(1.6rem, 7vw, 2.3rem); }
+
+/* Een kaart: rond fotootje met een ring die dichtgaat */
+.kaart {
+  --size: 96px;
+  --phase: 0;
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, #1f2a6e 62%, transparent 63%),
+    conic-gradient(var(--c) calc(var(--phase) * 360deg), rgba(255, 255, 255, 0.14) 0);
+}
+.kaart-icon { font-size: calc(var(--size) * 0.42); line-height: 1; }
+
+/* De kaarten onder elkaar, om en om links en rechts */
+.kaart-path {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.kaart-path li { display: flex; }
+.kaart-path li:nth-child(even) { justify-content: flex-end; }
+.kaart-link {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 12px;
+  border-radius: var(--radius);
+  max-width: 100%;
+}
+.kaart-path li:nth-child(even) .kaart-link { flex-direction: row-reverse; text-align: right; }
+a.kaart-link:active .kaart { transform: scale(0.94); }
+.kaart-label { display: flex; flex-direction: column; }
+.kaart-name { font-size: 1.5rem; font-weight: 800; line-height: 1.1; }
+.kaart-sub { font-size: 1.1rem; color: var(--muted); }
+.kaart-link.locked .kaart { opacity: 0.5; }
+.kaart-link.locked .kaart-name { color: var(--muted); }
+
+.kaart-hero { display: flex; justify-content: center; padding: 24px 0 8px; }
+.kaart-result { margin-bottom: 8px; }
+
+/* Voortgang: de satelliet vliegt naar de kaart */
+.sat-art { display: block; width: 40px; height: auto; }
+.track-sat {
+  position: absolute;
+  bottom: -6px;
+  left: calc(var(--progress) * 100%);
+  transform: translateX(-50%);
+  transition: left 0.5s ease;
+}
+.track-goal { font-size: 1.6rem; }
+
+/* De blokjeskaart van Nederland */
+.nl-map { width: min(230px, 58vw); height: auto; }
+.nl-map .sea { fill: #2a5fa8; }
+.nl-map .sea-label { fill: rgba(255, 255, 255, 0.55); font-family: var(--font); font-size: 9px; font-weight: 700; text-anchor: middle; }
+.nl-map .lake { fill: #2a5fa8; stroke: #9fd3ff; stroke-width: 1; }
+.nl-map .isle { fill: #e8d9a8; }
+.nl-map .isle.on { fill: var(--accent); stroke: #fff; stroke-width: 1; }
+.nl-map .compass path { fill: #fff; }
+.nl-map .compass text { fill: #fff; font-family: var(--font); font-size: 9px; font-weight: 800; text-anchor: middle; }
+
+.map-legend { display: flex; align-items: center; gap: 6px; margin: 8px 0 0; font-size: 1.1rem; font-weight: 700; }
+.map-legend .dot { display: inline-block; width: 14px; height: 14px; border-radius: 4px; }
+.map-legend .dot.a { background: var(--accent); }
+.map-legend .dot.b { background: #5b9dff; margin-left: 10px; }
+
+@media (max-height: 700px) {
+  .nl-map { width: min(180px, 48vw); }
+}

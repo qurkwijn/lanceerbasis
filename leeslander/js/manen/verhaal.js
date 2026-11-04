@@ -154,7 +154,7 @@ export default {
   intro: 'Lees het verhaaltje goed. Daarna komt er een vraag. Je mag het verhaaltje nog een keer lezen!',
   levels: [
     { id: 'kort', name: 'Korte verhaaltjes', hint: 'Drie zinnen en een vraag', groups: [3, 4] },
-    { id: 'lang', name: 'Lange verhaaltjes', hint: 'Vier of vijf zinnen, ook met waarom', groups: [4] },
+    { id: 'lang', name: 'Lange verhaaltjes', hint: 'Vier of vijf zinnen, ook met waarom', groups: [4, 5] },
   ],
   makeQuestion(level) {
     const story = pick(LIST[level]);

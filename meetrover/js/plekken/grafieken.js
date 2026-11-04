@@ -80,14 +80,14 @@ function tallyQuestion(kinds) {
   return question(table, ask(rows, kinds));
 }
 
-function barQuestion() {
-  const rows = data(4, 10);
-  const top = 10;
+function barQuestion(step = 1) {
+  const rows = data(4, 10).map((r) => ({ ...r, value: r.value * step }));
+  const top = 10 * step;
   const h = 200;
   const unit = (h - 20) / top;
-  const grid = Array.from({ length: top + 1 }, (_, i) => {
-    const y = h - i * unit;
-    return `<line class="grid" x1="34" x2="330" y1="${y}" y2="${y}" />${i % 2 === 0 ? `<text x="20" y="${y + 4}">${i}</text>` : ''}`;
+  const grid = Array.from({ length: 11 }, (_, i) => {
+    const y = h - i * step * unit;
+    return `<line class="grid" x1="34" x2="330" y1="${y}" y2="${y}" />${i % 2 === 0 ? `<text x="20" y="${y + 4}">${i * step}</text>` : ''}`;
   }).join('');
   const colors = ['#ff6b81', '#5b9dff', '#3ddc84', '#ffcc33'];
   const bars = rows.map((r, i) => {
@@ -107,7 +107,8 @@ function barQuestion() {
 const LEVELS = {
   turven: () => tallyQuestion(['hoeveel', 'hoeveel', 'meest', 'minst']),
   turven4: () => tallyQuestion(['hoeveel', 'meest', 'verschil', 'samen']),
-  staaf: barQuestion,
+  staaf: () => barQuestion(),
+  staaf50: () => barQuestion(5),
 };
 
 export default {
@@ -116,6 +117,7 @@ export default {
     { id: 'turven', name: 'Turven', hint: 'Tel de streepjes', groups: [3, 4] },
     { id: 'turven4', name: 'Turven en rekenen', hint: 'Hoeveel meer? Hoeveel samen?', groups: [4] },
     { id: 'staaf', name: 'Staafgrafiek', hint: 'Hoe hoog is de staaf?', groups: [4] },
+    { id: 'staaf50', name: 'Staafgrafiek tot 50', hint: 'Elk streepje is 5', groups: [5] },
   ],
 
   makeQuestion(level) {

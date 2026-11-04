@@ -17,7 +17,7 @@ function showInfo(appName) {
   dialog.setAttribute('aria-labelledby', 'info-title');
   dialog.innerHTML = `
     <h2 id="info-title" tabindex="-1" autofocus>Over ${appName}</h2>
-    <p>Een gratis oefenplek voor groep 3 en 4, gemaakt door een ouder. De hogere groepen zijn in aanbouw.</p>
+    <p>Een gratis oefenplek voor groep 3 tot en met 5, gemaakt door een ouder. De hogere groepen zijn in aanbouw.</p>
     <h3>Lesstof</h3>
     <p>Gebaseerd op de kerndoelen, de leerlijnen per groep en veelgebruikte methodes. De volgorde op school kan net anders zijn.</p>
     <h3>Gemaakt met AI</h3>

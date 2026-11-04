@@ -284,3 +284,23 @@ a.plek-link:active .plek { transform: scale(0.94); }
   .tally-table td { padding: 3px 12px; }
   .tally-table .tally-pic { font-size: 1.6rem; }
 }
+
+/* Digitale klok */
+.digital-clock {
+  padding: 10px 28px;
+  border-radius: 16px;
+  background: #101330;
+  border: 4px solid #3b4080;
+  color: #7dffb0;
+  font-size: clamp(3rem, 16vw, 4.2rem);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.06em;
+  text-shadow: 0 0 10px rgba(125, 255, 176, 0.6);
+}
+
+/* Omtrek van een rechthoek */
+.perimeter { width: min(100%, 320px); height: auto; }
+.perimeter rect { fill: rgba(255, 255, 255, 0.08); stroke: var(--accent); stroke-width: 3; }
+.perimeter text { fill: var(--text); font-family: var(--font); font-size: 16px; font-weight: 800; text-anchor: middle; }
+.perimeter text.side { text-anchor: start; }
