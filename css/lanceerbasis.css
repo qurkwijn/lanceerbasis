@@ -183,7 +183,9 @@ a.station:active .station-art { transform: scale(0.96); }
   cursor: pointer;
 }
 .groep-info-btn:hover, .groep-info-btn:focus-visible { color: var(--text); border-color: var(--accent); }
-.info-dialog .info-subject { color: var(--muted); font-weight: 700; font-size: 1rem; }
+.info-dialog .groep-list { list-style: none; padding: 0; }
+.info-dialog .groep-list li { margin: 8px 0; }
+.groep-list b { display: block; color: var(--accent); }
 
 /* Missielogboek */
 .log-total {
