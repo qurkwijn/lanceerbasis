@@ -1,0 +1,198 @@
+/* Gedeeld spelscherm: voortgang, vragen, toetsenbord, keuzes en uitslag. */
+
+/* Niveaus kiezen */
+.intro {
+  font-size: 1.3rem;
+  text-align: center;
+  margin: 8px 0 20px;
+}
+
+.levels { display: grid; gap: 12px; }
+
+.level-card {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas: 'name stars' 'hint hint';
+  align-items: center;
+  padding: 16px 20px;
+  border-radius: var(--radius);
+  background: var(--card);
+  border: 2px solid var(--card-border);
+}
+
+.level-card:active { transform: scale(0.98); border-color: var(--accent); }
+.level-name { grid-area: name; font-size: 1.7rem; font-weight: 800; }
+.level-hint { grid-area: hint; color: var(--muted); font-size: 1.1rem; }
+.level-stars { grid-area: stars; font-size: 1.6rem; }
+
+/* Kopbalk met voortgang */
+.track {
+  --progress: 0;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.track-end { font-size: 1.6rem; }
+
+.track-line {
+  position: relative;
+  flex: 1;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.track-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: calc(var(--progress) * 100%);
+  border-radius: inherit;
+  background: linear-gradient(90deg, #ff9a3c, var(--accent));
+  transition: width 0.5s ease;
+}
+
+.track-rocket {
+  position: absolute;
+  top: 50%;
+  left: calc(var(--progress) * 100%);
+  transform: translate(-50%, -50%) rotate(45deg);
+  font-size: 1.6rem;
+  transition: left 0.5s ease;
+}
+
+.game {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px 0;
+}
+
+.prompt {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.feedback {
+  margin: 0;
+  min-height: 2.2em;
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.feedback.good { color: var(--good); }
+.feedback.try { color: var(--try); }
+.feedback.reveal { color: var(--accent); }
+
+/* Toetsenbord */
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.keypad button {
+  height: clamp(56px, 9dvh, 72px);
+  border: none;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.14);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 2rem;
+  font-weight: 700;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+
+.keypad button:active { transform: translateY(3px); box-shadow: 0 1px 0 rgba(0, 0, 0, 0.3); }
+.keypad .key-alt { background: rgba(255, 255, 255, 0.08); }
+.keypad .key-ok { background: var(--good); color: #0b3b20; }
+
+/* Resultaat */
+.result {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 12px;
+}
+
+.result-planet { position: relative; margin-bottom: 8px; }
+
+.result-rocket {
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  font-size: 3rem;
+  transform: translateX(-50%) rotate(135deg);
+  animation: land 1s ease-out both;
+}
+
+@keyframes land {
+  from { top: -140px; opacity: 0; }
+  to { top: -18px; opacity: 1; }
+}
+
+.result h1 { font-size: 2.2rem; color: var(--accent); }
+
+.result-stars { font-size: 3.5rem; letter-spacing: 6px; }
+.result-stars .star.filled { display: inline-block; animation: pop 0.5s ease both; }
+.result-stars .star:nth-child(2) { animation-delay: 0.2s; }
+.result-stars .star:nth-child(3) { animation-delay: 0.4s; }
+
+.result-text { margin: 0; font-size: 1.3rem; }
+
+.result-actions {
+  display: grid;
+  gap: 10px;
+  width: 100%;
+  max-width: 320px;
+  margin-top: 12px;
+}
+
+.question { display: flex; flex-direction: column; align-items: center; }
+
+/* Keuzeknoppen */
+.choices {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.choices[hidden], .keypad[hidden] { display: none; }
+
+.choice {
+  min-height: 68px;
+  padding: 8px;
+  border: 2px solid transparent;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.14);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1.1;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+.choice:active { transform: translateY(3px); box-shadow: 0 1px 0 rgba(0, 0, 0, 0.3); }
+.choice.correct { background: var(--good); color: #0b3b20; animation: pop 0.35s ease; }
+.choice.wrong { opacity: 0.35; animation: shake 0.4s ease; }
+.choice.reveal { border-color: var(--accent); background: rgba(255, 204, 51, 0.3); }
+
+/* Drie keuzes naast elkaar */
+.choices:has(> :nth-child(3):last-child) { grid-template-columns: repeat(3, 1fr); }
+
+/* Compacter, zodat alles ook op kleinere telefoons past */
+.game { padding: 8px 0; gap: 8px; }
+.keypad button { height: clamp(48px, 8.5dvh, 72px); }
+
+.choice.choice-big { font-size: 2.2rem; }
+
+/* De voortgang neemt de ruimte tussen het kruisje en de tijd in */
+.progress { flex: 1; display: flex; align-items: center; min-width: 0; }

@@ -9,6 +9,7 @@ export const STATIONS = [
     subject: 'Taal en spelling',
     world: 'de sterrenbeelden',
     groups: [3, 4],
+    ready: true,
     art: telescope,
   },
   {
@@ -66,8 +67,10 @@ function telescope() {
     <rect x="78" y="108" width="12" height="10" rx="2" fill="#ffcc33" class="window"/>
     <path d="M18 98 A42 42 0 0 1 102 98 Z" fill="#c0d4ff"/>
     <path d="M60 56 A42 42 0 0 1 80 61 L68 98 H60 Z" fill="#7a86d8"/>
-    <rect x="58" y="44" width="12" height="44" rx="5" fill="#4a63c8" transform="rotate(32 64 88)"/>
-    <rect x="56" y="40" width="16" height="10" rx="3" fill="#2a3a9a" transform="rotate(32 64 88)"/>
+    <g class="scope">
+      <rect x="58" y="44" width="12" height="44" rx="5" fill="#4a63c8" transform="rotate(32 64 88)"/>
+      <rect x="56" y="40" width="16" height="10" rx="3" fill="#2a3a9a" transform="rotate(32 64 88)"/>
+    </g>
     <rect x="14" y="156" width="92" height="8" rx="3" fill="#3b4080"/>
   </svg>`;
 }

@@ -1,0 +1,96 @@
+/* Taaltelescoop: alles wat alleen bij taal hoort. De basis staat in shared/css/base.css
+   en het spelscherm in shared/css/game.css. */
+
+:root {
+  --sky-line: rgba(192, 212, 255, 0.85);
+  --sky-dim: rgba(255, 255, 255, 0.45);
+  --sky-line-dim: rgba(192, 212, 255, 0.18);
+}
+
+/* Kop: de naam is lang, dus iets kleiner zodat de sterren ernaast passen */
+.map-header .logo { margin-right: auto; font-size: clamp(1.7rem, 7.6vw, 2.4rem); }
+
+/* Sterrenbeelden */
+.sky-art { display: block; flex: none; overflow: visible; }
+.sky-line { stroke: var(--sky-line-dim); stroke-width: 1.6; stroke-linecap: round; transition: stroke 0.4s; }
+.sky-line.on { stroke: var(--sky-line); }
+.sky-star { fill: var(--sky-dim); transition: fill 0.3s, r 0.3s; }
+.sky-star.on { fill: var(--accent); filter: drop-shadow(0 0 3px var(--accent)); }
+
+/* De sterrenhemel: sterrenbeelden om en om links en rechts */
+.sky-path {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sky-path li { display: flex; }
+.sky-path li:nth-child(even) { justify-content: flex-end; }
+
+.sky-link {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 12px;
+  border-radius: var(--radius);
+  max-width: 100%;
+}
+
+.sky-path li:nth-child(even) .sky-link { flex-direction: row-reverse; text-align: right; }
+a.sky-link:active .sky-art { transform: scale(0.94); }
+
+.sky-label { display: flex; flex-direction: column; }
+.sky-name { font-size: 1.5rem; font-weight: 800; line-height: 1.1; }
+.sky-sub { font-size: 1.1rem; color: var(--muted); }
+
+.sky-link.locked .sky-art { opacity: 0.5; }
+.sky-link.locked .sky-name { color: var(--muted); }
+
+/* Een sterrenbeeld van dichtbij */
+.sky-hero { display: flex; justify-content: center; padding: 16px 0 0; }
+.sky-hero-sub {
+  margin: 0;
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--accent);
+}
+
+/* Voortgang tijdens het oefenen */
+.sky-progress { display: flex; }
+.sky-progress-name { margin-left: 10px; font-size: 1.3rem; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* Het woord met een gat erin */
+.word-card { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.word-pic { font-size: 5rem; line-height: 1; }
+.word {
+  font-size: clamp(2.6rem, 13vw, 3.6rem);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.gap {
+  display: inline-block;
+  min-width: 1.4em;
+  margin: 0 0.05em;
+  padding: 0 0.15em;
+  border-bottom: 5px dashed var(--accent);
+  color: rgba(255, 255, 255, 0.4);
+  text-align: center;
+}
+.gap.filled { color: var(--accent); border-bottom-style: solid; animation: pop 0.35s ease; }
+
+/* Uitslag: het hele sterrenbeeld straalt */
+.sky-result { margin-bottom: 4px; }
+.sky-result .sky-line.on { stroke-width: 2; animation: appear 0.8s 0.3s ease both; }
+.sky-result .sky-star.on { transform-box: fill-box; transform-origin: center; animation: pop 0.5s ease both; }
+
+@keyframes appear { from { opacity: 0; } }
+
+@media (max-height: 700px) {
+  .word-pic { font-size: 4rem; }
+  .sky-hero .sky-art { width: 130px; height: 130px; }
+}

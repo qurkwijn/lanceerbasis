@@ -113,8 +113,9 @@ function showBase() {
         ${INFO_FOOTER}
       </div>
     </div>`;
-  // Begin met het voertuig dat al klaar staat in het midden.
-  app.querySelector('a.station')?.scrollIntoView({ inline: 'center', block: 'nearest' });
+  // Begin in het midden van de basis.
+  const items = app.querySelectorAll('.stations li');
+  items[Math.floor((items.length - 1) / 2)]?.scrollIntoView({ inline: 'center', block: 'nearest' });
 }
 
 // Een korte lancering voordat je naar de wereld van het voertuig gaat. Nog een

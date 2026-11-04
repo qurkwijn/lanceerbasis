@@ -17,7 +17,7 @@ function showInfo(appName) {
   dialog.setAttribute('aria-labelledby', 'info-title');
   dialog.innerHTML = `
     <h2 id="info-title">Over ${appName}</h2>
-    <p>De Lanceerbasis is een gratis oefenplek voor de basisschool, gemaakt door een ouder. Nu kun je met de Rekenraket rekenen oefenen in groep 3 en 4. Taal, lezen en de hogere groepen zijn nog in aanbouw.</p>
+    <p>De Lanceerbasis is een gratis oefenplek voor de basisschool, gemaakt door een ouder. Nu kun je met de Rekenraket rekenen en met de Taaltelescoop spelling oefenen in groep 3 en 4. Lezen en de hogere groepen zijn nog in aanbouw.</p>
     <h3>Privacy</h3>
     <ul>
       <li>Je hoeft geen account te maken. We vragen geen e-mailadres of wachtwoord.</li>
