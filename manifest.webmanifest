@@ -1,0 +1,17 @@
+{
+  "name": "Lanceerbasis",
+  "short_name": "Lanceerbasis",
+  "description": "Oefen rekenen, taal en lezen voor groep 3 en 4.",
+  "lang": "nl",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#14173d",
+  "theme_color": "#14173d",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

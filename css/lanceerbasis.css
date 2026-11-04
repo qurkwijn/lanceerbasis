@@ -1,0 +1,47 @@
+/* Landingspagina: de kaarten naar de apps. De basis staat in shared/css/base.css. */
+
+.app-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 14px;
+}
+
+.app-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 16px;
+  border-radius: var(--radius);
+  background: var(--card);
+  border: 2px solid var(--card-border);
+}
+
+a.app-card:active { transform: scale(0.98); border-color: var(--accent); }
+a.app-card .app-planet { animation: float 3s ease-in-out infinite alternate; }
+.app-list li:nth-child(even) a.app-card .app-planet { animation-delay: -1.5s; }
+
+/* Het icoontje landt op de planeet */
+.app-planet {
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex: none;
+}
+.app-planet .planet.ringed { margin: 0 14px; }
+.app-icon {
+  position: absolute;
+  font-size: 2.4rem;
+  pointer-events: none;
+}
+
+.app-label { display: flex; flex-direction: column; min-width: 0; }
+.app-name { font-size: 1.6rem; font-weight: 800; line-height: 1.1; }
+.app-sub { font-size: 1.1rem; color: var(--muted); }
+
+.app-card.soon { border-style: dashed; }
+.app-card.soon .planet { filter: grayscale(0.7) brightness(0.65); box-shadow: inset -8px -10px 0 rgba(0, 0, 0, 0.2); }
+.app-card.soon .app-icon { opacity: 0.6; }
+.app-card.soon .app-name { color: var(--muted); }
