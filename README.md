@@ -6,6 +6,8 @@ Een vrolijke oefenplek voor kinderen in groep 3 en 4, met een ruimtethema. Op de
 - **Taaltelescoop** (komt later): taal en spelling.
 - **Leeslander** (komt later): lezen.
 
+Speel op https://lanceerbasis.app
+
 ## Opbouw
 
 Gewone HTML, CSS en JavaScript-modules, zonder build-stap.
