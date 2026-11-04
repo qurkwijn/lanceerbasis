@@ -172,6 +172,8 @@ Niet in de Lanceerbasis, omdat het in een app niet goed te oefenen is: schrijven
 
 Dit lopen we samen per groep door. ✓ = af, ◐ = deels, ○ = nog te doen.
 
+Bij elke groep die erbij komt, hoort ook een kort blok voor ouders op de basis ("Wat zit er in groep X?", in `js/groepinfo.js`): één zin over het jaar en per voertuig één korte regel, zodat het op één telefoonscherm past.
+
 ### Groep 3 ✓
 Alles wat goed in een app past, zit erin. Mogelijke verbeteringen: meer woorden per kern van Veilig leren lezen, en de Taaltelescoop heeft voor groep 3 maar drie sterrenbeelden.
 

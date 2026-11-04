@@ -1,7 +1,9 @@
 import { STATIONS } from './stations.js';
 
 // Voor ouders: wat er per groep in elk voertuig zit, en waarom juist daar.
-// Kort gehouden; de uitgebreide versie staat in docs/leerstof.md.
+// De uitgebreide versie staat in docs/leerstof.md. Houd het venster op één
+// telefoonscherm, ook bij nieuwe groepen: één zin intro en per voertuig één
+// korte regel met trefwoorden.
 const UITLEG = {
   3: {
     intro: 'Het jaar van leren lezen, en rekenen tot 20.',
