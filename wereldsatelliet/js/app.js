@@ -26,7 +26,7 @@ function route() {
   if (!getProfile()) return location.replace(startUrl(APP));
   const [id, levelId] = location.hash.replace(/^#\/?/, '').split('/');
   const kaart = KAARTEN.find((p) => p.id === id);
-  if (!kaart || kaartState(kaart).state !== 'open') return showKaarten();
+  if (!kaart || !isOpen(kaart)) return showKaarten();
   const level = levelsFor(kaart).find((l) => l.id === levelId);
   if (!level) return showKaart(kaart);
   showGame(kaart, level);
@@ -36,13 +36,8 @@ const levelKey = (kaart, level) => `${kaart.id}-${level.id}`;
 const levelsFor = (kaart) => kaart.module.levels.filter((l) => l.groups.includes(getProfile().groep));
 const kaartStars = (kaart) => levelsFor(kaart).reduce((sum, l) => sum + getStars(levelKey(kaart, l)), 0);
 
-// Net als bij de planeten: open voor jouw groep, op slot voor een hogere groep,
-// en weg als het alleen voor een lagere groep is.
-function kaartState(kaart) {
-  if (levelsFor(kaart).length) return { state: 'open' };
-  const from = Math.min(...kaart.module.levels.flatMap((l) => l.groups));
-  return from > getProfile().groep && !kaart.module.review ? { state: 'locked', from } : { state: 'hidden' };
-}
+// Je ziet alleen wat bij jouw groep hoort, zodat de lijst kort blijft.
+const isOpen = (kaart) => levelsFor(kaart).length > 0;
 
 const phaseFor = (kaart) => {
   const max = levelsFor(kaart).length * 3;
@@ -65,20 +60,15 @@ function showKaarten() {
       </a>
       <p class="map-intro">Kijk vanuit de ruimte naar Nederland!</p>
       <ol class="kaart-path">
-        ${KAARTEN.filter((p) => kaartState(p).state !== 'hidden').map((p) => {
-          const { state, from } = kaartState(p);
+        ${KAARTEN.filter(isOpen).map((p) => {
           const inner = `
-            ${kaartHtml(p, state === 'open' ? phaseFor(p) : 0)}
+            ${kaartHtml(p, phaseFor(p))}
             <span class="kaart-label">
               <span class="kaart-name">${p.name}</span>
               <span class="kaart-sub">${p.sub}</span>
-              <span class="kaart-sub">${state === 'open'
-                ? `<span class="star filled">★</span> ${kaartStars(p)} / ${levelsFor(p).length * 3}`
-                : `🔒 Vanaf groep ${from}`}</span>
+              <span class="kaart-sub"><span class="star filled">★</span> ${kaartStars(p)} / ${levelsFor(p).length * 3}</span>
             </span>`;
-          return `<li>${state === 'open'
-            ? `<a class="kaart-link" href="#/${p.id}">${inner}</a>`
-            : `<div class="kaart-link locked" aria-disabled="true">${inner}</div>`}</li>`;
+          return `<li><a class="kaart-link" href="#/${p.id}">${inner}</a></li>`;
         }).join('')}
       </ol>
       ${INFO_FOOTER}

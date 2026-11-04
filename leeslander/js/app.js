@@ -25,7 +25,7 @@ function route() {
   if (!getProfile()) return location.replace(startUrl(APP));
   const [id, levelId] = location.hash.replace(/^#\/?/, '').split('/');
   const moon = MANEN.find((m) => m.id === id);
-  if (!moon || moonState(moon).state !== 'open') return showMoons();
+  if (!moon || !isOpen(moon)) return showMoons();
   const level = levelsFor(moon).find((l) => l.id === levelId);
   if (!level) return showMoon(moon);
   showGame(moon, level);
@@ -35,13 +35,8 @@ const levelKey = (moon, level) => `${moon.id}-${level.id}`;
 const levelsFor = (moon) => moon.module.levels.filter((l) => l.groups.includes(getProfile().groep));
 const moonStars = (moon) => levelsFor(moon).reduce((sum, l) => sum + getStars(levelKey(moon, l)), 0);
 
-// Net als bij de planeten: open voor jouw groep, op slot voor een hogere groep,
-// en weg als het alleen voor een lagere groep is.
-function moonState(moon) {
-  if (levelsFor(moon).length) return { state: 'open' };
-  const from = Math.min(...moon.module.levels.flatMap((l) => l.groups));
-  return from > getProfile().groep ? { state: 'locked', from } : { state: 'hidden' };
-}
+// Je ziet alleen wat bij jouw groep hoort, zodat de lijst kort blijft.
+const isOpen = (moon) => levelsFor(moon).length > 0;
 
 // Elke verdiende ster maakt de maan een stukje voller.
 const phaseFor = (moon) => {
@@ -65,20 +60,15 @@ function showMoons() {
       </a>
       <p class="map-intro">Lees goed en maak de manen vol!</p>
       <ol class="moon-path">
-        ${MANEN.filter((m) => moonState(m).state !== 'hidden').map((m) => {
-          const { state, from } = moonState(m);
+        ${MANEN.filter(isOpen).map((m) => {
           const inner = `
-            ${moonSvg(m, state === 'open' ? phaseFor(m) : 0, 96)}
+            ${moonSvg(m, phaseFor(m), 96)}
             <span class="moon-label">
               <span class="moon-name">${m.name}</span>
               <span class="moon-sub">${m.sub}</span>
-              <span class="moon-sub">${state === 'open'
-                ? `<span class="star filled">★</span> ${moonStars(m)} / ${levelsFor(m).length * 3}`
-                : `🔒 Vanaf groep ${from}`}</span>
+              <span class="moon-sub"><span class="star filled">★</span> ${moonStars(m)} / ${levelsFor(m).length * 3}</span>
             </span>`;
-          return `<li>${state === 'open'
-            ? `<a class="moon-link" href="#/${m.id}">${inner}</a>`
-            : `<div class="moon-link locked" aria-disabled="true">${inner}</div>`}</li>`;
+          return `<li><a class="moon-link" href="#/${m.id}">${inner}</a></li>`;
         }).join('')}
       </ol>
       ${INFO_FOOTER}

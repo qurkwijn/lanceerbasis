@@ -26,7 +26,7 @@ function route() {
   if (!getProfile()) return location.replace(startUrl(APP));
   const [id, levelId] = location.hash.replace(/^#\/?/, '').split('/');
   const sig = SIGNALEN.find((p) => p.id === id);
-  if (!sig || signalState(sig).state !== 'open') return showSignals();
+  if (!sig || !isOpen(sig)) return showSignals();
   const level = levelsFor(sig).find((l) => l.id === levelId);
   if (!level) return showSignal(sig);
   showGame(sig, level);
@@ -36,13 +36,8 @@ const levelKey = (sig, level) => `${sig.id}-${level.id}`;
 const levelsFor = (sig) => sig.module.levels.filter((l) => l.groups.includes(getProfile().groep));
 const signalStars = (sig) => levelsFor(sig).reduce((sum, l) => sum + getStars(levelKey(sig, l)), 0);
 
-// Net als bij de planeten: open voor jouw groep, op slot voor een hogere groep,
-// en weg als het alleen voor een lagere groep is.
-function signalState(sig) {
-  if (levelsFor(sig).length) return { state: 'open' };
-  const from = Math.min(...sig.module.levels.flatMap((l) => l.groups));
-  return from > getProfile().groep && !sig.module.review ? { state: 'locked', from } : { state: 'hidden' };
-}
+// Je ziet alleen wat bij jouw groep hoort, zodat de lijst kort blijft.
+const isOpen = (sig) => levelsFor(sig).length > 0;
 
 const phaseFor = (sig) => {
   const max = levelsFor(sig).length * 3;
@@ -65,20 +60,15 @@ function showSignals() {
       </a>
       <p class="map-intro">Draai de schotel en vang alle signalen op!</p>
       <ol class="signal-path">
-        ${SIGNALEN.filter((p) => signalState(p).state !== 'hidden').map((p) => {
-          const { state, from } = signalState(p);
+        ${SIGNALEN.filter(isOpen).map((p) => {
           const inner = `
-            ${signalSvg(p, state === 'open' ? phaseFor(p) : 0)}
+            ${signalSvg(p, phaseFor(p))}
             <span class="signal-label">
               <span class="signal-name">${p.name}</span>
               <span class="signal-sub">${p.sub}</span>
-              <span class="signal-sub">${state === 'open'
-                ? `<span class="star filled">★</span> ${signalStars(p)} / ${levelsFor(p).length * 3}`
-                : `🔒 Vanaf groep ${from}`}</span>
+              <span class="signal-sub"><span class="star filled">★</span> ${signalStars(p)} / ${levelsFor(p).length * 3}</span>
             </span>`;
-          return `<li>${state === 'open'
-            ? `<a class="signal-link" href="#/${p.id}">${inner}</a>`
-            : `<div class="signal-link locked" aria-disabled="true">${inner}</div>`}</li>`;
+          return `<li><a class="signal-link" href="#/${p.id}">${inner}</a></li>`;
         }).join('')}
       </ol>
       ${INFO_FOOTER}

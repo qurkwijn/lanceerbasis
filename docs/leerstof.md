@@ -156,6 +156,7 @@ Keuzes van november 2026:
 - De Taaltelescoop is alleen nog spelling. Het alfabet is naar de Zinnenzender verhuisd.
 - Sterren van onderdelen die verhuisd zijn, zijn bewust niet meegenomen.
 - Vanaf groep 5 heeft elk voertuig (behalve de Leeslander en de Wereldsatelliet) een herhaalonderdeel met alle stof uit de vorige groep door elkaar (`shared/js/herhaal.js`). Zo blijft de oude stof in beeld zonder dat de lijst lang wordt. Een lagere groep ziet het herhaalonderdeel niet op slot staan.
+- In elk voertuig zie je alleen de onderdelen van je eigen groep. Onderdelen van een hogere of lagere groep staan er niet, ook niet op slot, zodat de lijst kort blijft.
 - Topografie gebruikt een blokjeskaart: elke provincie is een blok op ongeveer de goede plek. Er is geen kaartbestand van buiten nodig.
 
 ## Wat de Lanceerbasis nu heeft voor groep 3 tot en met 5

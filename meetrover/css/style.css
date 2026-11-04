@@ -71,8 +71,6 @@ a.plek-link:active .plek { transform: scale(0.94); }
 .plek-label { display: flex; flex-direction: column; }
 .plek-name { font-size: 1.5rem; font-weight: 800; line-height: 1.1; }
 .plek-sub { font-size: 1.1rem; color: var(--muted); }
-.plek-link.locked .plek { filter: grayscale(0.7) brightness(0.65); }
-.plek-link.locked .plek-name { color: var(--muted); }
 
 .plek-hero { display: flex; justify-content: center; padding: 24px 0 8px; }
 .plek-result { margin-bottom: 8px; }

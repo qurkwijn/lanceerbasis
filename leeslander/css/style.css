@@ -37,9 +37,6 @@ a.moon-link:active .moon-art { transform: scale(0.94); }
 .moon-name { font-size: 1.5rem; font-weight: 800; line-height: 1.1; }
 .moon-sub { font-size: 1.1rem; color: var(--muted); }
 
-.moon-link.locked .moon-art { opacity: 0.5; }
-.moon-link.locked .moon-name { color: var(--muted); }
-
 /* Een maan van dichtbij */
 .moon-hero { display: flex; justify-content: center; padding: 16px 0 0; }
 .moon-hero-sub {

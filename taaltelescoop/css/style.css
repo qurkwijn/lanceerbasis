@@ -46,9 +46,6 @@ a.sky-link:active .sky-art { transform: scale(0.94); }
 .sky-name { font-size: 1.5rem; font-weight: 800; line-height: 1.1; }
 .sky-sub { font-size: 1.1rem; color: var(--muted); }
 
-.sky-link.locked .sky-art { opacity: 0.5; }
-.sky-link.locked .sky-name { color: var(--muted); }
-
 /* Een sterrenbeeld van dichtbij */
 .sky-hero { display: flex; justify-content: center; padding: 16px 0 0; }
 .sky-hero-sub {

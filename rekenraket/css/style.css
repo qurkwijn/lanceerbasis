@@ -34,9 +34,6 @@ a.planet-link:active .planet { transform: scale(0.94); }
 .planet-name { font-size: 1.5rem; font-weight: 800; line-height: 1.1; }
 .planet-sub { font-size: 1.1rem; color: var(--muted); }
 
-.planet-link.locked .planet { filter: grayscale(0.7) brightness(0.65); box-shadow: inset -8px -10px 0 rgba(0, 0, 0, 0.2); }
-.planet-link.locked .planet-name { color: var(--muted); }
-
 /* Planeetscherm */
 .planet-hero {
   display: flex;
@@ -45,7 +42,6 @@ a.planet-link:active .planet { transform: scale(0.94); }
 }
 
 .planet-hero .planet { animation: float 3s ease-in-out infinite alternate; }
-
 
 /* Splitshuis */
 .split {
@@ -88,7 +84,6 @@ a.planet-link:active .planet { transform: scale(0.94); }
   height: 96px;
   border-radius: 18px;
 }
-
 
 /* Ruimte voor de ring zodat die niet over de naam valt */
 .planet-link .planet.ringed { margin: 0 24px; }

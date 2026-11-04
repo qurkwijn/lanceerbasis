@@ -43,8 +43,6 @@ a.kaart-link:active .kaart { transform: scale(0.94); }
 .kaart-label { display: flex; flex-direction: column; }
 .kaart-name { font-size: 1.5rem; font-weight: 800; line-height: 1.1; }
 .kaart-sub { font-size: 1.1rem; color: var(--muted); }
-.kaart-link.locked .kaart { opacity: 0.5; }
-.kaart-link.locked .kaart-name { color: var(--muted); }
 
 .kaart-hero { display: flex; justify-content: center; padding: 24px 0 8px; }
 .kaart-result { margin-bottom: 8px; }

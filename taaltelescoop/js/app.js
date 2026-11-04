@@ -25,7 +25,7 @@ function route() {
   if (!getProfile()) return location.replace(startUrl(APP));
   const [id, levelId] = location.hash.replace(/^#\/?/, '').split('/');
   const sb = STERRENBEELDEN.find((s) => s.id === id);
-  if (!sb || skyState(sb).state !== 'open') return showSky();
+  if (!sb || !isOpen(sb)) return showSky();
   const level = levelsFor(sb).find((l) => l.id === levelId);
   if (!level) return showSterrenbeeld(sb);
   showGame(sb, level);
@@ -35,13 +35,8 @@ const levelKey = (sb, level) => `${sb.id}-${level.id}`;
 const levelsFor = (sb) => sb.module.levels.filter((l) => l.groups.includes(getProfile().groep));
 const sbStars = (sb) => levelsFor(sb).reduce((sum, l) => sum + getStars(levelKey(sb, l)), 0);
 
-// Net als bij de planeten: open voor jouw groep, op slot voor een hogere groep,
-// en weg als het alleen voor een lagere groep is.
-function skyState(sb) {
-  if (levelsFor(sb).length) return { state: 'open' };
-  const from = Math.min(...sb.module.levels.flatMap((l) => l.groups));
-  return from > getProfile().groep && !sb.module.review ? { state: 'locked', from } : { state: 'hidden' };
-}
+// Je ziet alleen wat bij jouw groep hoort, zodat de lijst kort blijft.
+const isOpen = (sb) => levelsFor(sb).length > 0;
 
 // Op de hemel zie je meteen hoe ver je bent: elke verdiende ster laat een
 // deel van het sterrenbeeld oplichten.
@@ -66,20 +61,15 @@ function showSky() {
       </a>
       <p class="map-intro">Kijk door de telescoop en laat de sterrenbeelden stralen!</p>
       <ol class="sky-path">
-        ${STERRENBEELDEN.filter((s) => skyState(s).state !== 'hidden').map((s) => {
-          const { state, from } = skyState(s);
+        ${STERRENBEELDEN.filter(isOpen).map((s) => {
           const inner = `
-            ${skySvg(s, state === 'open' ? litFor(s) : 0, 104)}
+            ${skySvg(s, litFor(s), 104)}
             <span class="sky-label">
               <span class="sky-name">${s.name}</span>
               <span class="sky-sub">${s.sub}</span>
-              <span class="sky-sub">${state === 'open'
-                ? `<span class="star filled">★</span> ${sbStars(s)} / ${levelsFor(s).length * 3}`
-                : `🔒 Vanaf groep ${from}`}</span>
+              <span class="sky-sub"><span class="star filled">★</span> ${sbStars(s)} / ${levelsFor(s).length * 3}</span>
             </span>`;
-          return `<li>${state === 'open'
-            ? `<a class="sky-link" href="#/${s.id}">${inner}</a>`
-            : `<div class="sky-link locked" aria-disabled="true">${inner}</div>`}</li>`;
+          return `<li><a class="sky-link" href="#/${s.id}">${inner}</a></li>`;
         }).join('')}
       </ol>
       ${INFO_FOOTER}

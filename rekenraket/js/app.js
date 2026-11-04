@@ -25,7 +25,7 @@ function route() {
   if (!getProfile()) return location.replace(startUrl(APP));
   const [id, levelId] = location.hash.replace(/^#\/?/, '').split('/');
   const planet = PLANETS.find((p) => p.id === id);
-  if (!planet || planetState(planet).state !== 'open') return showMap();
+  if (!planet || !isOpen(planet)) return showMap();
   const level = levelsFor(planet).find((l) => l.id === levelId);
   if (!level) return showPlanet(planet);
   showGame(planet, level);
@@ -34,14 +34,8 @@ function route() {
 const levelKey = (planet, level) => `${planet.id}-${level.id}`;
 const levelsFor = (planet) => planet.module.levels.filter((l) => l.groups.includes(getProfile().groep));
 
-// Een planeet met niveaus voor jouw groep is open. Is hij voor een hogere
-// groep, dan zie je hem op slot ("Vanaf groep 4"). Planeten die alleen voor
-// een lagere groep zijn, laten we weg.
-function planetState(planet) {
-  if (levelsFor(planet).length) return { state: 'open' };
-  const from = Math.min(...planet.module.levels.flatMap((l) => l.groups));
-  return from > getProfile().groep && !planet.module.review ? { state: 'locked', from } : { state: 'hidden' };
-}
+// Je ziet alleen wat bij jouw groep hoort, zodat de lijst kort blijft.
+const isOpen = (planet) => levelsFor(planet).length > 0;
 
 function planetBall(planet, size) {
   const [c1, c2] = planet.colors;
@@ -69,19 +63,14 @@ function showMap() {
       </a>
       <p class="map-intro">Kies een planeet en vlieg erheen!</p>
       <ol class="planet-path">
-        ${PLANETS.filter((p) => planetState(p).state !== 'hidden').map((p, i) => {
-          const { state, from } = planetState(p);
+        ${PLANETS.filter(isOpen).map((p, i) => {
           const inner = `
             ${planetBall(p, sizes[i % sizes.length])}
             <span class="planet-label">
               <span class="planet-name">${p.name}</span>
-              <span class="planet-sub">${state === 'open'
-                ? `<span class="star filled">★</span> ${planetStars(p)} / ${levelsFor(p).length * 3}`
-                : `🔒 Vanaf groep ${from}`}</span>
+              <span class="planet-sub"><span class="star filled">★</span> ${planetStars(p)} / ${levelsFor(p).length * 3}</span>
             </span>`;
-          return `<li>${state === 'open'
-            ? `<a class="planet-link" href="#/${p.id}">${inner}</a>`
-            : `<div class="planet-link locked" aria-disabled="true">${inner}</div>`}</li>`;
+          return `<li><a class="planet-link" href="#/${p.id}">${inner}</a></li>`;
         }).join('')}
       </ol>
       ${INFO_FOOTER}

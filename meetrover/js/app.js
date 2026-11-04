@@ -25,7 +25,7 @@ function route() {
   if (!getProfile()) return location.replace(startUrl(APP));
   const [id, levelId] = location.hash.replace(/^#\/?/, '').split('/');
   const plek = PLEKKEN.find((p) => p.id === id);
-  if (!plek || plekState(plek).state !== 'open') return showMars();
+  if (!plek || !isOpen(plek)) return showMars();
   const level = levelsFor(plek).find((l) => l.id === levelId);
   if (!level) return showPlek(plek);
   showGame(plek, level);
@@ -35,13 +35,8 @@ const levelKey = (plek, level) => `${plek.id}-${level.id}`;
 const levelsFor = (plek) => plek.module.levels.filter((l) => l.groups.includes(getProfile().groep));
 const plekStars = (plek) => levelsFor(plek).reduce((sum, l) => sum + getStars(levelKey(plek, l)), 0);
 
-// Net als bij de planeten: open voor jouw groep, op slot voor een hogere groep,
-// en weg als het alleen voor een lagere groep is.
-function plekState(plek) {
-  if (levelsFor(plek).length) return { state: 'open' };
-  const from = Math.min(...plek.module.levels.flatMap((l) => l.groups));
-  return from > getProfile().groep && !plek.module.review ? { state: 'locked', from } : { state: 'hidden' };
-}
+// Je ziet alleen wat bij jouw groep hoort, zodat de lijst kort blijft.
+const isOpen = (plek) => levelsFor(plek).length > 0;
 
 const phaseFor = (plek) => {
   const max = levelsFor(plek).length * 3;
@@ -64,20 +59,15 @@ function showMars() {
       </a>
       <p class="map-intro">Rij over Mars en zet overal je vlag!</p>
       <ol class="plek-path">
-        ${PLEKKEN.filter((p) => plekState(p).state !== 'hidden').map((p) => {
-          const { state, from } = plekState(p);
+        ${PLEKKEN.filter(isOpen).map((p) => {
           const inner = `
-            ${plekHtml(p, state === 'open' ? phaseFor(p) : 0)}
+            ${plekHtml(p, phaseFor(p))}
             <span class="plek-label">
               <span class="plek-name">${p.name}</span>
               <span class="plek-sub">${p.sub}</span>
-              <span class="plek-sub">${state === 'open'
-                ? `<span class="star filled">★</span> ${plekStars(p)} / ${levelsFor(p).length * 3}`
-                : `🔒 Vanaf groep ${from}`}</span>
+              <span class="plek-sub"><span class="star filled">★</span> ${plekStars(p)} / ${levelsFor(p).length * 3}</span>
             </span>`;
-          return `<li>${state === 'open'
-            ? `<a class="plek-link" href="#/${p.id}">${inner}</a>`
-            : `<div class="plek-link locked" aria-disabled="true">${inner}</div>`}</li>`;
+          return `<li><a class="plek-link" href="#/${p.id}">${inner}</a></li>`;
         }).join('')}
       </ol>
       ${INFO_FOOTER}
