@@ -17,7 +17,9 @@ function showInfo(appName) {
   dialog.setAttribute('aria-labelledby', 'info-title');
   dialog.innerHTML = `
     <h2 id="info-title">Over ${appName}</h2>
-    <p>De Lanceerbasis is een gratis oefenplek voor de basisschool, gemaakt door een ouder. Nu kun je in groep 3 en 4 rekenen met de Rekenraket, spelling oefenen met de Taaltelescoop en lezen met de Leeslander. De hogere groepen zijn nog in aanbouw.</p>
+    <p>De Lanceerbasis is een gratis oefenplek voor de basisschool, gemaakt door een ouder. Nu kun je in groep 3 en 4 rekenen met de Rekenraket, klokkijken, meten en met geld rekenen met de Meetrover, spelling oefenen met de Taaltelescoop, taal oefenen met de Zinnenzender en lezen met de Leeslander. De hogere groepen zijn nog in aanbouw.</p>
+    <h3>Waar komt de lesstof vandaan?</h3>
+    <p>Wat er per groep te oefenen is, volgt de kerndoelen voor rekenen en Nederlands (SLO, vernieuwd in 2026), de leerlijnen per groep en de methodes die de meeste scholen gebruiken, zoals Veilig leren lezen, Staal en De wereld in getallen. Elke school kiest zijn eigen methode, dus de volgorde kan bij jullie net anders zijn. Wat er precies in jouw groep zit, en waarom, zie je op de basis onder het knopje bij de voertuigen.</p>
     <h3>Gemaakt met AI</h3>
     <p>De oefeningen, woordenlijsten en verhaaltjes zijn gemaakt met hulp van AI (Claude). Ik controleer zo veel mogelijk, maar ik kan niet alles nakijken. Er kan dus een foutje in zitten, zoals een woord dat net anders gespeld wordt, een plaatje dat niet goed past of een vraag met een verkeerd antwoord.</p>
     <p>De Lanceerbasis is een extraatje om thuis te oefenen. Het vervangt de lessen en de methode van school niet. Twijfel je over een antwoord, ga dan uit van wat de juf of meester zegt.</p>

@@ -67,19 +67,55 @@ function corners() {
   };
 }
 
-// Getallenrijen: welke sprong zit erin?
-function numberPattern() {
-  const step = pick([2, 3, 4, 5, 10]) * (Math.random() < 0.35 ? -1 : 1);
-  // Een aflopende rij begint hoog genoeg, zodat hij niet onder de 0 komt.
-  const start = step > 0 ? rand(0, 20) : rand(-4 * step, -4 * step + 40);
-  const numbers = Array.from({ length: 5 }, (_, i) => start + i * step);
-  const missing = rand(2, 4);
+// Spiegelen: wat je links ziet, staat rechts precies andersom.
+function mirror() {
+  let row;
+  // Een rij die van twee kanten hetzelfde is, verandert niet in de spiegel.
+  do {
+    row = Array.from({ length: rand(3, 4) }, () => pick(SYMBOLS.slice(0, 5)));
+  } while (row.join('') === [...row].reverse().join(''));
+  const answer = [...row].reverse().join('');
+  const wrong = new Set([row.join('')]);
+  for (let i = 0; wrong.size < 2 && i < 30; i++) {
+    const w = shuffle(row).join('');
+    if (w !== answer) wrong.add(w);
+  }
+  if (wrong.size < 2) wrong.add([...row.slice(1), SYMBOLS[6]].join(''));
   return {
-    key: `g-${start}-${step}-${missing}`,
-    prompt: 'Welk getal mist er?',
-    answer: numbers[missing],
-    maxDigits: 3,
-    html: `<div class="sequence">${numbers.map((n, i) => (i === missing ? slot() : `<span>${n}</span>`)).join('')}</div>`,
+    key: `s-${row.join('')}`,
+    prompt: 'Wat zie je in de spiegel?',
+    answer,
+    choices: shuffle([answer, ...wrong]),
+    revealText: 'In de spiegel staat alles andersom.',
+    html: `<div class="mirror"><span>${row.join('')}</span><span class="mirror-line" aria-hidden="true"></span><span class="pattern-next">?</span></div>`,
+  };
+}
+
+// Een plattegrond van de klas: wat ligt links, rechts, boven of onder iets?
+const THINGS = ['🐶', '🌵', '📚', '🎈', '🧸', '⚽', '🎨', '🪑', '🍎'];
+const DIRS = [['links van', 0, -1], ['rechts van', 0, 1], ['boven', -1, 0], ['onder', 1, 0]];
+
+function map() {
+  const grid = shuffle(THINGS);
+  const [word, dr, dc] = pick(DIRS);
+  // Kies iets waar in die richting nog een vakje naast ligt.
+  const options = grid.map((_, i) => i).filter((i) => {
+    const r = Math.floor(i / 3) + dr;
+    const c = (i % 3) + dc;
+    return r >= 0 && r < 3 && c >= 0 && c < 3;
+  });
+  const from = pick(options);
+  const to = (Math.floor(from / 3) + dr) * 3 + (from % 3) + dc;
+  const answer = grid[to];
+  const others = shuffle(grid.filter((t, i) => i !== to && i !== from)).slice(0, 2);
+  return {
+    key: `k-${grid[from]}-${word}`,
+    prompt: `Wat ligt er ${word} ${grid[from]}?`,
+    answer,
+    choices: shuffle([answer, ...others]),
+    choiceStyle: 'big',
+    revealText: `${answer} ligt ${word} ${grid[from]}.`,
+    html: `<div class="floor-plan">${grid.map((t, i) => `<span${i === from ? ' class="here"' : ''}>${t}</span>`).join('')}</div>`,
   };
 }
 
@@ -88,17 +124,19 @@ const LEVELS = {
   vormen: () => shapeName(['cirkel', 'driehoek', 'vierkant', 'rechthoek']),
   vormen4: () => shapeName(Object.keys(SHAPES)),
   hoeken: corners,
-  getallen: numberPattern,
+  spiegelen: mirror,
+  plattegrond: map,
 };
 
 export default {
-  intro: 'Een patroon herhaalt zich steeds. Zoek het stukje dat telkens terugkomt, dan weet je wat er daarna komt!',
+  intro: 'Een patroon herhaalt zich steeds. Zoek het stukje dat telkens terugkomt, dan weet je wat er daarna komt! In de <b>spiegel</b> staat alles andersom, en op een <b>plattegrond</b> kijk je van bovenaf.',
   levels: [
     { id: 'patroon', name: 'Wat komt erna?', hint: '🔴🔵🔴🔵…', groups: [3, 4] },
     { id: 'vormen', name: 'Vormen', hint: 'Cirkel, driehoek, vierkant…', groups: [3] },
     { id: 'vormen4', name: 'Meer vormen', hint: 'Ook vijfhoek en zeshoek', groups: [4] },
     { id: 'hoeken', name: 'Hoeken tellen', hint: 'Hoeveel hoeken heeft het?', groups: [4] },
-    { id: 'getallen', name: 'Getallenrijen', hint: 'Zoals 3, 6, 9, ?', groups: [4] },
+    { id: 'spiegelen', name: 'Spiegelen', hint: 'Wat zie je in de spiegel?', groups: [3, 4] },
+    { id: 'plattegrond', name: 'Plattegrond', hint: 'Links, rechts, boven of onder?', groups: [3, 4] },
   ],
 
   makeQuestion(level) {

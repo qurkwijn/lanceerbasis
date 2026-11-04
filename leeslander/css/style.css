@@ -107,3 +107,8 @@ a.moon-link:active .moon-art { transform: scale(0.94); }
 @media (max-height: 700px) {
   .moon-hero .moon-art { width: 120px; height: 120px; }
 }
+
+/* Klanken horen */
+.sound-card { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.sound-pic { font-size: 6rem; line-height: 1; }
+@media (max-height: 700px) { .sound-pic { font-size: 4.5rem; } }

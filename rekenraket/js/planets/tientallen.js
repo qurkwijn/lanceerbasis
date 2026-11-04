@@ -56,7 +56,7 @@ export default {
   levels: [
     { id: 'tellen', name: 'Staven en blokjes', hint: 'Welk getal is dit?', groups: [4] },
     { id: 'opbouw', name: 'Tientallen en eenheden', hint: '47 = 4 tientallen en 7 eenheden', groups: [4] },
-    { id: 'buren', name: 'Ervoor en erna', hint: 'Welk getal komt na 59?', groups: [4] },
+    { id: 'buren', name: 'Ervoor en erna', hint: 'Welk getal komt na 59?', groups: [3, 4] },
   ],
 
   makeQuestion(level) {

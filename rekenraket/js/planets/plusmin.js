@@ -59,6 +59,15 @@ const LEVELS = {
     if (kind === 'plus10') return sum(a, '+', 10 * rand(1, Math.floor((100 - a) / 10) || 1));
     return sum(a, '-', 10 * rand(1, Math.floor(a / 10)));
   },
+  // Over het tiental heen: 38 + 5 is eerst naar 40, dan nog 3.
+  over100() {
+    if (Math.random() < 0.5) {
+      const a = 10 * rand(1, 8) + rand(2, 9);
+      return sum(a, '+', rand(11 - (a % 10), 9));
+    }
+    const a = 10 * rand(2, 9) + rand(1, 7);
+    return sum(a, '-', rand((a % 10) + 1, 9));
+  },
 };
 
 export default {
@@ -67,9 +76,10 @@ export default {
     { id: 'plus10', name: 'Plus tot 10', hint: 'Zoals 4 + 3', groups: [3] },
     { id: 'min10', name: 'Min tot 10', hint: 'Zoals 9 − 5', groups: [3] },
     { id: 'tot20', name: 'Tot 20', hint: 'Zoals 12 + 5 en 17 − 4', groups: [3, 4] },
-    { id: 'over10', name: 'Over de 10', hint: 'Zoals 8 + 5 en 13 − 6', groups: [4] },
+    { id: 'over10', name: 'Over de 10', hint: 'Zoals 8 + 5 en 13 − 6', groups: [3, 4] },
     { id: 'tientallen', name: 'Tientallen', hint: 'Zoals 30 + 40 en 90 − 20', groups: [4] },
     { id: 'tot100', name: 'Tot 100', hint: 'Zoals 34 + 5 en 56 − 20', groups: [4] },
+    { id: 'over100', name: 'Over het tiental tot 100', hint: 'Zoals 38 + 5 en 42 − 7', groups: [4] },
   ],
 
   makeQuestion(level) {

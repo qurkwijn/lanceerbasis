@@ -1,0 +1,64 @@
+/* Zinnenzender: alles wat alleen bij taal hoort. De basis staat in
+   shared/css/base.css en het spelscherm in shared/css/game.css. */
+
+.map-header .logo { margin-right: auto; font-size: clamp(1.7rem, 7.6vw, 2.4rem); }
+
+/* Signalen met golven */
+.signal-art { display: block; flex: none; overflow: visible; }
+.signal-art .wave { fill: none; stroke: rgba(255, 255, 255, 0.16); stroke-width: 5; stroke-linecap: round; transition: stroke 0.4s; }
+.signal-art .wave.on { stroke: var(--c); filter: drop-shadow(0 0 3px var(--c)); }
+
+/* De signalen onder elkaar, om en om links en rechts */
+.signal-path {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.signal-path li { display: flex; }
+.signal-path li:nth-child(even) { justify-content: flex-end; }
+.signal-link {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 12px;
+  border-radius: var(--radius);
+  max-width: 100%;
+}
+.signal-path li:nth-child(even) .signal-link { flex-direction: row-reverse; text-align: right; }
+a.signal-link:active .signal-art { transform: scale(0.94); }
+.signal-label { display: flex; flex-direction: column; }
+.signal-name { font-size: 1.5rem; font-weight: 800; line-height: 1.1; }
+.signal-sub { font-size: 1.1rem; color: var(--muted); }
+.signal-link.locked .signal-art { opacity: 0.5; }
+.signal-link.locked .signal-name { color: var(--muted); }
+
+.signal-hero { display: flex; justify-content: center; padding: 16px 0 0; }
+.signal-result { margin-bottom: 8px; }
+
+/* Voortgang: de schotel stuurt een berichtje */
+.dish-art { display: block; width: 34px; height: auto; }
+.track-dish {
+  position: absolute;
+  bottom: -6px;
+  left: calc(var(--progress) * 100%);
+  transform: translateX(-50%);
+  transition: left 0.5s ease;
+}
+.track-goal { display: flex; }
+
+/* Een woord in beeld */
+.signal-word { margin: 0; font-size: clamp(2.4rem, 12vw, 3.2rem); font-weight: 800; text-align: center; line-height: 1.2; }
+.signal-word.dim { color: var(--muted); font-size: 2rem; }
+
+/* Het alfabet */
+.abc-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; font-size: clamp(2.4rem, 12vw, 3.2rem); font-weight: 800; }
+.abc-row .gap {
+  min-width: 1em;
+  border-bottom: 5px dashed var(--accent);
+  color: rgba(255, 255, 255, 0.4);
+  text-align: center;
+}
+.abc-row.abc-hint { gap: 0 8px; max-width: 340px; font-size: 1.3rem; font-weight: 700; color: var(--muted); letter-spacing: 0.04em; }

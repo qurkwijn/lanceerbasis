@@ -124,7 +124,7 @@ function showGame(sb, level) {
     onStars: (stars) => saveStars(levelKey(sb, level), stars),
     result: () => ({
       art: `<div class="sky-result">${skySvg(sb, sb.stars.length, 200)}</div>`,
-      title: `${escapeHtml(getProfile().name)} laat ${sb.name.replace(/^De /, 'de ')} stralen!`,
+      title: `${escapeHtml(getProfile().name)} laat ${sb.name.replace(/^(De|Het) /, (w) => w.toLowerCase())} stralen!`,
       actions: [
         { href: `#/${sb.id}`, label: 'Ander niveau' },
         { href: '#/', label: 'Naar de sterrenhemel' },

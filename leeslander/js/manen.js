@@ -1,15 +1,26 @@
 import bouw from './manen/bouw.js';
 import flits from './manen/flits.js';
 import gek from './manen/gek.js';
+import klank from './manen/klank.js';
+import race from './manen/race.js';
 import verhaal from './manen/verhaal.js';
+import weet from './manen/weet.js';
 import zinnen from './manen/zinnen.js';
 
 // Elke maan is een stukje lezen. Hoe meer je oefent, hoe voller de maan.
 // `craters` zijn [x, y, straal] in een vlak van 100 bij 100.
 export const MANEN = [
   {
+    id: 'klank', name: 'Klankmaan', sub: 'Klanken horen', color: '#ffd1a6', module: klank,
+    craters: [[36, 32, 8], [64, 40, 6], [46, 66, 11], [72, 68, 5]],
+  },
+  {
     id: 'flits', name: 'Flitsmaan', sub: 'Woorden flitsen', color: '#f5d76e', module: flits,
     craters: [[34, 30, 9], [62, 58, 12], [40, 72, 6], [70, 28, 5]],
+  },
+  {
+    id: 'race', name: 'Racemaan', sub: 'Snel lezen', color: '#ff9a9a', module: race,
+    craters: [[30, 38, 7], [60, 30, 9], [54, 66, 8], [32, 70, 5]],
   },
   {
     id: 'zinnen', name: 'Zinnenmaan', sub: 'Zin bij plaatje', color: '#9fd3ff', module: zinnen,
@@ -26,6 +37,10 @@ export const MANEN = [
   {
     id: 'verhaal', name: 'Verhaalmaan', sub: 'Korte verhaaltjes', color: '#a8e6a1', module: verhaal,
     craters: [[44, 28, 8], [28, 56, 7], [62, 60, 11], [74, 36, 4]],
+  },
+  {
+    id: 'weet', name: 'Weetmaan', sub: 'Weetjesteksten', color: '#c4b0ff', module: weet,
+    craters: [[40, 30, 9], [66, 52, 7], [34, 62, 10], [62, 78, 4]],
   },
 ];
 

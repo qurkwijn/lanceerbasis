@@ -40,6 +40,22 @@ function multiply(tables) {
   };
 }
 
+// Getallenrijen: welke sprong zit erin?
+function numberPattern() {
+  const step = pick([2, 3, 4, 5, 10]) * (Math.random() < 0.35 ? -1 : 1);
+  // Een aflopende rij begint hoog genoeg, zodat hij niet onder de 0 komt.
+  const start = step > 0 ? rand(0, 20) : rand(-4 * step, -4 * step + 40);
+  const numbers = Array.from({ length: 5 }, (_, i) => start + i * step);
+  const missing = rand(2, 4);
+  return {
+    key: `g-${start}-${step}-${missing}`,
+    prompt: 'Welk getal mist er?',
+    answer: numbers[missing],
+    maxDigits: 3,
+    html: `<div class="sequence">${numbers.map((n, i) => (i === missing ? slot() : `<span>${n}</span>`)).join('')}</div>`,
+  };
+}
+
 const LEVELS = {
   sprong2: () => sequence(2, 20),
   sprong510: () => (Math.random() < 0.5 ? sequence(5, 50) : sequence(10, 100)),
@@ -47,6 +63,7 @@ const LEVELS = {
   t5: () => multiply([5]),
   t34: () => multiply([3, 4]),
   mix: () => multiply([1, 2, 3, 4, 5, 10]),
+  rijen: numberPattern,
 };
 
 export default {
@@ -58,6 +75,7 @@ export default {
     { id: 't5', name: 'Tafel van 5', hint: '5, 10, 15, 20…', groups: [4] },
     { id: 't34', name: 'Tafel van 3 en 4', hint: '3, 6, 9… en 4, 8, 12…', groups: [4] },
     { id: 'mix', name: 'Alles door elkaar', hint: 'Tafels 1 t/m 5 en 10', groups: [4] },
+    { id: 'rijen', name: 'Getallenrijen', hint: 'Zoals 3, 6, 9, ?', groups: [4] },
   ],
 
   makeQuestion(level) {

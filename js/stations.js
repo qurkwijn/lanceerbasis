@@ -6,11 +6,20 @@ export const STATIONS = [
   {
     id: 'taaltelescoop',
     name: 'Taaltelescoop',
-    subject: 'Taal en spelling',
+    subject: 'Spelling',
     world: 'de sterrenbeelden',
     groups: [3, 4],
     ready: true,
     art: telescope,
+  },
+  {
+    id: 'zinnenzender',
+    name: 'Zinnenzender',
+    subject: 'Taal',
+    world: 'de signalen',
+    groups: [3, 4],
+    ready: true,
+    art: dish,
   },
   {
     id: 'rekenraket',
@@ -20,6 +29,15 @@ export const STATIONS = [
     groups: [3, 4],
     ready: true,
     art: rocket,
+  },
+  {
+    id: 'meetrover',
+    name: 'Meetrover',
+    subject: 'Meten en tijd',
+    world: 'Mars',
+    groups: [3, 4],
+    ready: true,
+    art: rover,
   },
   {
     id: 'leeslander',
@@ -89,5 +107,44 @@ function lander() {
     </g>
     <path d="M30 104 H90" stroke="#ffcc33" stroke-width="3" stroke-dasharray="6 5"/>
     <rect x="6" y="156" width="108" height="8" rx="3" fill="#3b4080"/>
+  </svg>`;
+}
+
+// Schotelantenne op een mast, met golven die opvangen.
+function dish() {
+  return `<svg class="station-art" viewBox="0 0 120 170" aria-hidden="true">
+    <path d="M52 158 L58 92 H62 L68 158 Z" fill="#5a5f9e"/>
+    <path d="M50 120 H70 M48 140 H72" stroke="#8a8fd0" stroke-width="3"/>
+    <g class="dish">
+      <path d="M26 54 A40 40 0 0 0 86 104 Z" fill="#d8dcf2"/>
+      <path d="M56 79 L76 58" stroke="#c9cde8" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="78" cy="56" r="5" fill="#ffcc33" class="beacon"/>
+    </g>
+    <g class="signal-waves" fill="none" stroke="#8af0b0" stroke-width="3" stroke-linecap="round">
+      <path d="M88 40 A14 14 0 0 1 96 50"/>
+      <path d="M90 28 A26 26 0 0 1 106 46"/>
+    </g>
+    <rect x="30" y="156" width="60" height="8" rx="3" fill="#3b4080"/>
+  </svg>`;
+}
+
+// Marsrover op een rode heuvel, klaar om weg te rijden.
+function rover() {
+  return `<svg class="station-art" viewBox="0 0 120 170" aria-hidden="true">
+    <path d="M4 164 Q60 118 116 164 Z" fill="#c4603a"/>
+    <circle cx="40" cy="150" r="5" fill="#9a3f22"/>
+    <circle cx="82" cy="146" r="3.5" fill="#9a3f22"/>
+    <path d="M88 96 V132" stroke="#f4f1ff" stroke-width="2.5"/>
+    <path d="M90 96 L106 102 L90 108 Z" fill="#ffcc33"/>
+    <g class="rover-craft">
+      <path d="M68 100 V114" stroke="#c9cde8" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="68" cy="98" r="5" fill="#ffcc33" class="beacon"/>
+      <rect x="28" y="114" width="56" height="18" rx="5" fill="#f4f1ff"/>
+      <rect x="36" y="118" width="16" height="9" rx="2" fill="#3a6fd8"/>
+      <rect x="22" y="130" width="68" height="6" rx="3" fill="#9aa0c8"/>
+      <circle cx="34" cy="142" r="8" fill="#3b4080" stroke="#c9cde8" stroke-width="3"/>
+      <circle cx="56" cy="142" r="8" fill="#3b4080" stroke="#c9cde8" stroke-width="3"/>
+      <circle cx="78" cy="142" r="8" fill="#3b4080" stroke="#c9cde8" stroke-width="3"/>
+    </g>
   </svg>`;
 }

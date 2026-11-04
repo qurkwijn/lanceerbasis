@@ -3,13 +3,13 @@ import { pick, shuffle } from '../../../shared/js/util.js';
 // Een woord flitst kort in beeld. Daarna kies je het plaatje dat erbij hoort.
 // Plaatjes die met dezelfde letter beginnen komen vaker als foute keuze, zodat
 // je het hele woord moet lezen en niet alleen de eerste letter.
-const KORT = [['kat', '🐱'], ['vis', '🐟'], ['bus', '🚌'], ['pen', '🖊️'], ['bal', '⚽'], ['zon', '☀️'],
+export const KORT = [['kat', '🐱'], ['vis', '🐟'], ['bus', '🚌'], ['pen', '🖊️'], ['bal', '⚽'], ['zon', '☀️'],
   ['bom', '💣'], ['sok', '🧦'], ['pet', '🧢'], ['jas', '🧥'], ['mes', '🔪'], ['bed', '🛏️'], ['kip', '🐔'],
   ['koe', '🐄'], ['aap', '🐒'], ['uil', '🦉'], ['mug', '🦟'], ['ijs', '🍦'], ['oor', '👂'], ['neus', '👃'],
   ['voet', '🦶'], ['maan', '🌙'], ['boom', '🌳'], ['roos', '🌹'], ['vuur', '🔥'], ['kaas', '🧀'], ['peer', '🍐'],
   ['huis', '🏠'], ['muis', '🐭'], ['hond', '🐶'], ['geit', '🐐'], ['boot', '🚤'], ['been', '🦵'], ['mond', '👄']];
 
-const LANG = [['fiets', '🚲'], ['trein', '🚆'], ['banaan', '🍌'], ['appel', '🍎'], ['olifant', '🐘'], ['giraf', '🦒'],
+export const LANG = [['fiets', '🚲'], ['trein', '🚆'], ['banaan', '🍌'], ['appel', '🍎'], ['olifant', '🐘'], ['giraf', '🦒'],
   ['slang', '🐍'], ['slak', '🐌'], ['sleutel', '🔑'], ['kikker', '🐸'], ['konijn', '🐰'], ['kasteel', '🏰'],
   ['kaars', '🕯️'], ['krab', '🦀'], ['krokodil', '🐊'], ['vlinder', '🦋'], ['vlag', '🚩'], ['vliegtuig', '✈️'],
   ['tomaat', '🍅'], ['taart', '🎂'], ['tent', '⛺'], ['tractor', '🚜'], ['wortel', '🥕'], ['wolk', '☁️'],
@@ -20,7 +20,7 @@ const LANG = [['fiets', '🚲'], ['trein', '🚆'], ['banaan', '🍌'], ['appel'
 const LIST = { kort: KORT, lang: LANG };
 const TIME = { kort: 1800, lang: 1200 };
 
-function distractors(list, [word, pic]) {
+export function distractors(list, [word, pic]) {
   const others = list.filter(([w, p]) => w !== word && p !== pic);
   const alike = shuffle(others.filter(([w]) => w[0] === word[0]));
   const rest = shuffle(others.filter(([w]) => w[0] !== word[0]));

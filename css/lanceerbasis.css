@@ -152,6 +152,39 @@ a.station:active .station-art { transform: scale(0.96); }
   100% { transform: translate(0, -900px); }
 }
 
+/* De schotel draait naar de hemel en de golven gaan zenden */
+.station .dish { transform-origin: 56px 79px; }
+.station .signal-waves { opacity: 0; }
+.station.launching .dish { animation: aim 1.1s ease-in-out forwards; }
+.station.launching .signal-waves { animation: send 0.4s ease-in-out infinite alternate; }
+
+@keyframes send { to { opacity: 1; } }
+
+/* De rover rijdt weg */
+.station.launching .rover-craft { animation: drive 1.1s ease-in forwards; }
+
+@keyframes drive {
+  20% { transform: translateX(-4px); }
+  100% { transform: translateX(600px); }
+}
+
+/* Voor ouders: wat zit er in deze groep? */
+.groep-info-btn {
+  display: block;
+  margin: 14px auto 0;
+  padding: 8px 18px;
+  border: 1px solid var(--card-border);
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--muted);
+  font-family: var(--font);
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.groep-info-btn:hover, .groep-info-btn:focus-visible { color: var(--text); border-color: var(--accent); }
+.info-dialog .info-subject { color: var(--muted); font-weight: 700; font-size: 1rem; }
+
 /* Missielogboek */
 .log-total {
   margin: 20px 0 16px;

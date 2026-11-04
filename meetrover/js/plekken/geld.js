@@ -22,6 +22,17 @@ function bill(value) {
     </svg>`;
 }
 
+// Koperen munten van 5 cent, gouden van 10, 20 en 50 cent.
+function centCoin(cents) {
+  const fill = cents === 5 ? '#c9774a' : '#e8b84a';
+  const r = { 5: 22, 10: 22, 20: 25, 50: 28 }[cents];
+  return `
+    <svg class="coin" viewBox="0 0 60 60" role="img" aria-label="${cents} cent">
+      <circle cx="30" cy="30" r="${r}" fill="${fill}" stroke="rgba(0,0,0,.25)" stroke-width="2" />
+      <text x="30" y="31">${cents}c</text>
+    </svg>`;
+}
+
 const money = (value) => (value <= 2 ? coin(value) : bill(value));
 
 const euro = `<div class="euro-answer"><span>€</span>${slot()}</div>`;
@@ -44,6 +55,28 @@ function countQuestion(kinds, max, minPieces, maxPieces) {
     answer: total,
     maxDigits: 3,
     html: `<div class="money">${pieces.map(money).join('')}</div>${euro}`,
+  };
+}
+
+// Centen tellen tot 100 cent, oftewel 1 euro.
+function centQuestion() {
+  const pieces = [];
+  const count = rand(2, 5);
+  while (pieces.length < count) {
+    const total = pieces.reduce((s, n) => s + n, 0);
+    const fits = [5, 10, 20, 50].filter((k) => total + k <= 100);
+    if (!fits.length) break;
+    pieces.push(pick(fits));
+  }
+  pieces.sort((a, b) => b - a);
+  const total = pieces.reduce((s, n) => s + n, 0);
+  return {
+    key: `cent-${pieces.join('-')}`,
+    prompt: 'Hoeveel cent is dit?',
+    answer: total,
+    maxDigits: 3,
+    revealText: total === 100 ? 'Het is 100 cent. Dat is precies 1 euro!' : `Het is ${total} cent.`,
+    html: `<div class="money">${pieces.map(centCoin).join('')}</div><div class="euro-answer">${slot()}<span class="unit">cent</span></div>`,
   };
 }
 
@@ -84,6 +117,7 @@ const LEVELS = {
   tot100: () => countQuestion([1, 2, 5, 10, 20, 50], 100, 3, 6),
   winkel100: () => shopQuestion(100, 50),
   terug: () => changeQuestion(),
+  centen: () => centQuestion(),
 };
 
 export default {
@@ -95,6 +129,7 @@ export default {
     { id: 'tot100', name: 'Geld tot €100', hint: 'Ook briefjes van 20 en 50', groups: [4] },
     { id: 'winkel100', name: 'Winkeltje tot €100', hint: 'Hoeveel kost het samen?', groups: [4] },
     { id: 'terug', name: 'Wisselgeld', hint: 'Hoeveel krijg je terug?', groups: [4] },
+    { id: 'centen', name: 'Centen', hint: '100 cent is 1 euro', groups: [4] },
   ],
 
   makeQuestion(level) {

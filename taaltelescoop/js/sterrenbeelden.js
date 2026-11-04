@@ -1,28 +1,30 @@
+import beer from './sterrenbeelden/beer.js';
+import haai from './sterrenbeelden/haai.js';
 import hond from './sterrenbeelden/hond.js';
 import ijsbeer from './sterrenbeelden/ijsbeer.js';
+import kameel from './sterrenbeelden/kameel.js';
+import kat from './sterrenbeelden/kat.js';
 import maan from './sterrenbeelden/maan.js';
-import pauw from './sterrenbeelden/pauw.js';
+import muis from './sterrenbeelden/muis.js';
+import nachtuil from './sterrenbeelden/nachtuil.js';
 import slang from './sterrenbeelden/slang.js';
+import zwaan from './sterrenbeelden/zwaan.js';
 
-// Elk sterrenbeeld is een taalonderdeel en heet naar een woord dat erbij hoort.
+// Elk sterrenbeeld is een spellingonderdeel en heet naar een woord dat erbij hoort.
 // Een sterrenbeeld heeft precies 10 sterren, één per vraag in een ronde.
 // `stars` zijn punten in een vlak van 100 bij 100, `lines` verbinden twee
-// sterren (op volgorde in de lijst, vanaf 0).
+// sterren (op volgorde in de lijst, vanaf 0). De volgorde volgt ongeveer de
+// spellingcategorieën van groep 3 en 4.
 export const STERRENBEELDEN = [
+  {
+    id: 'kat', name: 'De Kat', sub: 'Hakken en plakken', module: kat,
+    stars: [[28, 8], [36, 26], [54, 26], [60, 8], [45, 40], [30, 64], [34, 90], [64, 90], [70, 62], [92, 40]],
+    lines: [[0, 1], [1, 2], [2, 3], [1, 4], [2, 4], [4, 5], [5, 6], [6, 7], [7, 8], [8, 4], [8, 9]],
+  },
   {
     id: 'maan', name: 'De Maan', sub: 'Kort of lang', module: maan,
     stars: [[62, 8], [40, 14], [24, 32], [18, 54], [26, 76], [46, 90], [70, 92], [46, 72], [38, 52], [46, 28]],
     lines: [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 7], [7, 8], [8, 9], [9, 0]],
-  },
-  {
-    id: 'ijsbeer', name: 'De IJsbeer', sub: 'ei of ij', module: ijsbeer,
-    stars: [[8, 46], [22, 36], [26, 24], [46, 30], [68, 32], [88, 40], [82, 72], [56, 56], [32, 72], [20, 54]],
-    lines: [[0, 1], [1, 2], [1, 3], [3, 4], [4, 5], [5, 6], [6, 7], [7, 8], [8, 9], [9, 0], [7, 3]],
-  },
-  {
-    id: 'pauw', name: 'De Pauw', sub: 'au of ou', module: pauw,
-    stars: [[56, 64], [50, 76], [50, 94], [12, 50], [20, 26], [34, 10], [50, 6], [66, 10], [80, 26], [88, 50]],
-    lines: [[0, 1], [1, 2], [1, 3], [1, 6], [1, 9], [3, 4], [4, 5], [5, 6], [6, 7], [7, 8], [8, 9]],
   },
   {
     id: 'slang', name: 'De Slang', sub: 'ng of nk', module: slang,
@@ -30,9 +32,44 @@ export const STERRENBEELDEN = [
     lines: [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 7], [7, 8], [8, 9]],
   },
   {
+    id: 'nachtuil', name: 'De Nachtuil', sub: 'Luchtwoorden', module: nachtuil,
+    stars: [[28, 8], [72, 8], [36, 30], [64, 30], [22, 52], [78, 52], [30, 82], [70, 82], [50, 94], [50, 44]],
+    lines: [[0, 2], [1, 3], [2, 3], [2, 9], [3, 9], [0, 4], [1, 5], [4, 6], [5, 7], [6, 8], [7, 8]],
+  },
+  {
+    id: 'beer', name: 'De Beer', sub: 'eer, oor, eur, eel', module: beer,
+    stars: [[8, 34], [22, 24], [30, 10], [42, 30], [70, 24], [92, 36], [88, 74], [68, 54], [40, 56], [34, 80]],
+    lines: [[0, 1], [1, 2], [1, 3], [3, 4], [4, 5], [5, 6], [6, 7], [7, 8], [8, 9], [8, 3]],
+  },
+  {
+    id: 'haai', name: 'De Haai', sub: 'aai, ooi, oei, eeuw', module: haai,
+    stars: [[6, 52], [30, 42], [46, 12], [58, 40], [80, 46], [96, 24], [88, 52], [96, 76], [60, 64], [28, 62]],
+    lines: [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 7], [7, 4], [4, 8], [8, 9], [9, 0]],
+  },
+  {
     id: 'hond', name: 'De Hond', sub: 'd of t aan het eind', module: hond,
     stars: [[18, 16], [30, 26], [10, 34], [38, 44], [66, 46], [88, 28], [76, 82], [56, 66], [36, 86], [34, 62]],
     lines: [[0, 1], [1, 2], [1, 3], [3, 4], [4, 5], [4, 6], [6, 7], [7, 9], [9, 8], [3, 9]],
+  },
+  {
+    id: 'ijsbeer', name: 'De IJsbeer', sub: 'ei/ij en au/ou', module: ijsbeer,
+    stars: [[8, 46], [22, 36], [26, 24], [46, 30], [68, 32], [88, 40], [82, 72], [56, 56], [32, 72], [20, 54]],
+    lines: [[0, 1], [1, 2], [1, 3], [3, 4], [4, 5], [5, 6], [6, 7], [7, 8], [8, 9], [9, 0], [7, 3]],
+  },
+  {
+    id: 'zwaan', name: 'De Zwaan', sub: 'be-, ver-, -ig en -lijk', module: zwaan,
+    stars: [[20, 16], [8, 24], [28, 34], [30, 56], [92, 38], [84, 62], [62, 44], [66, 86], [38, 82], [50, 66]],
+    lines: [[1, 0], [0, 2], [2, 3], [3, 8], [8, 7], [7, 5], [5, 4], [4, 6], [6, 3], [6, 9], [9, 5]],
+  },
+  {
+    id: 'kameel', name: 'De Kameel', sub: 'Klankgroepen', module: kameel,
+    stars: [[6, 34], [16, 22], [24, 44], [40, 22], [54, 34], [68, 20], [86, 38], [84, 90], [62, 56], [32, 90]],
+    lines: [[0, 1], [0, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 7], [6, 8], [8, 2], [2, 9]],
+  },
+  {
+    id: 'muis', name: 'Het Muisje', sub: 'Verkleinwoorden', module: muis,
+    stars: [[6, 28], [18, 50], [34, 68], [48, 56], [66, 48], [76, 30], [92, 52], [78, 70], [62, 86], [42, 86]],
+    lines: [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 7], [7, 8], [8, 9], [9, 2]],
   },
 ];
 

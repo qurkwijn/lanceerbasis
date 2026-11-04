@@ -28,7 +28,7 @@ function scramble(words) {
 export default {
   intro: 'De woorden zijn door elkaar gehusseld! Tik ze in de goede volgorde, zodat er een goede zin staat.',
   levels: [
-    { id: 'kort', name: 'Korte zinnen', hint: 'Drie of vier woorden', groups: [4] },
+    { id: 'kort', name: 'Korte zinnen', hint: 'Drie of vier woorden', groups: [3, 4] },
     { id: 'lang', name: 'Lange zinnen', hint: 'Vijf of zes woorden', groups: [4] },
   ],
   makeQuestion(level) {

@@ -87,11 +87,36 @@ function weigh() {
   };
 }
 
+// Welke maat past erbij? Lengte in cm of m, gewicht in kg, wat erin past in liter.
+const MATEN = [
+  ['🖍️', 'Hoe lang is een potlood?', 'centimeter'], ['🐜', 'Hoe lang is een mier?', 'centimeter'],
+  ['🥄', 'Hoe lang is een lepel?', 'centimeter'], ['📱', 'Hoe breed is een telefoon?', 'centimeter'],
+  ['🚪', 'Hoe hoog is een deur?', 'meter'], ['🏊', 'Hoe lang is een zwembad?', 'meter'],
+  ['🦒', 'Hoe groot is een giraf?', 'meter'], ['🌳', 'Hoe hoog is een boom?', 'meter'],
+  ['🍉', 'Hoe zwaar is een watermeloen?', 'kilogram'], ['🥔', 'Hoe zwaar is een zak aardappels?', 'kilogram'],
+  ['🐕', 'Hoe zwaar is een hond?', 'kilogram'], ['🧒', 'Hoe zwaar ben jij?', 'kilogram'],
+  ['🥛', 'Hoeveel melk zit er in een pak?', 'liter'], ['🪣', 'Hoeveel water past in een emmer?', 'liter'],
+  ['🛁', 'Hoeveel water past in het bad?', 'liter'], ['🧃', 'Hoeveel sap zit er in een fles?', 'liter'],
+];
+
+function unitQuestion() {
+  const [pic, text, answer] = pick(MATEN);
+  return {
+    key: text,
+    prompt: 'Welke maat hoort erbij?',
+    answer,
+    choices: ['centimeter', 'meter', 'kilogram', 'liter'],
+    revealText: `Dat meet je in ${answer === 'kilogram' ? 'kilo’s' : `${answer}s`}.`,
+    html: `<div class="word-question"><span class="shop-emoji" aria-hidden="true">${pic}</span><p class="unit-question">${text}</p></div>`,
+  };
+}
+
 const LEVELS = {
   langst: longest,
   blokjes: () => measure('blokjes'),
   liniaal: () => measure('cm'),
   wegen: weigh,
+  maten: unitQuestion,
 };
 
 export default {
@@ -101,6 +126,7 @@ export default {
     { id: 'blokjes', name: 'Meten met blokjes', hint: 'Hoeveel blokjes lang?', groups: [3, 4] },
     { id: 'liniaal', name: 'Meten met de liniaal', hint: 'In centimeters', groups: [4] },
     { id: 'wegen', name: 'Wegen', hint: 'De weegschaal in evenwicht', groups: [4] },
+    { id: 'maten', name: 'Welke maat?', hint: 'Centimeter, meter, kilo of liter', groups: [4] },
   ],
 
   makeQuestion(level) {

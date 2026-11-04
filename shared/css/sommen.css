@@ -1,0 +1,82 @@
+/* Sommen en invulvakjes, gedeeld door de Rekenraket en de Meetrover. */
+
+/* Invulvakje: gestippeld tot het is ingevuld */
+.slot {
+  border-style: dashed;
+  border-color: var(--accent);
+  background: rgba(255, 204, 51, 0.12);
+}
+
+.slot.empty { color: rgba(255, 255, 255, 0.4); }
+.slot.correct { border-style: solid; border-color: var(--good); background: rgba(61, 220, 132, 0.25); color: #fff; animation: pop 0.35s ease; }
+.slot.reveal { border-style: solid; background: rgba(255, 204, 51, 0.3); color: #fff; }
+.slot.shake { animation: shake 0.4s ease; }
+
+/* Invulvakje midden in een som */
+.slot-inline {
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.9em;
+  height: 1.5em;
+  padding: 0 0.2em;
+  border: 3px dashed var(--accent);
+  border-radius: 14px;
+}
+
+/* Sommen: plus, min en keer */
+.sum {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25em;
+  font-size: clamp(2.2rem, 11vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.sum .op { color: var(--accent); }
+
+/* Tellen in sprongen */
+.sequence {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  font-size: clamp(1.7rem, 8vw, 2.4rem);
+  font-weight: 800;
+}
+
+.sequence > span:not(.slot) {
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.9em;
+  height: 1.5em;
+  border-radius: 14px;
+  background: var(--card);
+  border: 2px solid var(--card-border);
+}
+
+/* Antwoordvakje onder een plaatje */
+.euro-answer,
+.line-answer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 18px;
+  font-size: 2.6rem;
+  font-weight: 800;
+}
+
+.line-answer { font-size: 1.3rem; font-weight: 700; color: var(--muted); }
+.line-answer .slot { font-size: 2.4rem; color: var(--text); }
+.line-answer .slot.empty { color: rgba(255, 255, 255, 0.4); }
+
+/* Eenheid achter het antwoord, zoals cm of kg */
+.unit { font-size: 1.4rem; color: var(--muted); }
+
+@media (max-height: 700px) {
+  .feedback { min-height: 1.6em; font-size: 1.2rem; }
+  .prompt { font-size: 1.3rem; }
+  .euro-answer, .line-answer { margin-top: 8px; }
+}

@@ -1,0 +1,286 @@
+/* Meetrover: alles wat alleen bij meten, tijd, geld en vormen hoort. De basis
+   staat in shared/css/base.css, het spelscherm in shared/css/game.css en de
+   sommen in shared/css/sommen.css. */
+
+:root {
+  --mars: #e0703f;
+  --mars-dark: #9a3f22;
+}
+
+/* Mars kleurt de hemel een beetje oranje */
+body { background: radial-gradient(ellipse at 50% 0%, #4a2a52, var(--bg) 70%) fixed, var(--bg); }
+
+.map-header .logo { margin-right: auto; }
+
+/* Een plek op Mars met een vlaggenmast */
+.plek {
+  --size: 96px;
+  --phase: 0;
+  position: relative;
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #f3a072, var(--mars) 55%, var(--mars-dark));
+  box-shadow: inset -8px -10px 0 rgba(0, 0, 0, 0.18);
+}
+.plek-icon { font-size: calc(var(--size) * 0.42); line-height: 1; }
+.plek-pole {
+  position: absolute;
+  right: 22%;
+  bottom: 70%;
+  width: 3px;
+  height: 46%;
+  border-radius: 2px;
+  background: #f4f1ff;
+}
+.plek-flag {
+  position: absolute;
+  left: 3px;
+  bottom: calc(30% + var(--phase) * 50%);
+  width: calc(var(--size) * 0.2);
+  height: calc(var(--size) * 0.14);
+  background: var(--accent);
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+  transition: bottom 0.6s ease;
+}
+
+/* Het spoor langs de plekken, om en om links en rechts */
+.plek-path {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.plek-path li { display: flex; }
+.plek-path li:nth-child(even) { justify-content: flex-end; }
+.plek-link {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 12px;
+  border-radius: var(--radius);
+  max-width: 100%;
+}
+.plek-path li:nth-child(even) .plek-link { flex-direction: row-reverse; text-align: right; }
+a.plek-link:active .plek { transform: scale(0.94); }
+.plek-label { display: flex; flex-direction: column; }
+.plek-name { font-size: 1.5rem; font-weight: 800; line-height: 1.1; }
+.plek-sub { font-size: 1.1rem; color: var(--muted); }
+.plek-link.locked .plek { filter: grayscale(0.7) brightness(0.65); }
+.plek-link.locked .plek-name { color: var(--muted); }
+
+.plek-hero { display: flex; justify-content: center; padding: 24px 0 8px; }
+.plek-result { margin-bottom: 8px; }
+
+/* Voortgang: de rover rijdt naar de plek */
+.rover-art { display: block; width: 40px; height: auto; }
+.track-rover {
+  position: absolute;
+  bottom: -2px;
+  left: calc(var(--progress) * 100%);
+  transform: translateX(-50%);
+  transition: left 0.5s ease;
+}
+.track-goal { font-size: 1.6rem; }
+
+/* Spiegelen */
+.mirror { display: flex; align-items: center; gap: 10px; font-size: 2.2rem; }
+.mirror-line { width: 6px; align-self: stretch; min-height: 3rem; border-radius: 3px; background: linear-gradient(#c0d4ff, #ffffff, #c0d4ff); }
+.mirror .pattern-next { width: auto; min-width: 3.4em; }
+
+/* Plattegrond van de klas */
+.floor-plan {
+  display: grid;
+  grid-template-columns: repeat(3, 72px);
+  gap: 6px;
+  padding: 8px;
+  border-radius: var(--radius);
+  background: #fdfcf7;
+}
+.floor-plan span {
+  display: grid;
+  place-items: center;
+  height: 72px;
+  border-radius: 12px;
+  background: #e8e4d4;
+  font-size: 2.4rem;
+}
+.floor-plan .here { outline: 4px solid var(--accent); }
+
+/* Klok */
+:root {
+  --hour: #e8476a;
+  --minute: #3a6fd8;
+}
+
+.clock { width: min(250px, 66vw); height: auto; display: block; }
+.clock-rim { fill: #9ad6ff; }
+.clock-face { fill: #fdfcf7; }
+.clock .tick { stroke: #9aa0c8; stroke-width: 1.5; stroke-linecap: round; }
+.clock .tick.big { stroke: #2a2f6a; stroke-width: 3; }
+.clock text {
+  fill: #1b1f4b;
+  font-family: var(--font);
+  font-size: 19px;
+  font-weight: 800;
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+.clock .hand {
+  stroke-linecap: round;
+  transform-box: view-box;
+  transform-origin: 100px 100px;
+  transition: transform 1.8s ease-in-out;
+}
+.clock .hand-hour { stroke: var(--hour); stroke-width: 9; }
+.clock .hand-minute { stroke: var(--minute); stroke-width: 5.5; }
+.clock-pin { fill: #1b1f4b; }
+
+.clock-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px 16px;
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 1rem;
+}
+.clock-legend .dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%; vertical-align: -1px; }
+.clock-legend .dot.hour { background: var(--hour); }
+.clock-legend .dot.minute { background: var(--minute); }
+.hour-text { color: #ff7a93; }
+.minute-text { color: #8ab8ff; }
+
+/* Geld */
+.money {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  max-width: 360px;
+}
+
+.coin { width: 60px; height: 60px; }
+.bill { width: 104px; height: 55px; }
+
+.coin text, .bill text {
+  font-family: var(--font);
+  font-weight: 800;
+  text-anchor: middle;
+  dominant-baseline: central;
+  fill: #1b1f4b;
+}
+.coin text { font-size: 17px; }
+.bill text { font-size: 22px; fill: #fff; }
+
+.shop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.shop .op { font-size: 2.4rem; font-weight: 800; color: var(--accent); }
+
+.shop-item { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.shop-emoji { font-size: 4rem; line-height: 1; }
+
+.price-tag {
+  padding: 2px 12px;
+  border-radius: 10px;
+  background: #fdfcf7;
+  color: #1b1f4b;
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+/* Meten en wegen */
+.ribbons, .ruler { width: min(100%, 380px); height: auto; }
+.ruler-body { fill: #fdfcf7; }
+.ruler line { stroke: #1b1f4b; stroke-width: 2; }
+.ruler text { fill: #1b1f4b; font-family: var(--font); font-size: 12px; font-weight: 700; text-anchor: middle; }
+.ruler .unit-block { fill: rgba(255, 255, 255, 0.18); stroke: rgba(255, 255, 255, 0.5); }
+.ruler .guide { stroke: var(--accent); stroke-width: 1.5; stroke-dasharray: 3 3; }
+
+.scale { display: flex; flex-direction: column; align-items: center; }
+.scale-beam { display: flex; gap: 40px; padding-bottom: 6px; border-bottom: 6px solid #b9bde8; border-radius: 3px; }
+.scale-pan { min-width: 110px; min-height: 70px; display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: center; gap: 4px; }
+.scale-thing { font-size: 3.6rem; line-height: 1; }
+.weight {
+  padding: 6px 8px;
+  border-radius: 8px 8px 4px 4px;
+  background: #4a4f7a;
+  border: 2px solid #8a8fc0;
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+.scale-stand { width: 12px; height: 40px; background: #b9bde8; border-radius: 0 0 6px 6px; position: relative; }
+.scale-stand::after { content: ''; position: absolute; left: -40px; bottom: -6px; width: 92px; height: 8px; border-radius: 4px; background: #b9bde8; }
+
+/* Kalender */
+.calendar-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 200px;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #fdfcf7;
+  color: #1b1f4b;
+  box-shadow: 0 8px 0 rgba(0, 0, 0, 0.25);
+}
+.calendar-top { width: 100%; padding: 6px 16px; background: #e8476a; color: #fff; font-size: 1.1rem; font-weight: 700; text-align: center; }
+.calendar-big { padding: 14px 20px 18px; font-size: 2.2rem; font-weight: 800; }
+
+/* Vormen en patronen */
+.pattern { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; max-width: 360px; font-size: 2.2rem; }
+.pattern-next {
+  display: inline-grid;
+  place-items: center;
+  width: 1.4em;
+  border: 3px dashed var(--accent);
+  border-radius: 12px;
+  color: var(--accent);
+  font-weight: 800;
+}
+.shape { width: 170px; height: auto; }
+
+@media (max-height: 700px) {
+  .clock { width: min(200px, 56vw); }
+  .clock-legend { display: none; }
+  .shop-emoji { font-size: 3rem; }
+  .scale-thing { font-size: 2.8rem; }
+  .shape { width: 130px; }
+}
+
+/* Welke maat? */
+.word-question { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.unit-question { margin: 0; font-size: 1.5rem; font-weight: 800; text-align: center; }
+
+/* Tabellen en grafieken */
+.tally-table, .bar-chart { border-radius: var(--radius); background: var(--card); border: 2px solid var(--card-border); }
+.tally-table { border-collapse: collapse; font-size: 1.3rem; }
+.tally-table td { padding: 6px 14px; border-bottom: 1px solid var(--card-border); }
+.tally-table tr:last-child td { border-bottom: none; }
+.tally-table .tally-pic { font-size: 2rem; text-align: center; }
+.tally { width: auto; height: 34px; display: block; }
+.tally line { stroke: var(--text); stroke-width: 3; stroke-linecap: round; }
+.bar-chart { width: min(100%, 360px); padding: 4px 4px 8px; }
+.bar-chart svg { display: block; width: 100%; height: auto; }
+.bar-chart .grid { stroke: rgba(255, 255, 255, 0.15); stroke-width: 1; }
+.bar-chart .axis { stroke: var(--muted); stroke-width: 2; }
+.bar-chart text { fill: var(--text); font-family: var(--font); font-size: 13px; font-weight: 700; text-anchor: middle; }
+.bar-labels { position: relative; height: 2rem; font-size: 1.6rem; line-height: 2rem; }
+.bar-labels span { position: absolute; top: 0; transform: translateX(-50%); }
+.chart-question { margin: 10px 0 0; font-size: 1.35rem; font-weight: 800; text-align: center; }
+
+@media (max-height: 700px) {
+  .tally-table td { padding: 3px 12px; }
+  .tally-table .tally-pic { font-size: 1.6rem; }
+}

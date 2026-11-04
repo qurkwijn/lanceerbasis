@@ -12,7 +12,7 @@ const CHOICES = ['ng', 'nk'];
 export default {
   intro: 'Bij <b>ng</b> hoor je geen k, zoals in <b>slang</b>. Bij <b>nk</b> hoor je aan het eind een k, zoals in <b>bank</b>. Zeg het woord maar zachtjes!',
   levels: [
-    { id: 'plaatjes', name: 'Met plaatjes', hint: 'Ring, slang, bank en inkt', groups: [4] },
+    { id: 'plaatjes', name: 'Met plaatjes', hint: 'Ring, slang, bank en inkt', groups: [3, 4] },
     { id: 'woorden', name: 'Zonder plaatjes', hint: 'Lang, dank, ding en pink', groups: [4] },
   ],
   makeQuestion(level) {

@@ -2,6 +2,7 @@ import { INFO_FOOTER, setupInfo } from '../shared/js/info.js';
 import { ALL_GROUPS, GROUPS, getProfile, saveProfile } from '../shared/js/profile.js';
 import { totalStars } from '../shared/js/rewards.js';
 import { escapeHtml } from '../shared/js/util.js';
+import { groepInfoButton, showGroepInfo } from './groepinfo.js';
 import { STATIONS } from './stations.js';
 
 const app = document.getElementById('app');
@@ -110,9 +111,11 @@ function showBase() {
               : `<div class="station building" aria-disabled="true">${inner}</div>`}</li>`;
           }).join('')}
         </ul>
+        ${groepInfoButton(groep)}
         ${INFO_FOOTER}
       </div>
     </div>`;
+  app.querySelector('[data-groep-info]')?.addEventListener('click', () => showGroepInfo(groep));
   // Begin in het midden van de basis.
   const items = app.querySelectorAll('.stations li');
   items[Math.floor((items.length - 1) / 2)]?.scrollIntoView({ inline: 'center', block: 'nearest' });
