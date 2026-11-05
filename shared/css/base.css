@@ -372,6 +372,9 @@ h1 { margin: 0; line-height: 1.1; }
 .info-dialog .info-close { width: 100%; margin-top: 16px; }
 .info-dialog .info-actions { display: flex; flex-wrap: wrap; gap: 8px; }
 .info-dialog .info-actions .btn { margin-top: 0; }
+.info-dialog .info-nerd-btn { background: transparent; color: var(--muted); border-color: var(--card-border); }
+.info-dialog code { font-size: 0.85em; overflow-wrap: anywhere; }
+.info-dialog a:not(.btn) { color: var(--accent); }
 
 /* Alleen voor schermlezers */
 .sr-only {

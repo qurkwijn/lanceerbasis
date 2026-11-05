@@ -23,7 +23,7 @@ js/groepinfo.js         voor ouders: wat er per groep in elk voertuig zit, en wa
 shared/css/base.css     gedeelde stijl: kleuren, sterrenhemel, knoppen, planeten, infoscherm
 shared/js/profile.js    naam en groep
 shared/js/rewards.js    sterren per app en per groep
-shared/js/info.js       info-knopje met privacy en feedback
+shared/js/info.js       info-knopje met privacy, feedback en een stukje techniek voor nerds
 shared/js/util.js       kleine hulpjes en voorlezen
 shared/js/vehicle.js    wat alle voertuigen delen: kaart, niveaus kiezen en oefenen
 shared/js/game.js       het spelscherm dat alle voertuigen delen
