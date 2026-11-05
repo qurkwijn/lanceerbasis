@@ -65,6 +65,11 @@ a.kaart-link:active .kaart { transform: scale(0.94); }
 .nl-map .prov { stroke: #14173d; stroke-width: 0.8; stroke-linejoin: round; }
 .nl-map .isle { fill: #e8d9a8; stroke: #14173d; stroke-width: 0.6; }
 .nl-map .isle.on { fill: var(--accent); }
+.nl-map .river { fill: none; stroke: #7fb8ff; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.nl-map .river.on { stroke: var(--accent); stroke-width: 3; }
+.nl-map .spot { fill: var(--accent); stroke: #14173d; stroke-width: 1.2; }
+.nl-map .spot-ring { fill: none; stroke: var(--accent); stroke-width: 1.5; transform-box: fill-box; transform-origin: center; animation: spot 1.6s ease-out infinite; }
+@keyframes spot { from { opacity: 1; transform: scale(0.6); } to { opacity: 0; transform: scale(1.6); } }
 .nl-map .compass path { fill: #fff; }
 .nl-map .compass text { fill: #fff; font-family: var(--font); font-size: 9px; font-weight: 800; text-anchor: middle; }
 

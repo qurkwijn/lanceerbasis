@@ -1,5 +1,5 @@
 import { pick, shuffle } from '../../../shared/js/util.js';
-import { PROVINCIES, STEDEN, byId, mapSvg } from '../nederland.js';
+import { PROVINCIES, STEDEN, byId, mapSvg, stad as findStad } from '../nederland.js';
 
 // Hoofdsteden van de provincies, en in welke provincie de grote steden liggen.
 function hoofdstad() {
@@ -14,6 +14,10 @@ function hoofdstad() {
       choiceStyle: 'list',
       revealText: `De hoofdstad van ${p.name} is ${p.hoofdstad}.`,
       html: mapSvg({ mark: { [p.id]: 'var(--accent)' } }),
+      // Daarna zie je waar de hoofdstad ligt.
+      onSolved(el) {
+        el.querySelector('.nl-map').outerHTML = mapSvg({ mark: { [p.id]: 'var(--accent)' }, dots: [findStad(p.hoofdstad)[2]] });
+      },
     };
   }
   return {
@@ -23,12 +27,15 @@ function hoofdstad() {
     choices: shuffle([p, ...others]).map((o) => o.name),
     choiceStyle: 'list',
     revealText: `${p.hoofdstad} is de hoofdstad van ${p.name}.`,
-    html: mapSvg(),
+    html: mapSvg({ dots: [findStad(p.hoofdstad)[2]] }),
+    onSolved(el) {
+      el.querySelector('.nl-map').outerHTML = mapSvg({ mark: { [p.id]: 'var(--accent)' }, dots: [findStad(p.hoofdstad)[2]] });
+    },
   };
 }
 
 function stad() {
-  const [name, id] = pick(STEDEN);
+  const [name, id, pos] = pick(STEDEN);
   const p = byId(id);
   const others = shuffle(PROVINCIES.filter((o) => o !== p)).slice(0, 2);
   return {
@@ -38,9 +45,10 @@ function stad() {
     choices: shuffle([p, ...others]).map((o) => o.name),
     choiceStyle: 'list',
     revealText: `${name} ligt in ${p.name}.`,
-    html: mapSvg(),
+    // De stip laat zien waar de stad ligt; daarna kleurt de provincie op.
+    html: mapSvg({ dots: [pos] }),
     onSolved(el) {
-      el.querySelector('.nl-map').outerHTML = mapSvg({ mark: { [id]: 'var(--accent)' } });
+      el.querySelector('.nl-map').outerHTML = mapSvg({ mark: { [id]: 'var(--accent)' }, dots: [pos] });
     },
   };
 }
