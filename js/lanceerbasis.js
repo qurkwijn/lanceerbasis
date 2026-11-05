@@ -101,6 +101,8 @@ function showBase() {
         <span class="moon"></span>
       </div>
       <div class="base-ground">
+        <div class="stations-wrap">
+        <button type="button" class="scroll-btn left" data-scroll="-1" aria-label="Meer voertuigen links" hidden>‹</button>
         <ul class="stations">
           ${stationsFor(groep).map((s) => {
             const inner = `
@@ -114,6 +116,8 @@ function showBase() {
               : `<div class="station building" aria-disabled="true">${inner}</div>`}</li>`;
           }).join('')}
         </ul>
+        <button type="button" class="scroll-btn right" data-scroll="1" aria-label="Meer voertuigen rechts" hidden>›</button>
+        </div>
         ${groepInfoButton(groep)}
         ${INFO_FOOTER}
       </div>
@@ -122,6 +126,38 @@ function showBase() {
   // Begin in het midden van de basis.
   const items = app.querySelectorAll('.stations li');
   items[Math.floor((items.length - 1) / 2)]?.scrollIntoView({ inline: 'center', block: 'nearest' });
+  setupScrollButtons(app.querySelector('.stations'));
+}
+
+// Pijltjes links en rechts, zodat je ziet dat er nog meer voertuigen zijn.
+// Een pijltje verdwijnt als je aan die kant aan het eind bent.
+let onResize = null;
+
+function setupScrollButtons(list) {
+  const left = app.querySelector('.scroll-btn.left');
+  const right = app.querySelector('.scroll-btn.right');
+  // Een pijltje is weg als het eerste of laatste voertuig helemaal in beeld is.
+  const update = () => {
+    const first = list.firstElementChild;
+    const last = list.lastElementChild;
+    left.hidden = first.offsetLeft >= list.scrollLeft - 4;
+    right.hidden = last.offsetLeft + last.offsetWidth <= list.scrollLeft + list.clientWidth + 4;
+  };
+  // Spring naar het volgende voertuig: zoek wat nu in het midden staat.
+  app.querySelectorAll('[data-scroll]').forEach((btn) => btn.addEventListener('click', () => {
+    const items = [...list.children];
+    const middle = list.scrollLeft + list.clientWidth / 2;
+    const now = items.reduce((best, li, i) =>
+      (Math.abs(li.offsetLeft + li.offsetWidth / 2 - middle) < Math.abs(items[best].offsetLeft + items[best].offsetWidth / 2 - middle) ? i : best), 0);
+    const target = items[Math.max(0, Math.min(items.length - 1, now + Number(btn.dataset.scroll)))];
+    list.scrollTo({ left: target.offsetLeft + target.offsetWidth / 2 - list.clientWidth / 2 });
+    update();
+  }));
+  list.addEventListener('scroll', update, { passive: true });
+  if (onResize) window.removeEventListener('resize', onResize);
+  onResize = update;
+  window.addEventListener('resize', onResize);
+  update();
 }
 
 // Een korte lancering voordat je naar de wereld van het voertuig gaat. Nog een

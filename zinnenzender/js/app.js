@@ -1,131 +1,17 @@
-import { playRound, starsHtml } from '../../shared/js/game.js';
-import { INFO_FOOTER, setupInfo } from '../../shared/js/info.js';
-import { HOME, getProfile, startUrl } from '../../shared/js/profile.js';
-import * as rewards from '../../shared/js/rewards.js';
-import { escapeHtml } from '../../shared/js/util.js';
+import { startVehicle, trackProgress } from '../../shared/js/vehicle.js';
 import { SIGNALEN, dishSvg, signalSvg } from './signalen.js';
 
-const APP = 'zinnenzender';
-const app = document.getElementById('app');
-
-const getStars = (id) => rewards.getStars(APP, id);
-const saveStars = (id, stars) => rewards.saveStars(APP, id, stars);
-const totalStars = () => rewards.totalStars(APP);
-
-let cleanup = null;
-
-// Routes: #/ (de signalen), #/<signaal> (niveau kiezen), #/<signaal>/<niveau>
-// (oefenen).
-// Naam en groep kies je op de Lanceerbasis; zonder profiel ga je daarheen en
-// kom je daarna hier terug.
-function route() {
-  if (cleanup) {
-    cleanup();
-    cleanup = null;
-  }
-  if (!getProfile()) return location.replace(startUrl(APP));
-  const [id, levelId] = location.hash.replace(/^#\/?/, '').split('/');
-  const sig = SIGNALEN.find((p) => p.id === id);
-  if (!sig || !isOpen(sig)) return showSignals();
-  const level = levelsFor(sig).find((l) => l.id === levelId);
-  if (!level) return showSignal(sig);
-  showGame(sig, level);
-}
-
-const levelKey = (sig, level) => `${sig.id}-${level.id}`;
-const levelsFor = (sig) => sig.module.levels.filter((l) => l.groups.includes(getProfile().groep));
-const signalStars = (sig) => levelsFor(sig).reduce((sum, l) => sum + getStars(levelKey(sig, l)), 0);
-
-// Je ziet alleen wat bij jouw groep hoort, zodat de lijst kort blijft.
-const isOpen = (sig) => levelsFor(sig).length > 0;
-
-const phaseFor = (sig) => {
-  const max = levelsFor(sig).length * 3;
-  return max ? signalStars(sig) / max : 0;
-};
-
-function showSignals() {
-  const { name, groep } = getProfile();
-  app.innerHTML = `
-    <div class="screen">
-      <header class="map-header">
-        <a class="icon-btn" href="${HOME}" aria-label="Terug naar de Lanceerbasis">←</a>
-        <h1 class="logo">Zinnenzender</h1>
-        <div class="star-count"><span aria-hidden="true">★ ${totalStars()}</span><span class="sr-only">${totalStars()} sterren verdiend</span></div>
-      </header>
-      <a class="player-chip" href="${startUrl(APP)}" aria-label="Naam of groep wijzigen">
-        <span>Hoi ${escapeHtml(name)}!</span>
-        <span class="groep-badge">Groep ${groep}</span>
-        <span class="chip-edit" aria-hidden="true">✎</span>
-      </a>
-      <p class="map-intro">Draai de schotel en vang alle signalen op!</p>
-      <ol class="signal-path">
-        ${SIGNALEN.filter(isOpen).map((p) => {
-          const inner = `
-            ${signalSvg(p, phaseFor(p))}
-            <span class="signal-label">
-              <span class="signal-name">${p.name}</span>
-              <span class="signal-sub">${p.sub}</span>
-              <span class="signal-sub"><span class="star filled">★</span> ${signalStars(p)} / ${levelsFor(p).length * 3}</span>
-            </span>`;
-          return `<li><a class="signal-link" href="#/${p.id}">${inner}</a></li>`;
-        }).join('')}
-      </ol>
-      ${INFO_FOOTER}
-    </div>`;
-}
-
-function showSignal(sig) {
-  app.innerHTML = `
-    <div class="screen">
-      <header class="bar">
-        <a class="icon-btn" href="#/" aria-label="Terug naar de signalen">←</a>
-        <h1>${sig.name}</h1>
-        <span class="groep-badge">Groep ${getProfile().groep}</span>
-      </header>
-      <div class="signal-hero">${signalSvg(sig, phaseFor(sig), 150)}</div>
-      <p class="intro">${sig.module.intro}</p>
-      <div class="levels">
-        ${levelsFor(sig).map((l) => `
-          <a class="level-card" href="#/${sig.id}/${l.id}">
-            <span class="level-name">${l.name}</span>
-            <span class="level-hint">${l.hint}</span>
-            <span class="level-stars">${starsHtml(getStars(levelKey(sig, l)))}</span>
-          </a>`).join('')}
-      </div>
-      ${INFO_FOOTER}
-    </div>`;
-}
-
-// Tijdens het oefenen gaat het berichtje van de schotel naar het signaal.
-function showGame(sig, level) {
-  cleanup = playRound(app, {
-    level,
-    makeQuestion: () => sig.module.makeQuestion(level.id, getProfile()),
-    quitHref: `#/${sig.id}`,
-    progress: {
-      html: `
-        <div class="track dish-track">
-          <span class="track-line"><span class="track-fill"></span><span class="track-dish">${dishSvg}</span></span>
-          <span class="track-goal">${signalSvg(sig, 1, 30)}</span>
-        </div>`,
-      update(el, done) {
-        el.querySelector('.track').style.setProperty('--progress', done);
-      },
-    },
-    onStars: (stars) => saveStars(levelKey(sig, level), stars),
-    result: () => ({
-      art: `<div class="signal-result">${signalSvg(sig, 1, 160)}</div>`,
-      title: `${escapeHtml(getProfile().name)} heeft ${sig.name.toLowerCase()} opgevangen!`,
-      actions: [
-        { href: `#/${sig.id}`, label: 'Ander niveau' },
-        { href: '#/', label: 'Naar de signalen' },
-      ],
-    }),
-    onAgain: route,
-  });
-}
-
-setupInfo('Zinnenzender');
-window.addEventListener('hashchange', route);
-route();
+startVehicle({
+  id: 'zinnenzender',
+  name: 'Zinnenzender',
+  items: SIGNALEN,
+  cls: 'signal',
+  mapIntro: 'Draai de schotel en vang alle signalen op!',
+  mapName: 'de signalen',
+  art: signalSvg,
+  heroSize: 150,
+  // Tijdens het oefenen gaat het berichtje van de schotel naar het signaal.
+  progress: (sig) => trackProgress(dishSvg, signalSvg(sig, 1, 30), 'dish'),
+  resultArt: (sig) => `<div class="signal-result">${signalSvg(sig, 1, 160)}</div>`,
+  resultTitle: (sig, name) => `${name} heeft ${sig.name.toLowerCase()} opgevangen!`,
+});

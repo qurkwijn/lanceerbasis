@@ -78,9 +78,13 @@ export function playRound(root, options) {
         ${timed ? `<span class="time-left" aria-live="off">${timed}</span>` : ''}
       </header>
       <main class="game">
-        <p class="prompt" tabindex="-1"></p>
+        <div class="prompt-row">
+          <p class="prompt" tabindex="-1"></p>
+          <button type="button" class="speak-prompt" data-speak="" aria-label="Lees de opdracht voor">🔊</button>
+        </div>
         <div class="question"></div>
         <p class="feedback" aria-live="polite"></p>
+        <button type="button" class="btn primary next-btn" hidden>Verder ▶</button>
       </main>
       <div class="keypad">
         ${[1, 2, 3, 4, 5, 6, 7, 8, 9].map((n) => `<button type="button" data-key="${n}">${n}</button>`).join('')}
@@ -96,6 +100,8 @@ export function playRound(root, options) {
     </div>`;
 
   const promptEl = root.querySelector('.prompt');
+  const speakPromptEl = root.querySelector('.speak-prompt');
+  const nextBtn = root.querySelector('.next-btn');
   const questionEl = root.querySelector('.question');
   const feedbackEl = root.querySelector('.feedback');
   const progressEl = root.querySelector('.progress');
@@ -155,6 +161,8 @@ export function playRound(root, options) {
     builtEl.className = 'tiles-built';
     stopSpeaking();
     promptEl.textContent = question.prompt;
+    speakPromptEl.dataset.speak = question.prompt;
+    nextBtn.hidden = true;
     questionEl.innerHTML = question.html;
     slot = questionEl.querySelector('.slot');
     // Een vraag heeft een vakje om in te typen, keuzeknoppen of losse woorden.
@@ -202,6 +210,17 @@ export function playRound(root, options) {
     timer = setTimeout(next, delay);
   }
 
+  // Na twee keer fout blijft het goede antwoord staan tot je zelf op Verder
+  // tikt, zodat je rustig kunt kijken hoe het moest. Bij een race gaat het
+  // vanzelf door.
+  function reveal() {
+    if (timed) return advance(revealDelay);
+    advance(0);
+    clearTimeout(timer);
+    nextBtn.hidden = false;
+    nextBtn.focus({ preventScroll: true });
+  }
+
   const correctDelay = timed ? 450 : 900;
   const revealDelay = timed ? 1200 : 2200;
 
@@ -224,7 +243,7 @@ export function playRound(root, options) {
     }
     [...choicesEl.children].find((b) => b.dataset.choice === String(question.answer)).classList.add('reveal');
     setFeedback(revealText(), 'reveal');
-    advance(revealDelay);
+    reveal();
   }
 
   function tap(btn) {
@@ -265,7 +284,7 @@ export function playRound(root, options) {
     renderTiles(question.answer.split(' '));
     builtEl.classList.add('reveal');
     setFeedback(question.revealText || 'Zo is de zin goed.', 'reveal');
-    advance(revealDelay);
+    reveal();
   }
 
   function check() {
@@ -289,7 +308,7 @@ export function playRound(root, options) {
     input = String(question.answer);
     slot.classList.add('reveal');
     setFeedback(revealText(), 'reveal');
-    advance(revealDelay);
+    reveal();
   }
 
   function press(key) {
@@ -343,12 +362,14 @@ export function playRound(root, options) {
     if (tile) tap(tile);
     const speakBtn = e.target.closest('[data-speak]');
     if (speakBtn) speak(speakBtn.dataset.speak);
+    if (e.target.closest('.next-btn')) next();
   };
   // Een fysiek toetsenbord typt in het antwoordvakje. Niet als het infoscherm
   // open is, en Enter op een knop laten we aan die knop zelf.
   const onKey = (e) => {
     if (document.querySelector('dialog[open]')) return;
     if (e.key === 'Enter' && e.target instanceof Element && e.target.closest('button, a')) return;
+    if (e.key === 'Enter' && !nextBtn.hidden) return next();
     if (/^\d$/.test(e.key)) press(e.key);
     else if (e.key === 'Backspace') press('back');
     else if (e.key === 'Enter') press('ok');

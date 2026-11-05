@@ -6,7 +6,7 @@ Een vrolijke oefenplek voor kinderen in groep 3 tot en met 5, met een ruimtethem
 - **Meetrover** (`meetrover/`): klokkijken, kalender, geld, meten, grafieken en vormen, met een plek op Mars per onderdeel.
 - **Taaltelescoop** (`taaltelescoop/`): spelling, met een sterrenbeeld per onderdeel (de spellingcategorieën van groep 3 en 4).
 - **Zinnenzender** (`zinnenzender/`): taal, zoals het alfabet, hoofdletters, woordenschat en meervoud, met een signaal per onderdeel.
-- **Wereldsatelliet** (`wereldsatelliet/`): topografie vanaf groep 5, met een blokjeskaart van Nederland.
+- **Wereldsatelliet** (`wereldsatelliet/`): topografie vanaf groep 5, met een kaart van Nederland (open data van het CBS, CC BY 4.0).
 - **Leeslander** (`leeslander/`): lezen, met een maan per onderdeel die voller wordt als je oefent.
 
 Speel op https://lanceerbasis.app
@@ -25,7 +25,10 @@ shared/js/profile.js    naam en groep
 shared/js/rewards.js    sterren per app en per groep
 shared/js/info.js       info-knopje met privacy en feedback
 shared/js/util.js       kleine hulpjes en voorlezen
+shared/js/vehicle.js    wat alle voertuigen delen: kaart, niveaus kiezen en oefenen
 shared/js/game.js       het spelscherm dat alle voertuigen delen
+shared/fonts/           het lettertype Baloo 2 (SIL Open Font License)
+tests/check.mjs         controleert alle oefeningen: node tests/check.mjs
 shared/css/game.css     stijl van het spelscherm
 shared/css/sommen.css   sommen en invulvakjes (Rekenraket en Meetrover)
 shared/js/herhaal.js    herhaalonderdeel: alles uit de vorige groep door elkaar
@@ -39,7 +42,7 @@ leeslander/             de lees-app
 
 Alles wordt alleen in `localStorage` op het apparaat bewaard, onder `lanceerbasis:v1`. Naam, groep en sterren uit de losse Rekenraket (`rekenraket:v1`) worden bij het eerste bezoek overgenomen.
 
-Een nieuwe app krijgt een eigen map, laadt `../shared/css/base.css`, gebruikt `getProfile()` en stuurt zonder profiel door naar `startUrl('<app>')`. Sterren bewaar je met `saveStars('<app>', id, n)`. Zet de app daarna in `js/stations.js` met `ready: true`. Welk vak in welk voertuig hoort, staat in [docs/leerstof.md](docs/leerstof.md).
+Een nieuw voertuig krijgt een eigen map met een `index.html` (neem een bestaande over, met de beveiligingsregel), een lijst onderdelen en een `js/app.js` die `startVehicle` uit `shared/js/vehicle.js` aanroept. Elk onderdeel heeft een module met `levels` (elk met `groups`) en `makeQuestion`. Zet het voertuig daarna in `js/stations.js` met `ready: true`, schrijf de korte uitleg voor ouders in `js/groepinfo.js` en draai `node tests/check.mjs`. Welk vak in welk voertuig hoort, staat in [docs/leerstof.md](docs/leerstof.md).
 
 ## Lokaal draaien
 

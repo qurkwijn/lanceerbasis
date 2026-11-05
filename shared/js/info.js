@@ -1,7 +1,7 @@
 import { startUrl } from './profile.js';
 import { clearAll } from './store.js';
 
-const FEEDBACK_MAIL = 'knoesss@gmail.com';
+const FEEDBACK_MAIL = 'feedback@lanceerbasis.app';
 
 // Het i-knopje onderaan: info voor ouders over privacy en feedback.
 export const INFO_FOOTER = `<footer class="app-footer">
@@ -27,7 +27,7 @@ function showInfo(appName) {
       <li>Geen account, geen reclame, geen cookies en geen tracking.</li>
       <li>Naam, groep en sterren blijven op dit apparaat. Een voornaam of bijnaam is genoeg.</li>
     </ul>
-    <p class="info-small">De site staat op GitHub Pages (het adres loopt via Cloudflare) en het lettertype komt van Google Fonts. Zij zien je IP-adres. Voorlezen gebruikt de stem van je apparaat.</p>
+    <p class="info-small">De site staat op GitHub Pages, dat je IP-adres ziet, zoals bij elke website. Het lettertype staat op de site zelf, dus er gaat niets naar Google. Voorlezen gebeurt alleen met een stem op je eigen apparaat. De kaart van Nederland komt van het CBS (open data, CC BY 4.0).</p>
     <p>Een idee of een foutje gevonden? Laat het weten!</p>
     <div class="info-actions">
       <a class="btn primary" href="mailto:${FEEDBACK_MAIL}?subject=${subject}">✉️ Mail</a>

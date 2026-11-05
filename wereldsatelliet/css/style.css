@@ -58,13 +58,13 @@ a.kaart-link:active .kaart { transform: scale(0.94); }
 }
 .track-goal { font-size: 1.6rem; }
 
-/* De blokjeskaart van Nederland */
-.nl-map { width: min(230px, 58vw); height: auto; }
+/* De kaart van Nederland */
+.nl-map { width: min(250px, 64vw); height: auto; }
 .nl-map .sea { fill: #2a5fa8; }
 .nl-map .sea-label { fill: rgba(255, 255, 255, 0.55); font-family: var(--font); font-size: 9px; font-weight: 700; text-anchor: middle; }
-.nl-map .lake { fill: #2a5fa8; stroke: #9fd3ff; stroke-width: 1; }
-.nl-map .isle { fill: #e8d9a8; }
-.nl-map .isle.on { fill: var(--accent); stroke: #fff; stroke-width: 1; }
+.nl-map .prov { stroke: #14173d; stroke-width: 0.8; stroke-linejoin: round; }
+.nl-map .isle { fill: #e8d9a8; stroke: #14173d; stroke-width: 0.6; }
+.nl-map .isle.on { fill: var(--accent); }
 .nl-map .compass path { fill: #fff; }
 .nl-map .compass text { fill: #fff; font-family: var(--font); font-size: 9px; font-weight: 800; text-anchor: middle; }
 
@@ -74,5 +74,5 @@ a.kaart-link:active .kaart { transform: scale(0.94); }
 .map-legend .dot.b { background: #5b9dff; margin-left: 10px; }
 
 @media (max-height: 700px) {
-  .nl-map { width: min(180px, 48vw); }
+  .nl-map { width: min(200px, 52vw); }
 }

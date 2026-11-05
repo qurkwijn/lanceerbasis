@@ -86,6 +86,30 @@
 
 .stations::-webkit-scrollbar { display: none; }
 
+/* Pijltjes naar meer voertuigen */
+.stations-wrap { position: relative; }
+.scroll-btn {
+  position: absolute;
+  top: calc(min(40vw, 190px) * 0.62);
+  z-index: 1;
+  width: 44px;
+  height: 44px;
+  border: 2px solid var(--card-border);
+  border-radius: 50%;
+  background: rgba(20, 23, 61, 0.85);
+  color: var(--accent);
+  font-family: var(--font);
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.3);
+}
+.scroll-btn[hidden] { display: none; }
+.scroll-btn.left { left: 6px; }
+.scroll-btn.right { right: 6px; }
+.scroll-btn:active { transform: translateY(2px); }
+
 .stations li { flex: 0 0 min(40vw, 190px); scroll-snap-align: center; }
 
 .station {

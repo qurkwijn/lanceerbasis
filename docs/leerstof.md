@@ -157,7 +157,9 @@ Keuzes van november 2026:
 - Sterren van onderdelen die verhuisd zijn, zijn bewust niet meegenomen.
 - Vanaf groep 5 heeft elk voertuig (behalve de Leeslander en de Wereldsatelliet) een herhaalonderdeel met alle stof uit de vorige groep door elkaar (`shared/js/herhaal.js`). Zo blijft de oude stof in beeld zonder dat de lijst lang wordt. Een lagere groep ziet het herhaalonderdeel niet op slot staan.
 - In elk voertuig zie je alleen de onderdelen van je eigen groep. Onderdelen van een hogere of lagere groep staan er niet, ook niet op slot, zodat de lijst kort blijft.
-- Topografie gebruikt een blokjeskaart: elke provincie is een blok op ongeveer de goede plek. Er is geen kaartbestand van buiten nodig.
+- Topografie gebruikt de provinciegrenzen van het CBS (open data, CC BY 4.0, vereenvoudigd door cartomap). Ze staan omgerekend in `wereldsatelliet/js/kaartdata.js`.
+- Alle voertuigen gebruiken `shared/js/vehicle.js`; een nieuw voertuig hoeft alleen zijn onderdelen, plaatjes en teksten mee te geven.
+- Elke nieuwe groep eindigt met `node tests/check.mjs`, dat alle oefeningen controleert.
 
 ## Wat de Lanceerbasis nu heeft voor groep 3 tot en met 5
 

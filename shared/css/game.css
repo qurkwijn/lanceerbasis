@@ -271,3 +271,20 @@
 
 /* De vraag krijgt de focus voor schermlezers; geen rand eromheen */
 .prompt:focus, .result h1:focus { outline: none; }
+
+/* De opdracht met een voorleesknop ernaast */
+.prompt-row { display: flex; align-items: center; justify-content: center; gap: 8px; }
+.speak-prompt {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.14);
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+/* Na twee keer fout: zelf verder als je hebt gezien hoe het moest */
+.next-btn { margin-top: 4px; min-width: 160px; }
+.next-btn[hidden] { display: none; }

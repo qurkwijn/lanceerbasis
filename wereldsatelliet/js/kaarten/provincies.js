@@ -32,7 +32,7 @@ function buren() {
 }
 
 export default {
-  intro: 'Nederland heeft <b>12 provincies</b>. Op deze kaart is elke provincie een blok, op ongeveer de goede plek. Boven is het noorden, onder het zuiden.',
+  intro: 'Nederland heeft <b>12 provincies</b>. Op de kaart is boven het noorden en onder het zuiden. Het water zie je blauw.',
   levels: [
     { id: 'welke', name: 'Welke provincie?', hint: 'Zoek hem op de kaart', groups: [5] },
     { id: 'buren', name: 'De buren', hint: 'Welke provincie ligt ernaast?', groups: [5] },
