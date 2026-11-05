@@ -10,7 +10,7 @@ const STERK = [['loop', 'liep', 'loopte'], ['zwem', 'zwom', 'zwemde'], ['eet', '
   ['vlieg', 'vloog', 'vliegde'], ['rijd', 'reed', 'rijdde'], ['neem', 'nam', 'neemde'], ['sta', 'stond', 'stade']];
 
 export default {
-  intro: 'Wat je al gedaan hebt, zeg je in de <b>verleden tijd</b>. Bij veel werkwoorden verandert het hele woord: vandaag <b>loop</b> ik, gisteren <b>liep</b> ik. Vandaag <b>zwem</b> ik, gisteren <b>zwom</b> ik.',
+  intro: 'Wat je al gedaan hebt, zeg je in de <b>verleden tijd</b>. Bij veel werkwoorden verandert de klank: vandaag <b>loop</b> ik, gisteren <b>liep</b> ik. Vandaag <b>zwem</b> ik, gisteren <b>zwom</b> ik.',
   levels: [
     { id: 'sterk', name: 'Gisteren…', hint: 'Loop wordt liep', groups: [5] },
   ],

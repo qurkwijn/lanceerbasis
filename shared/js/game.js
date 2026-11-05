@@ -8,9 +8,11 @@ import { escapeHtml, pick, speak, stopSpeaking } from './util.js';
 export const ROUND = 10;
 const PRAISE = ['Goed zo!', 'Super!', 'Knap gedaan!', 'Top!', 'Raketsnel!', 'Precies goed!'];
 
+// Sterren met een tekst erbij voor wie een schermlezer gebruikt.
 export function starsHtml(count, max = 3) {
   return Array.from({ length: max }, (_, i) =>
-    `<span class="star${i < count ? ' filled' : ''}">★</span>`).join('');
+    `<span class="star${i < count ? ' filled' : ''}" aria-hidden="true">★</span>`).join('')
+    + `<span class="sr-only">${count} van de ${max} sterren</span>`;
 }
 
 // Standaard voortgang: een raketje dat van de aarde naar `goalHtml` vliegt.
@@ -72,11 +74,11 @@ export function playRound(root, options) {
     <div class="screen game-screen">
       <header class="bar">
         <a class="icon-btn" href="${quitHref}" aria-label="Stoppen">✕</a>
-        <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="${timed || ROUND}">${progress.html}</div>
+        <div class="progress" role="progressbar" aria-label="Voortgang" aria-valuemin="0" aria-valuemax="${timed || ROUND}">${progress.html}</div>
         ${timed ? `<span class="time-left" aria-live="off">${timed}</span>` : ''}
       </header>
       <main class="game">
-        <p class="prompt"></p>
+        <p class="prompt" tabindex="-1"></p>
         <div class="question"></div>
         <p class="feedback" aria-live="polite"></p>
       </main>
@@ -139,9 +141,12 @@ export function playRound(root, options) {
   function next() {
     clearQuestion();
     if (!timed && index === ROUND) return finish();
-    for (let attempt = 0; attempt < 30; attempt++) {
+    // Liefst een vraag die nog niet was. Heeft een niveau minder dan 10
+    // vragen, dan in elk geval niet twee keer dezelfde na elkaar.
+    const last = question?.key;
+    for (let attempt = 0; attempt < 40; attempt++) {
       question = makeQuestion();
-      if (!seen.has(question.key)) break;
+      if (!seen.has(question.key) || (attempt >= 30 && question.key !== last)) break;
     }
     seen.add(question.key);
     input = '';
@@ -173,7 +178,13 @@ export function playRound(root, options) {
     setFeedback('');
     updateSlot();
     updateProgress();
+    if (slot) {
+      slot.setAttribute('aria-live', 'polite');
+      slot.setAttribute('aria-label', 'Jouw antwoord');
+    }
     if (question.onShow) unshow = question.onShow(questionEl) || null;
+    // De nieuwe vraag krijgt de focus, zodat een schermlezer hem voorleest.
+    if (!document.querySelector('dialog[open]')) promptEl.focus({ preventScroll: true });
   }
 
   const revealText = () => question.revealText || `Het goede antwoord is ${question.answer}.`;
@@ -282,7 +293,7 @@ export function playRound(root, options) {
   }
 
   function press(key) {
-    if (busy || !slot) return;
+    if (busy || !slot || question.choices || question.tiles) return;
     if (/^\d$/.test(key)) {
       if (input.length < (question.maxDigits || 2)) input = input === '0' ? key : input + key;
     } else if (key === 'back') {
@@ -310,8 +321,8 @@ export function playRound(root, options) {
     root.innerHTML = `
       <div class="screen result">
         ${art}
-        <h1>${title}</h1>
-        <div class="result-stars" aria-label="${stars} van de 3 sterren">${starsHtml(stars)}</div>
+        <h1 tabindex="-1">${title}</h1>
+        <div class="result-stars">${starsHtml(stars)}</div>
         <p class="result-text">${summary}</p>
         <div class="result-actions">
           <button type="button" class="btn primary" data-again>Nog een keer</button>
@@ -320,6 +331,7 @@ export function playRound(root, options) {
         ${INFO_FOOTER}
       </div>`;
     root.querySelector('[data-again]').addEventListener('click', onAgain);
+    root.querySelector('h1').focus({ preventScroll: true });
   }
 
   const onClick = (e) => {
@@ -332,7 +344,11 @@ export function playRound(root, options) {
     const speakBtn = e.target.closest('[data-speak]');
     if (speakBtn) speak(speakBtn.dataset.speak);
   };
+  // Een fysiek toetsenbord typt in het antwoordvakje. Niet als het infoscherm
+  // open is, en Enter op een knop laten we aan die knop zelf.
   const onKey = (e) => {
+    if (document.querySelector('dialog[open]')) return;
+    if (e.key === 'Enter' && e.target instanceof Element && e.target.closest('button, a')) return;
     if (/^\d$/.test(e.key)) press(e.key);
     else if (e.key === 'Backspace') press('back');
     else if (e.key === 'Enter') press('ok');

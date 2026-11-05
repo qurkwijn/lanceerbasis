@@ -71,7 +71,10 @@ function showStart(backTo) {
       errorEl.textContent = 'Kies nog in welke groep je zit.';
       return;
     }
-    saveProfile({ name, groep });
+    if (!saveProfile({ name, groep })) {
+      errorEl.textContent = 'Deze browser mag niets bewaren. Zet opslaan aan of kies een andere browser.';
+      return;
+    }
     if (backTo) location.href = `${backTo.id}/`;
     else if (location.hash === '#/') route();
     else location.hash = '#/';

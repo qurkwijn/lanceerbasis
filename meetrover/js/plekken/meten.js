@@ -89,7 +89,7 @@ function weigh() {
 
 // Welke maat past erbij? Lengte in cm of m, gewicht in kg, wat erin past in liter.
 const MATEN = [
-  ['🖍️', 'Hoe lang is een potlood?', 'centimeter'], ['🐜', 'Hoe lang is een mier?', 'centimeter'],
+  ['🖍️', 'Hoe lang is een potlood?', 'centimeter'], ['🧽', 'Hoe lang is een spons?', 'centimeter'],
   ['🥄', 'Hoe lang is een lepel?', 'centimeter'], ['📱', 'Hoe breed is een telefoon?', 'centimeter'],
   ['🚪', 'Hoe hoog is een deur?', 'meter'], ['🏊', 'Hoe lang is een zwembad?', 'meter'],
   ['🦒', 'Hoe groot is een giraf?', 'meter'], ['🌳', 'Hoe hoog is een boom?', 'meter'],

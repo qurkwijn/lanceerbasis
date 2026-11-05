@@ -7,7 +7,7 @@ import { gapQuestion } from '../words.js';
 const JE = [['huis[je]', '🏠'], ['boek[je]', '📕'], ['kat[je]', '🐱'], ['hond[je]', '🐶'], ['vis[je]', '🐟'],
   ['boot[je]', '🚤'], ['kop[je]', '☕'], ['bed[je]', '🛏️'], ['muis[je]', '🐭'], ['sok[je]', '🧦'], ['eend[je]', '🦆']];
 const TJE = [['stoel[tje]', '🪑'], ['schoen[tje]', '👟'], ['deur[tje]', '🚪'], ['trein[tje]', '🚆'], ['uil[tje]', '🦉'],
-  ['maan[tje]', '🌙'], ['vogel[tje]', '🐦'], ['tafel[tje]', '🪑'], ['ei[tje]', '🥚'], ['koe[tje]', '🐄']];
+  ['maan[tje]', '🌙'], ['vogel[tje]', '🐦'], ['ei[tje]', '🥚'], ['koe[tje]', '🐄']];
 const PJE = [['boom[pje]', '🌳'], ['raam[pje]', '🪟'], ['duim[pje]', '👍'], ['bezem[pje]', '🧹'], ['film[pje]', '🎬'],
   ['arm[pje]', '💪']];
 const ETJE = [['ring[etje]', '💍'], ['ding[etje]', '🧸'], ['slang[etje]', '🐍'], ['ball[etje]', '⚽'], ['bell[etje]', '🔔'],

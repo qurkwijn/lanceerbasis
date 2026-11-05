@@ -138,7 +138,7 @@ h1 { margin: 0; line-height: 1.1; }
   min-height: 52px;
 }
 
-.bar h1 { font-size: 2rem; font-weight: 800; }
+.bar h1 { min-width: 0; font-size: clamp(1.4rem, 6.5vw, 2rem); font-weight: 800; overflow-wrap: anywhere; hyphens: auto; }
 
 .icon-btn {
   display: grid;
@@ -312,8 +312,8 @@ h1 { margin: 0; line-height: 1.1; }
 .start .app-footer { margin-top: 12px; }
 
 .info-btn {
-  width: 32px;
-  height: 32px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   border: 2px solid var(--card-border);
   background: var(--card);
@@ -353,3 +353,21 @@ h1 { margin: 0; line-height: 1.1; }
 .info-dialog .info-close { width: 100%; margin-top: 16px; }
 .info-dialog .info-actions { display: flex; flex-wrap: wrap; gap: 8px; }
 .info-dialog .info-actions .btn { margin-top: 0; }
+
+/* Alleen voor schermlezers */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Lange namen en titels mogen afbreken, zodat ze op een kleine telefoon passen */
+h1, .logo, .player-chip { overflow-wrap: anywhere; }
+.logo { min-width: 0; hyphens: auto; }
+
+/* Zonder eigen Nederlandse stem op het apparaat: geen voorleesknoppen */
+.no-speech [data-speak] { display: none; }

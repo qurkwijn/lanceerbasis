@@ -1,4 +1,4 @@
-import { pick, shuffle } from '../../../shared/js/util.js';
+import { escapeHtml, pick, shuffle } from '../../../shared/js/util.js';
 
 // Klanken horen, de basis van leren lezen in groep 3. Wat hoor je vooraan, in
 // het midden of achteraan? Een klank als "aa", "ui" of "sch" telt als één.
@@ -24,7 +24,14 @@ const WHERE = {
 
 function question(level) {
   const [prompt, find] = WHERE[level];
-  const list = level === 'midden' ? WOORDEN.filter(([k]) => k.split(' ').length === 3) : WOORDEN;
+  // Achteraan hoor je bij bed en hond een t, dus die laten we daar weg. Een
+  // woord van één klank, zoals ei, past alleen bij vooraan.
+  const list = WOORDEN.filter(([k]) => {
+    const parts = k.split(' ');
+    if (level === 'midden') return parts.length === 3;
+    if (level === 'eind') return parts.length > 1 && parts[parts.length - 1] !== 'd';
+    return true;
+  });
   const [klanken, pic] = pick(list);
   const parts = klanken.split(' ');
   const answer = find(parts);
@@ -41,7 +48,7 @@ function question(level) {
     html: `
       <div class="sound-card">
         <span class="sound-pic" aria-hidden="true">${pic}</span>
-        <button type="button" class="speak-word" data-speak="${word}" aria-label="Lees het woord voor">🔊</button>
+        <button type="button" class="speak-word" data-speak="${escapeHtml(word)}" aria-label="Lees het woord voor">🔊</button>
       </div>`,
   };
 }

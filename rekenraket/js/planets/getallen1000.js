@@ -69,7 +69,10 @@ function vergelijken() {
     prompt: 'Kies <, > of =',
     answer,
     choices: ['<', '=', '>'],
-    html: `<div class="sum"><span>${a}</span><span class="slot-inline slot empty">?</span><span>${b}</span></div>`,
+    html: `<div class="sum"><span>${a}</span><span class="compare-box">?</span><span>${b}</span></div>`,
+    onSolved(el) {
+      el.querySelector('.compare-box').textContent = answer;
+    },
   };
 }
 

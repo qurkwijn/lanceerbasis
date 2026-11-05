@@ -6,9 +6,11 @@ const KEY = 'lanceerbasis:v1';
 // we één keer over.
 const OLD_REKENRAKET = 'rekenraket:v1';
 
+// Alleen een gewoon object telt; alles anders (kapot of vreemd) is niets.
 function read(key) {
   try {
-    return JSON.parse(localStorage.getItem(key));
+    const data = JSON.parse(localStorage.getItem(key));
+    return data && typeof data === 'object' && !Array.isArray(data) ? data : null;
   } catch {
     return null;
   }
@@ -30,11 +32,13 @@ export function load() {
   return read(KEY) || fromRekenraket() || {};
 }
 
+// Geeft terug of het gelukt is. Mislukt het, dan wordt het alleen niet bewaard.
 export function save(data) {
   try {
     localStorage.setItem(KEY, JSON.stringify(data));
+    return true;
   } catch {
-    // Niet erg, dan wordt het alleen niet bewaard.
+    return false;
   }
 }
 

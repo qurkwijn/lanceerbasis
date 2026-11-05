@@ -108,7 +108,7 @@
   width: 100%;
 }
 
-.station-name { font-size: 1.25rem; font-weight: 800; line-height: 1.15; }
+.station-name { font-size: clamp(1rem, 4.6vw, 1.25rem); font-weight: 800; line-height: 1.15; overflow-wrap: anywhere; hyphens: auto; }
 .station-sub { font-size: 1rem; color: var(--muted); line-height: 1.2; }
 
 a.station:active .station-art { transform: scale(0.96); }

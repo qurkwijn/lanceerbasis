@@ -10,11 +10,11 @@ const EN = [['kat', 'katten', 'katen', 'kats'], ['boom', 'bomen', 'boomen', 'bom
   ['bed', 'bedden', 'beden', 'beds'], ['muur', 'muren', 'muuren', 'murren'], ['hond', 'honden', 'hondden', 'honds'],
   ['brief', 'brieven', 'briefen', 'briefs'], ['kip', 'kippen', 'kipen', 'kips'], ['boot', 'boten', 'booten', 'botten'],
   ['neus', 'neuzen', 'neusen', 'neussen']];
-const S = [['tafel', 'tafels', 'tafelen', 'tafells'], ['appel', 'appels', 'appelen', 'appells'],
+const S = [['tafel', 'tafels', 'tafelen', 'tafells'], ['appel', 'appels', 'apels', 'appells'],
   ['jongen', 'jongens', 'jongenen', 'jonges'], ['lepel', 'lepels', 'lepelen', 'lepells'], ['vogel', 'vogels', 'vogelen', 'voogels'],
   ['bezem', 'bezems', 'bezemen', 'bezemmen'], ['meisje', 'meisjes', 'meisjen', 'meisjens'], ['oma', "oma's", 'omas', 'omaen'],
   ['auto', "auto's", 'autos', 'autoen'], ['kikker', 'kikkers', 'kikkeren', 'kikers'], ['sleutel', 'sleutels', 'sleutelen', 'sleuteles'],
-  ['tractor', 'tractors', 'tractoren', 'tracktors']];
+  ['tractor', 'tractors', 'traktors', 'tracktors']];
 
 export default {
   intro: 'Is er meer dan één? Dan zet je er meestal <b>-en</b> achter: één boek, twee <b>boeken</b>. Woorden op -el, -em, -en en -er krijgen een <b>-s</b>: <b>tafels</b>. Let op: kat wordt <b>katten</b> en boom wordt <b>bomen</b>!',

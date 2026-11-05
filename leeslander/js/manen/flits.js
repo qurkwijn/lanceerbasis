@@ -4,7 +4,7 @@ import { pick, shuffle } from '../../../shared/js/util.js';
 // Plaatjes die met dezelfde letter beginnen komen vaker als foute keuze, zodat
 // je het hele woord moet lezen en niet alleen de eerste letter.
 export const KORT = [['kat', '🐱'], ['vis', '🐟'], ['bus', '🚌'], ['pen', '🖊️'], ['bal', '⚽'], ['zon', '☀️'],
-  ['bom', '💣'], ['sok', '🧦'], ['pet', '🧢'], ['jas', '🧥'], ['mes', '🔪'], ['bed', '🛏️'], ['kip', '🐔'],
+  ['sok', '🧦'], ['pet', '🧢'], ['jas', '🧥'], ['mes', '🔪'], ['bed', '🛏️'], ['kip', '🐔'],
   ['koe', '🐄'], ['aap', '🐒'], ['uil', '🦉'], ['mug', '🦟'], ['ijs', '🍦'], ['oor', '👂'], ['neus', '👃'],
   ['voet', '🦶'], ['maan', '🌙'], ['boom', '🌳'], ['roos', '🌹'], ['vuur', '🔥'], ['kaas', '🧀'], ['peer', '🍐'],
   ['huis', '🏠'], ['muis', '🐭'], ['hond', '🐶'], ['geit', '🐐'], ['boot', '🚤'], ['been', '🦵'], ['mond', '👄']];

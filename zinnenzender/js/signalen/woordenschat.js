@@ -8,10 +8,15 @@ const TEGEN = [['groot', 'klein'], ['warm', 'koud'], ['lang', 'kort'], ['hoog', 
   ['lachen', 'huilen'], ['geven', 'nemen'], ['begin', 'eind'], ['schoon', 'vies'], ['zacht', 'hard'], ['links', 'rechts'],
   ['veel', 'weinig'], ['aan', 'uit'], ['winnen', 'verliezen']];
 
-const HETZELFDE = [['blij', 'vrolijk'], ['snel', 'vlug'], ['groot', 'enorm'], ['mooi', 'prachtig'], ['praten', 'kletsen'],
-  ['bang', 'angstig'], ['boos', 'kwaad'], ['klein', 'piepklein'], ['beginnen', 'starten'], ['heel', 'erg'],
-  ['dapper', 'moedig'], ['slim', 'knap'], ['raar', 'vreemd'], ['kijken', 'zien'], ['pakken', 'grijpen'], ['stil', 'rustig'],
-  ['fiets', 'rijwiel'], ['dokter', 'arts'], ['vies', 'smerig'], ['rennen', 'hollen']];
+const HETZELFDE = [['blij', 'vrolijk'], ['snel', 'vlug'], ['mooi', 'prachtig'], ['praten', 'kletsen'],
+  ['bang', 'angstig'], ['boos', 'kwaad'], ['beginnen', 'starten'], ['dapper', 'moedig'], ['raar', 'vreemd'],
+  ['pakken', 'grijpen'], ['dokter', 'arts'], ['vies', 'smerig'], ['rennen', 'hollen'], ['kapot', 'stuk'],
+  ['lekker', 'heerlijk'], ['gooien', 'werpen'], ['cadeau', 'geschenk'], ['huilen', 'janken']];
+
+// Foute keuzes komen uit deze lijst. Uit de andere paren zou niet goed gaan:
+// bij mooi kan prachtig ook goed zijn, bij hard ook langzaam.
+const NEUTRAAL = ['tafel', 'fiets', 'geel', 'water', 'slapen', 'appel', 'boom', 'zingen', 'lepel', 'trein', 'school',
+  'vogel', 'deur', 'kaas', 'sok', 'wolk', 'tekenen', 'paars', 'brood', 'klok'];
 
 const GROEPEN = {
   dieren: ['hond', 'kat', 'koe', 'paard', 'schaap', 'geit', 'konijn', 'muis'],
@@ -23,13 +28,11 @@ const GROEPEN = {
   lichaamsdelen: ['arm', 'been', 'neus', 'oor', 'hand', 'voet', 'knie'],
 };
 
-// Alle woorden uit een lijst van paren, behalve de twee van dit paar.
-const others = (pairs, pair) => pairs.flat().filter((w) => !pair.includes(w));
 
 function pairQuestion(pairs, kind) {
   const pair = pick(pairs);
   const [word, answer] = Math.random() < 0.5 ? pair : [...pair].reverse();
-  const wrong = shuffle(others(pairs, pair)).slice(0, 2);
+  const wrong = shuffle(NEUTRAAL).slice(0, 2);
   const tegen = kind === 'tegen';
   return {
     key: `${kind}-${word}`,

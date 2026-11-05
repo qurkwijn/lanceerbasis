@@ -8,7 +8,7 @@ const LANG = [['b[o]men', '🌳'], ['sch[a]pen', '🐑'], ['p[e]ren', '🍐'], [
   ['m[a]nen', '🌙'], ['m[u]ren', '🧱'], ['h[a]nen', '🐓'], ['t[o]maat', '🍅'], ['k[a]meel', '🐫'], ['h[a]mer', '🔨'],
   ['l[e]zen', '📖'], ['sl[a]pen', '😴'], ['v[u]ren', '🔥'], ['b[o]ten', '🚤']];
 const KORT = [['ki[pp]en', '🐔'], ['po[pp]en', '🪆'], ['be[ll]en', '🔔'], ['ba[ll]en', '⚽'], ['vi[ss]en', '🐟'],
-  ['bu[ss]en', '🚌'], ['bo[mm]en', '💣'], ['so[kk]en', '🧦'], ['ki[kk]er', '🐸'], ['we[kk]er', '⏰'], ['ke[tt]ing', '📿'],
+  ['bu[ss]en', '🚌'], ['bo[mm]en', '💣'], ['so[kk]en', '🧦'], ['ki[kk]er', '🐸'], ['we[kk]er', '⏰'],
   ['le[pp]el', '🥄'], ['ka[tt]en', '🐱'], ['po[tt]en', '🪴'], ['zo[nn]en', '☀️'], ['pa[nn]en', '🍳']];
 
 // "o" of "oo" bij een lange klank, "t" of "tt" bij een korte.

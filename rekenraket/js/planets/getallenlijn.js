@@ -59,7 +59,7 @@ const LEVELS = {
 };
 
 export default {
-  intro: 'Op een getallenlijn staan de getallen op een rij, van klein naar groot. Tel de streepjes vanaf een getal dat je weet. Het lange streepje in het midden is de <b>helft</b>.',
+  intro: 'Op een getallenlijn staan de getallen op een rij, van klein naar groot. Tel de streepjes vanaf een getal dat je weet. De lange streepjes helpen je, zoals bij 5, 10 en 15.',
   levels: [
     { id: 'tot10', name: 'Tot 10', hint: 'Met de 0, 5 en 10 erbij', groups: [3] },
     { id: 'tot20', name: 'Tot 20', hint: 'Met de 0, 10 en 20 erbij', groups: [3, 4] },

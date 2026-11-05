@@ -51,7 +51,7 @@ function showKaarten() {
       <header class="map-header">
         <a class="icon-btn" href="${HOME}" aria-label="Terug naar de Lanceerbasis">←</a>
         <h1 class="logo">Wereldsatelliet</h1>
-        <div class="star-count" aria-label="${totalStars()} sterren verdiend">★ ${totalStars()}</div>
+        <div class="star-count"><span aria-hidden="true">★ ${totalStars()}</span><span class="sr-only">${totalStars()} sterren verdiend</span></div>
       </header>
       <a class="player-chip" href="${startUrl(APP)}" aria-label="Naam of groep wijzigen">
         <span>Hoi ${escapeHtml(name)}!</span>

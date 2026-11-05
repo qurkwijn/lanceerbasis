@@ -5,7 +5,7 @@ const NG_PIC = [['ri[ng]', '💍'], ['sla[ng]', '🐍'], ['koni[ng]', '👑'], [
 const NK_PIC = [['ba[nk]', '🛋️'], ['dri[nk]en', '🥤'], ['de[nk]en', '🤔'], ['i[nk]t', '🖋️'], ['sti[nk]en', '🦨'],
   ['pla[nk]', '🪵'], ['bli[nk]en', '✨']];
 const NG = ['la[ng]', 'di[ng]', 'zi[ng]en', 'ga[ng]', 'wa[ng]', 'kri[ng]', 'ha[ng]en', 'va[ng]en', 'spri[ng]en', 'e[ng]'];
-const NK = ['da[nk]', 'pi[nk]', 'li[nk]s', 'kli[nk]er', 'vo[nk]', 'sla[nk]', 'sta[nk]', 'wi[nk]el', 'e[nk]el', 'zi[nk]en'];
+const NK = ['da[nk]', 'pi[nk]', 'li[nk]s', 'kli[nk]er', 'vo[nk]', 'sla[nk]', 'sta[nk]', 'wi[nk]el', 'e[nk]el'];
 
 const CHOICES = ['ng', 'nk'];
 

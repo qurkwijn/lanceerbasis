@@ -111,7 +111,7 @@ function shiftQuestion() {
 
   return {
     key: `later-${t}-${shift}`,
-    prompt: `Hoe laat is het ${amount} ${shift > 0 ? 'later' : 'vroeger'}?`,
+    prompt: `Hoe laat is het ${amount} ${shift > 0 ? 'later' : 'eerder'}?`,
     answer,
     choices: makeChoices(answer, mistakes),
     html: clockSvg(start) + LEGEND,
@@ -131,7 +131,7 @@ export default {
     { id: 'uren', name: 'Hele uren', hint: 'De lange wijzer staat op de 12', groups: [3, 4] },
     { id: 'halve', name: 'Halve uren', hint: 'Hele uren en half', groups: [3, 4] },
     { id: 'kwartier', name: 'Kwartieren', hint: 'Kwart over en kwart voor', groups: [4] },
-    { id: 'later', name: 'Later en vroeger', hint: 'Hoe laat is het 2 uur later?', groups: [4] },
+    { id: 'later', name: 'Later en eerder', hint: 'Hoe laat is het 2 uur later?', groups: [4] },
     { id: 'vijf', name: 'Per 5 minuten', hint: '10 over 3, 5 voor half 4', groups: [5] },
     { id: 'digitaal', name: 'Digitale klok', hint: '3:25 is 5 voor half 4', groups: [5] },
     { id: 'minuut', name: 'Op de minuut', hint: '7 over 3, 2 voor half 4', groups: [5] },

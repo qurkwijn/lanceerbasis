@@ -13,12 +13,17 @@ export const HOME = new URL('../../', import.meta.url).href;
 // terug in die app.
 export const startUrl = (app) => `${HOME}#/start${app ? `/${app}` : ''}`;
 
+// Alleen een profiel met een naam en een groep die er is, telt. Anders kies
+// je opnieuw op het startscherm.
 export function getProfile() {
-  return load().profile || null;
+  const profile = load().profile;
+  if (!profile || typeof profile.name !== 'string' || !profile.name || !GROUPS.includes(profile.groep)) return null;
+  return { name: profile.name.slice(0, 20), groep: profile.groep };
 }
 
+// Geeft terug of het bewaren gelukt is.
 export function saveProfile(profile) {
   const data = load();
   data.profile = profile;
-  save(data);
+  return save(data);
 }

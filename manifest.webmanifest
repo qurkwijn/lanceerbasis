@@ -1,7 +1,7 @@
 {
   "name": "Lanceerbasis",
   "short_name": "Lanceerbasis",
-  "description": "Oefen rekenen, taal en lezen voor groep 3 en 4.",
+  "description": "Oefen rekenen, taal en lezen voor groep 3 tot en met 5.",
   "lang": "nl",
   "start_url": "./",
   "scope": "./",

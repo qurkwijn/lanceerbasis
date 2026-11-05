@@ -41,7 +41,7 @@ function minus(max) {
 // Hoeveel meer: dit vinden veel kinderen lastig, want het is een minsom.
 function difference(max, name) {
   const [thing, emoji] = pick(STUFF);
-  const friend = pick(['Sam', 'Noor', 'Daan', 'Lotte', 'Finn', 'Yara']);
+  const friend = pick(['Sam', 'Noor', 'Daan', 'Lotte', 'Finn', 'Yara'].filter((n) => n !== name));
   const a = rand(4, max);
   const b = rand(1, a - 1);
   return story(`${name} heeft ${a} ${thing}. ${friend} heeft er ${b}. Hoeveel ${thing} heeft ${name} meer dan ${friend}?`, a - b, emoji, thing);

@@ -51,7 +51,7 @@ export default {
   intro: 'Eerlijk delen betekent dat iedereen <b>evenveel</b> krijgt. Deel ze één voor één uit, net zolang tot alles op is. Kan het niet precies? Dan blijft er een <b>rest</b> over.',
   levels: [
     { id: 'klein', name: 'Eerlijk delen tot 20', hint: 'Met plaatjes erbij', groups: [4] },
-    { id: 'groot', name: 'Eerlijk delen tot 50', hint: 'Gebruik de tafels', groups: [4] },
+    { id: 'groot', name: 'Eerlijk delen tot 100', hint: 'Gebruik de tafels', groups: [4] },
     { id: 'rest', name: 'Delen met rest', hint: '17 : 5 = 3 rest 2', groups: [5] },
   ],
 

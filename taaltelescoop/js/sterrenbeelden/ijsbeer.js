@@ -6,13 +6,13 @@ const EI_PIC = [['tr[ei]n', '🚆'], ['[ei]', '🥚'], ['g[ei]t', '🐐'], ['z[e
   ['m[ei]sje', '👧'], ['pl[ei]ster', '🩹'], ['r[ei]s', '🧳']];
 const IJ_PIC = [['[ij]s', '🍦'], ['b[ij]', '🐝'], ['t[ij]ger', '🐯'], ['r[ij]st', '🍚'], ['k[ij]ker', '🔭'],
   ['[ij]sbeer', '🐻‍❄️'], ['pr[ij]s', '🏆'], ['kr[ij]t', '🖍️'], ['p[ij]l', '🏹']];
-const EI = ['kl[ei]n', 'pl[ei]n', 'v[ei]lig', '[ei]gen', 'w[ei]nig', 'st[ei]l', 'h[ei]de', '[ei]nd', 'br[ei]en', 'z[ei]len'];
-const IJ = ['bl[ij]', 'm[ij]n', 'z[ij]n', 't[ij]d', 'l[ij]n', 'd[ij]k', 'f[ij]n', 'p[ij]n', 'k[ij]ken', 'w[ij]', 'b[ij]na', 'schr[ij]ven'];
+const EI = ['kl[ei]n', 'pl[ei]n', 'v[ei]lig', '[ei]gen', 'w[ei]nig', 'h[ei]de', '[ei]nd', 'br[ei]en', 'z[ei]len'];
+const IJ = ['bl[ij]', 'm[ij]n', 'z[ij]n', 't[ij]d', 'l[ij]n', 'd[ij]k', 'f[ij]n', 'p[ij]n', 'k[ij]ken', 'b[ij]na', 'schr[ij]ven'];
 
 const AU_PIC = [['[au]to', '🚗'], ['p[au]w', '🦚'], ['bl[au]w', '🔵'], ['k[au]wgom', '🍬'], ['[au]gurk', '🥒']];
 const OU_PIC = [['g[ou]d', '🥇'], ['z[ou]t', '🧂'], ['t[ou]w', '🪢'], ['vr[ou]w', '👩'], ['h[ou]t', '🪵'],
-  ['k[ou]d', '🥶'], ['k[ou]s', '🧦'], ['kab[ou]ter', '🧙']];
-const AU = ['g[au]w', 'fl[au]w', 'l[au]w', 'r[au]w', 's[au]s', 'kl[au]w', 'p[au]ze', 'k[au]wen', 'n[au]w', 'd[au]w'];
+  ['k[ou]d', '🥶'], ['k[ou]s', '🧦']];
+const AU = ['g[au]w', 'fl[au]w', 'l[au]w', 's[au]s', 'kl[au]w', 'p[au]ze', 'k[au]wen', 'n[au]w', 'd[au]w'];
 const OU = ['[ou]d', 'f[ou]t', 'j[ou]', 'n[ou]', 'b[ou]wen', 'v[ou]wen', 'sch[ou]der', 'm[ou]w', 'tr[ou]wen', 'h[ou]den'];
 
 const LEVELS = {

@@ -12,8 +12,8 @@ const TEKSTEN = [
   },
   {
     pic: '🐝',
-    text: 'Bijen wonen samen in een korf. Ze vliegen van bloem naar bloem. Van de nectar uit de bloemen maken ze honing.',
-    vragen: [['Waar wonen bijen?', 'in een korf', 'in een hol', 'in een nest op de grond'],
+    text: 'Honingbijen wonen samen in een korf. Ze vliegen van bloem naar bloem. Van de nectar uit de bloemen maken ze honing.',
+    vragen: [['Waar wonen honingbijen?', 'in een korf', 'in een hol', 'in een nest op de grond'],
       ['Wat maken bijen van nectar?', 'honing', 'melk', 'suiker']],
   },
   {
@@ -84,7 +84,7 @@ const TEKSTEN = [
   },
   {
     pic: '🚲',
-    text: 'In Nederland fietsen veel mensen. Er zijn meer fietsen dan mensen! Op de fiets draag je in het donker licht, zodat anderen je zien.',
+    text: 'In Nederland fietsen veel mensen. Er zijn meer fietsen dan mensen! In het donker doe je je fietslicht aan, zodat anderen je zien.',
     vragen: [['Waarom heb je licht op je fiets in het donker?', 'zodat anderen je zien', 'om te lezen', 'omdat het mooi is'],
       ['Zijn er in Nederland veel fietsen?', 'Ja, meer dan mensen.', 'Nee, bijna geen.', 'Nee, alleen auto’s.']],
   },
@@ -101,7 +101,7 @@ const LANG = [
   },
   {
     pic: '🌋',
-    text: 'Een vulkaan is een berg met een opening naar binnen in de aarde. Diep onder de grond is het zo heet dat steen smelt. Die hete, vloeibare steen heet lava. Als een vulkaan uitbarst, komen er lava, as en rook naar buiten. In Nederland zijn geen werkende vulkanen.',
+    text: 'Een vulkaan is een berg met een opening naar binnen in de aarde. Diep onder de grond is het zo heet dat steen smelt. Die hete, vloeibare steen heet lava. Als een vulkaan uitbarst, komen er lava, as en rook naar buiten. In het Europese deel van Nederland zijn geen vulkanen.',
     vragen: [['Waar gaat deze tekst vooral over?', 'Wat een vulkaan is en wat er gebeurt bij een uitbarsting.', 'Hoe je een berg beklimt.', 'Waarom Nederland vlak is.'],
       ['Hoe heet gesmolten steen?', 'lava', 'as', 'zand']],
   },

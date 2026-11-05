@@ -37,7 +37,7 @@ function eiland() {
     const answer = kind === 'west' ? names[0] : names[4];
     return {
       key: kind,
-      prompt: `Welk Waddeneiland ligt het meest naar het ${kind === 'west' ? 'westen' : 'oosten'}?`,
+      prompt: `Welk bewoond Waddeneiland ligt het meest naar het ${kind === 'west' ? 'westen' : 'oosten'}?`,
       answer,
       choices: shuffle([answer, ...shuffle(names.filter((n) => n !== answer)).slice(0, 2)]),
       choiceStyle: 'list',

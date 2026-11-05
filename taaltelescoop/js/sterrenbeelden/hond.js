@@ -5,7 +5,7 @@ const D_PIC = [['hon[d]', '🐕'], ['be[d]', '🛏️'], ['hoe[d]', '👒'], ['p
 const T_PIC = [['ka[t]', '🐱'], ['ra[t]', '🐀'], ['voe[t]', '🦶'], ['boo[t]', '🚤'], ['har[t]', '❤️'],
   ['nes[t]', '🪺'], ['pe[t]', '🧢'], ['plan[t]', '🪴']];
 const D = ['sta[d]', 'lie[d]', 'tij[d]', 'vrien[d]', 'avon[d]', 'werel[d]', 'lan[d]', 'ein[d]', 'woor[d]', 'mon[d]', 'gel[d]', 'roo[d]', 'goe[d]'];
-const T = ['wi[t]', 'kor[t]', 'groo[t]', 'nach[t]', 'lich[t]', 'luch[t]', 'klan[t]', 'spor[t]', 'zou[t]', 'laa[t]', 'nie[t]', 'hee[t]'];
+const T = ['wi[t]', 'kor[t]', 'groo[t]', 'nach[t]', 'lich[t]', 'luch[t]', 'klan[t]', 'spor[t]', 'zou[t]', 'laa[t]', 'hee[t]'];
 
 const CHOICES = ['d', 't'];
 const PROMPT = 'd of t? Maak het woord langer!';

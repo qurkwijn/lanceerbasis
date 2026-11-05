@@ -6,7 +6,7 @@ import { gapQuestion } from '../words.js';
 const TIE = [['poli[tie]', '👮'], ['vakan[tie]', '🏖️'], ['informa[tie]', 'ℹ️'], ['ac[tie]', '🎬'], ['por[tie]', '🍟'],
   ['opera[tie]', '🏥'], ['ambi[tie]', '🎯'], ['tradi[tie]', '🎄'], ['reac[tie]', '💬']];
 const ISCH = [['trop[isch]', '🌴'], ['log[isch]', '🧠'], ['elektr[isch]', '⚡'], ['prakt[isch]', '🛠️'],
-  ['fantast[isch]', '🤩'], ['typ[isch]', '🤔'], ['techn[isch]', '⚙️'],
+  ['fantast[isch]', '🤩'], ['techn[isch]', '⚙️'],
   ['magnet[isch]', '🧲']];
 
 const WRONG = { tie: 'tsie', isch: 'ies' };

@@ -3,8 +3,8 @@ import { gapQuestion, pickFrom } from '../words.js';
 
 // eer, oor, eur en eel: je hoort ie, oe of u, maar je schrijft ee, oo of eu.
 const PIC = [['b[ee]r', '🐻'], ['p[ee]r', '🍐'], ['v[ee]r', '🪶'], ['d[eu]r', '🚪'], ['kl[eu]r', '🎨'], ['[oo]r', '👂'],
-  ['b[oo]r', '🪛'], ['sp[oo]r', '🛤️'], ['g[ee]l', '🟡'], ['k[ee]l', '🗣️'], ['st[ee]l', '🍒'], ['g[eu]r', '👃']];
-const WORDS = ['m[ee]r', 'k[ee]r', 'l[ee]r', 'w[ee]r', 'z[ee]r', 'h[ee]r', 'd[oo]r', 'v[oo]r', 'h[oo]r', 'sch[eu]r',
+  ['sp[oo]r', '🛤️'], ['g[ee]l', '🟡'], ['k[ee]l', '🗣️'], ['st[ee]l', '🍒'], ['g[eu]r', '👃']];
+const WORDS = ['m[ee]r', 'k[ee]r', 'l[ee]r', 'w[ee]r', 'z[ee]r', 'h[ee]r', 'd[oo]r', 'v[oo]r', 'sch[eu]r',
   'zw[ee]r', 'v[ee]l', 'd[ee]l', 'm[ee]l', 'sp[ee]l', 'k[oo]r', 'sl[eu]r'];
 
 const PAIRS = { ee: ['ee', 'ie'], oo: ['oo', 'oe'], eu: ['eu', 'u'] };

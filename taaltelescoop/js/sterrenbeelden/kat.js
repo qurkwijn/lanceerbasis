@@ -1,4 +1,4 @@
-import { pick, shuffle } from '../../../shared/js/util.js';
+import { escapeHtml, pick, shuffle } from '../../../shared/js/util.js';
 
 // Hakken en plakken: het woord in losse klanken, door elkaar. Tik ze in de
 // goede volgorde. Een klank als "aa" of "sch" is één blokje, zoals op school.
@@ -14,9 +14,9 @@ const LANG = [['s t oe l', '🪑'], ['k a s t', '🗄️'], ['s p i n', '🕷️
   ['f r ui t', '🍇'], ['t r o m', '🥁'], ['k l o k', '🕰️'], ['s l ee', '🛷'], ['b l i k', '🥫']];
 
 const MOEILIJK = [['s t r i k', '🎀'], ['m e l k', '🥛'], ['h e r f s t', '🍂'], ['s t e r k', '💪'], ['h e l m', '⛑️'],
-  ['w o r m', '🪱'], ['b o r s t e l', '🪥'], ['s t r oo m', '⚡'], ['b l i k s e m', '🌩️'], ['m a r k t', '🛒'],
+  ['w o r m', '🪱'], ['b o r s t e l', '🪥'], ['s t r oo m', '⚡'], ['b l i k s e m', '🌩️'],
   ['f l e s', '🍾'], ['k o m p a s', '🧭'], ['s n oe p', '🍬'], ['p a r k', '🏞️'], ['w a l v i s', '🐋'],
-  ['k e r s t b oo m', '🎄'], ['k r a n t', '📰'], ['s t r oo', '🌾'], ['k r ui s', '❌'], ['k l a s', '🏫']];
+  ['k e r s t b oo m', '🎄'], ['k r a n t', '📰'], ['s t r oo', '🌾'], ['k r ui s', '❌']];
 
 const LIST = { kort: KORT, lang: LANG, moeilijk: MOEILIJK };
 
@@ -47,7 +47,7 @@ export default {
       html: `
         <div class="word-card">
           <span class="word-pic" aria-hidden="true">${pic}</span>
-          <button type="button" class="speak-word" data-speak="${word}" aria-label="Lees het woord voor">🔊</button>
+          <button type="button" class="speak-word" data-speak="${escapeHtml(word)}" aria-label="Lees het woord voor">🔊</button>
         </div>`,
     };
   },

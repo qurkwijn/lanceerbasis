@@ -268,3 +268,6 @@
   font-variant-numeric: tabular-nums;
 }
 .time-left.hurry { background: var(--try); color: #3a1200; }
+
+/* De vraag krijgt de focus voor schermlezers; geen rand eromheen */
+.prompt:focus, .result h1:focus { outline: none; }
